@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NV.com — イラストレーター ポートフォリオ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&family=Noto+Sans+JP:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+--pink:#ff2d78; --purple:#9b1dff; --light-purple:#c084fc;
+--cyan:#00f5ff; --white:#ffffff; --text-muted:#c0a0d0;
+--neon-glow:0 0 10px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78;
+--cyan-glow:0 0 10px #00f5ff,0 0 20px #00f5ff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#0a000f;color:#ffffff;font-family:'Noto Sans JP',sans-serif;overflow-x:hidden;}
+/* scanline removed for cross-browser brightness */
+
+/* CURSOR */
+#cur,#curT{display:none}
+
+/* ━━ SIDE MENU ━━ */
+#smOverlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:700;display:none;backdrop-filter:blur(4px)}
+#smOverlay.on{display:block}
+#sm{position:fixed;top:0;left:-310px;bottom:0;width:290px;background:linear-gradient(180deg,#1a0030,#0a000f);border-right:1px solid rgba(155,29,255,.4);z-index:800;transition:left .35s cubic-bezier(.25,.46,.45,.94);display:flex;flex-direction:column;overflow-y:auto}
+#sm.on{left:0}
+.sm-head{padding:22px 20px 14px;border-bottom:1px solid rgba(155,29,255,.2);display:flex;justify-content:space-between;align-items:center}
+.sm-logo{font-family:‘Orbitron’,sans-serif;font-size:.9rem;font-weight:900;letter-spacing:.15em;text-shadow:0 0 10px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78}
+.sm-logo span{color:#ff2d78}
+#smClose{background:none;border:none;color:#c0a0d0;font-size:1.3rem;cursor:pointer;transition:color .2s;background:none}
+#smClose:hover{color:#ff2d78}
+.sm-nav{padding:12px 0;flex:1}
+.sm-nav a{display:flex;align-items:center;gap:10px;padding:13px 22px;font-family:‘Orbitron’,sans-serif;font-size:.62rem;letter-spacing:.12em;color:#c0a0d0;text-decoration:none;border-left:2px solid transparent;transition:all .2s}
+.sm-nav a:hover{color:#00f5ff;border-left-color:#00f5ff;background:rgba(0,245,255,.04);text-shadow:0 0 10px #00f5ff,0 0 20px #00f5ff}
+.sm-nav .ico{font-size:.9rem;width:18px;text-align:center}
+.sm-hr{margin:6px 22px;border:none;border-top:1px solid rgba(155,29,255,.12)}
+.sm-foot{padding:14px 20px 28px;border-top:1px solid rgba(155,29,255,.12)}
+.sm-foot p{font-family:‘Orbitron’,sans-serif;font-size:.5rem;letter-spacing:.3em;color:#c0a0d0;margin-bottom:10px}
+.sm-foot a{display:block;padding:9px 12px;margin-bottom:7px;background:rgba(155,29,255,.08);border:1px solid rgba(155,29,255,.25);color:#c084fc;font-size:.76rem;text-decoration:none;text-align:center;transition:all .2s}
+.sm-foot a:hover{background:rgba(255,45,120,.12);border-color:#ff2d78;color:#ff2d78}
+
+/* ━━ NAV ━━ */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 24px;height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;background:rgba(10,0,15,.97);backdrop-filter:blur(8px);border-bottom:2px solid rgba(155,29,255,.5);box-shadow:0 2px 30px rgba(155,29,255,.2)}
+.nav-links{display:flex;align-items:center;gap:16px}
+.nav-links a{font-family:‘Orbitron’,sans-serif;font-size:.55rem;letter-spacing:.1em;color:#c0a0d0;text-decoration:none;transition:color .2s,text-shadow .2s;white-space:nowrap}
+.nav-links a:hover{color:#00f5ff;text-shadow:0 0 10px #00f5ff,0 0 20px #00f5ff}
+.nav-logo{font-family:‘Orbitron’,sans-serif;font-size:1.15rem;font-weight:900;letter-spacing:.2em;text-shadow:0 0 8px #ff2d78,0 0 20px #ff2d78,0 0 40px rgba(255,45,120,.7),0 0 80px rgba(255,45,120,.4);text-align:center;justify-self:center}
+.nav-logo span{color:#ff2d78}
+.nav-right{display:flex;justify-content:flex-end}
+#menuBtn{background:none;border:1px solid rgba(155,29,255,.6);color:#c0a0d0;padding:7px 13px;cursor:pointer;font-family:‘Orbitron’,sans-serif;font-size:.56rem;letter-spacing:.1em;transition:all .2s;border-radius:3px}
+#menuBtn:hover{border-color:#ff2d78;color:#ff2d78;box-shadow:0 0 10px rgba(255,45,120,.4)}
+@media(max-width:900px){.nav-links{display:none}nav{grid-template-columns:auto 1fr auto}.nav-logo{font-size:.95rem;justify-self:center}}
+
+/* ━━ HERO ━━ */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+.h-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 30% 50%,rgba(155,29,255,.55) 0%,transparent 65%),radial-gradient(ellipse 70% 60% at 75% 35%,rgba(255,45,120,.45) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 50% 85%,rgba(0,245,255,.25) 0%,transparent 60%);animation:bgP 8s ease-in-out infinite alternate}
+@keyframes bgP{0%{opacity:.7}100%{opacity:1}}
+.h-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(155,29,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(155,29,255,.18) 1px,transparent 1px);background-size:60px 60px;animation:gM 20s linear infinite}
+@keyframes gM{0%{transform:translateY(0)}100%{transform:translateY(60px)}}
+.h-tag{font-family:‘Orbitron’,sans-serif;font-size:.58rem;letter-spacing:.4em;color:#00f5ff;text-shadow:0 0 8px #00f5ff,0 0 20px #00f5ff,0 0 40px rgba(0,245,255,.6);margin-bottom:18px;opacity:0;animation:fU .8s ease .3s forwards}
+.h-title{font-family:‘Zen Antique Soft’,serif;font-size:clamp(1.8rem,5.5vw,5rem);line-height:1.2;opacity:0;animation:fU .8s ease .5s forwards}
+.h-title .l1{display:block;color:#ffffff;text-shadow:0 0 20px #ff2d78,0 0 50px rgba(255,45,120,.8),0 0 100px rgba(155,29,255,.6),0 0 150px rgba(155,29,255,.3)}
+.h-title .l2{display:block;font-family:‘Orbitron’,sans-serif;font-size:clamp(.85rem,2vw,1.7rem);letter-spacing:.5em;color:#c0a0d0;margin-top:8px}
+.h-sub{font-size:.86rem;color:#c0a0d0;max-width:480px;line-height:1.9;margin-top:18px;opacity:0;animation:fU .8s ease .7s forwards}
+.h-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fU .8s ease .9s forwards}
+.btn-p{padding:11px 30px;background:#ff2d78;background:-webkit-linear-gradient(135deg,#ff2d78,#9b1dff);background:linear-gradient(135deg,#ff2d78,#9b1dff);border:none;color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.7rem;letter-spacing:.12em;cursor:pointer;border-radius:4px;text-decoration:none;display:inline-block;transition:filter .2s,transform .2s;box-shadow:0 0 20px rgba(255,45,120,.6),0 0 40px rgba(155,29,255,.3)}
+.btn-p:hover{filter:brightness(1.25);transform:translateY(-2px)}
+.btn-s{padding:11px 30px;background:transparent;border:1px solid #9b1dff;color:#c084fc;font-family:‘Orbitron’,sans-serif;font-size:.7rem;letter-spacing:.12em;cursor:pointer;border-radius:4px;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-s:hover{border-color:#00f5ff;color:#00f5ff;box-shadow:0 0 10px #00f5ff,0 0 20px #00f5ff}
+.scr-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0;animation:fU .8s ease 1.1s forwards}
+.scr-hint span{font-family:‘Orbitron’,sans-serif;font-size:.5rem;letter-spacing:.3em;color:#c0a0d0}
+.scr-line{width:2px;height:34px;background:linear-gradient(to bottom,#9b1dff,transparent);box-shadow:0 0 6px #9b1dff;animation:sP 1.5s ease-in-out infinite}
+@keyframes sP{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.5);opacity:.4}}
+@keyframes fU{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ━━ GENERIC SECTION ━━ */
+.sw{padding:86px 28px}
+.s-label{font-family:‘Orbitron’,sans-serif;font-size:.55rem;letter-spacing:.5em;color:#ff2d78;text-shadow:0 0 8px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78,0 0 60px rgba(255,45,120,.5);margin-bottom:10px;display:block}
+.s-title{font-family:‘Zen Antique Soft’,serif;font-size:clamp(1.5rem,3.5vw,2.6rem);color:#ffffff;text-shadow:0 0 15px rgba(192,132,252,.9),0 0 40px rgba(155,29,255,.6);margin-bottom:44px}
+.ndiv{height:2px;background:linear-gradient(90deg,transparent,#9b1dff,#ff2d78,#9b1dff,transparent);opacity:.9;box-shadow:0 0 10px rgba(255,45,120,.5)}
+
+/* ━━ WORKS ━━ */
+.works-in{max-width:1300px;margin:0 auto}
+.plan-blk{margin-bottom:18px}
+.plan-tog{width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 26px;background:rgba(40,0,70,.85);border:1px solid rgba(155,29,255,.7);cursor:pointer;transition:background .25s,border-color .25s;border-radius:4px}
+.plan-tog:hover,.plan-tog.on{border-color:#ff2d78;background:rgba(90,0,50,.9);box-shadow:0 0 20px rgba(255,45,120,.3)}
+.plan-tog-l{display:flex;align-items:center;gap:14px}
+.plan-badge{font-family:‘Orbitron’,sans-serif;font-size:.52rem;letter-spacing:.12em;padding:5px 11px;border:1px solid;border-radius:2px}
+.bs{color:#d4aaff;border-color:#c084fc;background:rgba(192,132,252,.25);text-shadow:0 0 8px rgba(192,132,252,.8)}
+.br{color:#00f5ff;border-color:#00f5ff;background:rgba(0,245,255,.2);text-shadow:0 0 8px rgba(0,245,255,.8)}
+.be{color:#ff2d78;border-color:#ff2d78;background:rgba(255,45,120,.08);text-shadow:0 0 10px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78}
+.bc{color:#ffe84d;border-color:#ffd700;background:rgba(255,215,0,.2);text-shadow:0 0 8px rgba(255,215,0,.8)}
+.plan-name{font-family:‘Zen Antique Soft’,serif;font-size:1rem;color:#ffffff}
+.plan-range{font-family:‘Orbitron’,sans-serif;font-size:.65rem;color:#c0a0d0;margin-left:4px}
+.plan-arr{font-size:.9rem;color:#c0a0d0;transition:transform .3s,color .3s}
+.plan-tog.on .plan-arr{transform:rotate(180deg);color:#ff2d78}
+.plan-body{display:none;padding:22px 0 0}
+.plan-body.on{display:block}
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+
+/* Work card */
+.wc{position:relative;border:1px solid rgba(155,29,255,.6);background:rgba(35,0,65,.7);overflow:hidden;border-radius:6px;transition:border-color .3s,transform .3s}
+.wc:hover{border-color:#ff2d78;transform:translateY(-3px);box-shadow:0 0 30px rgba(255,45,120,.5),0 0 60px rgba(255,45,120,.2)}
+.wc-iw{position:relative;overflow:hidden;cursor:pointer}
+.wc-iw img{width:100%;display:block;object-fit:cover;transition:transform .4s;-webkit-user-select:none;user-select:none;pointer-events:auto}
+.wc:hover .wc-iw img{transform:scale(1.04)}
+.wc-iw.r169 img{aspect-ratio:16/9}
+.wc-iw.r11 img{aspect-ratio:1/1}
+.wc-iw.r916 img{aspect-ratio:9/16}
+.wc-iw.r219 img{aspect-ratio:21/9}
+.exp-ico{position:absolute;bottom:8px;right:8px;background:rgba(10,0,15,.7);border:1px solid rgba(255,45,120,.5);color:#ff2d78;font-size:.65rem;padding:5px 8px;font-family:‘Orbitron’,sans-serif;opacity:0;transition:opacity .25s;pointer-events:none}
+.wc:hover .exp-ico{opacity:1}
+.wc-body{padding:14px 16px}
+.wc-cat{font-family:‘Orbitron’,sans-serif;font-size:.5rem;letter-spacing:.22em;color:#00f5ff;text-shadow:0 0 8px #00f5ff,0 0 16px rgba(0,245,255,.6);margin-bottom:4px;display:block}
+.wc-ttl{font-family:‘Zen Antique Soft’,serif;font-size:.92rem;color:#ffffff;margin-bottom:5px}
+.wc-pr{font-family:‘Orbitron’,sans-serif;font-size:.9rem;font-weight:700;color:#ff2d78;text-shadow:0 0 10px #ff2d78,0 0 25px rgba(255,45,120,.8),0 0 50px rgba(255,45,120,.4)}
+.wc-com{display:inline-block;margin-left:7px;padding:2px 7px;font-size:.48rem;border:1px solid #ffd700;color:#ffd700;text-shadow:0 0 6px #ffd700;letter-spacing:.1em;font-family:‘Orbitron’,sans-serif;vertical-align:middle;background:rgba(255,215,0,.12)}
+.wc-dt-tog{width:100%;margin-top:9px;padding:7px 11px;background:rgba(155,29,255,.1);border:1px solid rgba(155,29,255,.25);color:#c0a0d0;font-family:‘Orbitron’,sans-serif;font-size:.52rem;letter-spacing:.1em;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;transition:all .2s;border-radius:2px}
+.wc-dt-tog:hover{background:rgba(255,45,120,.08);border-color:#ff2d78;color:#ff2d78}
+.wc-dt-body{display:none;padding:11px 11px 4px}
+.wc-dt-body.on{display:block}
+.wc-dt-body p{font-size:.76rem;color:#c0a0d0;line-height:1.8}
+
+/* ━━ LIGHTBOX ━━ */
+#lb{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;background:rgba(4,0,8,.96)}
+#lb.on{display:flex}
+#lbImg{max-width:88vw;max-height:88vh;object-fit:contain;border:1px solid rgba(155,29,255,.4);box-shadow:0 0 60px rgba(155,29,255,.3);-webkit-user-select:none;user-select:none;pointer-events:none;position:relative;z-index:2001}
+#lbClose{position:fixed;top:22px;right:26px;z-index:2002;background:none;border:1px solid rgba(255,45,120,.5);color:#ff2d78;font-size:1.3rem;padding:6px 13px;cursor:pointer;transition:background .2s;border-radius:3px}
+#lbClose:hover{background:rgba(255,45,120,.15)}
+#lbCap{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);font-family:‘Orbitron’,sans-serif;font-size:.62rem;letter-spacing:.2em;color:#c0a0d0;text-align:center;z-index:2002}
+.lb-warn{position:fixed;bottom:66px;left:50%;transform:translateX(-50%);font-family:‘Orbitron’,sans-serif;font-size:.48rem;letter-spacing:.2em;color:rgba(155,29,255,.5);z-index:2002;white-space:nowrap}
+#ssGuard{display:none;position:fixed;inset:0;background:#000;z-index:2050;pointer-events:none}
+
+/* ━━ PRICING ━━ */
+.pricing-in{max-width:1100px;margin:0 auto}
+.p-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:13px}
+.pc{padding:22px 20px;background:rgba(35,0,65,.75);border:1px solid rgba(155,29,255,.65);border-radius:6px;transition:all .2s}
+.pc:hover{border-color:#9b1dff;background:rgba(45,0,80,.7)}
+.pc.hi{border-color:#ff2d78;background:rgba(75,0,45,.8);box-shadow:inset 0 0 20px rgba(255,45,120,.08)}
+.pc-lbl{font-family:‘Orbitron’,sans-serif;font-size:.5rem;letter-spacing:.3em;color:#00f5ff;text-shadow:0 0 8px #00f5ff,0 0 16px rgba(0,245,255,.5);margin-bottom:6px;display:block}
+.pc-nm{font-family:‘Zen Antique Soft’,serif;font-size:.92rem;color:#ffffff;margin-bottom:9px}
+.pc-pr{font-family:‘Orbitron’,sans-serif;font-size:1.25rem;font-weight:700;color:#ff2d78;text-shadow:0 0 10px #ff2d78,0 0 25px rgba(255,45,120,.7)}
+.pc-pr span{font-size:.62rem;color:#c0a0d0;font-weight:400}
+.pc-note{font-size:.72rem;color:#c0a0d0;margin-top:7px;line-height:1.6}
+.pc-com{display:inline-block;margin-top:7px;padding:3px 9px;border:1px solid #00f5ff;font-family:‘Orbitron’,sans-serif;font-size:.47rem;color:#00f5ff;letter-spacing:.14em;border-radius:2px}
+
+/* ━━ PRICE BANNER & ACCORDION ━━ */
+.price-unit{margin-bottom:10px}
+.pbtn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 26px;background:rgba(40,0,70,.85);border:1px solid rgba(155,29,255,.7);cursor:pointer;transition:background .25s,border-color .25s;border-radius:4px}
+.pbtn:hover,.pbtn.active{border-color:#ff2d78;background:rgba(90,0,50,.9);box-shadow:0 0 25px rgba(255,45,120,.4)}
+.pbtn-left{display:flex;align-items:center;gap:14px}
+.pbtn-icon{font-size:1.5rem;line-height:1}
+.pbtn-label{font-family:‘Orbitron’,sans-serif;font-size:.72rem;letter-spacing:.15em;color:#ffffff;text-shadow:0 0 10px rgba(255,255,255,.5);display:block;margin-bottom:3px}
+.pbtn-range{font-family:‘Orbitron’,sans-serif;font-size:.62rem;font-weight:700;color:#ff2d78;text-shadow:0 0 10px #ff2d78,0 0 20px rgba(255,45,120,.6);display:block}
+.pbtn-arr{font-size:.9rem;color:#c0a0d0;transition:transform .3s,color .3s;flex-shrink:0}
+.pbtn.active .pbtn-arr{transform:rotate(180deg);color:#ff2d78}
+.price-acc-body{display:none;padding:20px 4px 4px}
+.price-acc-body.on{display:block}
+.price-acc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+
+/* ━━ OPTION ━━ */
+.opt-in{max-width:900px;margin:0 auto}
+.opt-card{padding:28px 32px;background:rgba(0,20,40,.75);border:1px solid rgba(0,245,255,.7);border-radius:8px;margin-bottom:18px;box-shadow:0 0 20px rgba(0,245,255,.1)}
+.opt-ttl{font-family:‘Zen Antique Soft’,serif;font-size:1.05rem;color:#00f5ff;text-shadow:0 0 10px #00f5ff,0 0 25px rgba(0,245,255,.6);margin-bottom:11px;display:flex;align-items:center;gap:9px}
+.opt-ttl::before{content:’’;width:3px;height:1em;background:#00f5ff;box-shadow:0 0 10px #00f5ff,0 0 20px #00f5ff;display:block}
+.opt-desc{font-size:.84rem;color:#c0a0d0;line-height:1.9}
+.booster-tbl{margin-top:14px;width:100%;border-collapse:collapse}
+.booster-tbl th,.booster-tbl td{padding:9px 13px;font-size:.78rem;border-bottom:1px solid rgba(155,29,255,.13);text-align:left}
+.booster-tbl th{font-family:‘Orbitron’,sans-serif;font-size:.52rem;letter-spacing:.18em;color:#00f5ff}
+.booster-tbl td{color:#c0a0d0}
+.booster-tbl td:last-child{color:#ff2d78;font-family:‘Orbitron’,sans-serif;font-weight:700}
+
+/* ━━ TERMS ━━ */
+.terms-in{max-width:800px;margin:0 auto}
+.t-item{display:flex;gap:17px;padding:18px 20px;background:rgba(26,0,48,.4);border-left:2px solid #9b1dff;border-bottom:1px solid rgba(155,29,255,.11);margin-bottom:9px;font-size:.85rem;line-height:1.85;color:#d0b0e0}
+.t-num{font-family:‘Orbitron’,sans-serif;font-size:.7rem;color:#ff2d78;text-shadow:0 0 8px #ff2d78,0 0 20px rgba(255,45,120,.7);min-width:22px;padding-top:2px;font-weight:700}
+.t-hi{color:#00f5ff;text-shadow:0 0 8px #00f5ff,0 0 16px rgba(0,245,255,.5);font-weight:700}
+
+/* ━━ ORDER ━━ */
+.ord-in{max-width:720px;margin:0 auto}
+.form-wrap{background:rgba(35,0,65,.75);border:1px solid rgba(155,29,255,.7);padding:40px;border-radius:8px;box-shadow:0 0 30px rgba(155,29,255,.15)}
+.fg{margin-bottom:20px}
+.fl{display:block;font-family:‘Orbitron’,sans-serif;font-size:.56rem;letter-spacing:.3em;color:#00f5ff;margin-bottom:7px}
+.fi,.fsel,.fta{width:100%;background:rgba(10,0,20,.8);border:1px solid rgba(155,29,255,.4);color:#ffffff;padding:10px 13px;font-family:‘Noto Sans JP’,sans-serif;font-size:.84rem;outline:none;transition:border-color .2s,box-shadow .2s;border-radius:4px}
+.fi:focus,.fsel:focus,.fta:focus{border-color:#ff2d78;box-shadow:0 0 13px rgba(255,45,120,.14)}
+.fsel option{background:#1a0030}
+.fta{height:120px;resize:vertical}
+.boost-opts{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px}
+.boost-opt{display:flex;align-items:center;gap:7px;cursor:pointer}
+.boost-opt input[type=checkbox]{accent-color:#ff2d78;width:14px;height:14px;cursor:pointer}
+.boost-opt label{font-size:.78rem;color:#c0a0d0;cursor:pointer}
+.kw{display:inline-block;margin:3px 0 13px;padding:4px 13px;background:rgba(255,45,120,.2);border:1px solid #ff2d78;color:#ff2d78;text-shadow:0 0 8px #ff2d78;font-family:‘Zen Antique Soft’,serif;font-size:.92rem;letter-spacing:.3em;box-shadow:0 0 12px rgba(255,45,120,.3)}
+.fnote{font-size:.73rem;color:#c0a0d0;margin-top:7px;line-height:1.65}
+.sub-btn{width:100%;padding:14px;margin-top:9px;background:#ff2d78;background:-webkit-linear-gradient(135deg,#ff2d78,#9b1dff);background:linear-gradient(135deg,#ff2d78,#9b1dff);border:none;color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.76rem;letter-spacing:.2em;cursor:pointer;border-radius:4px;transition:filter .2s,transform .2s;box-shadow:0 0 26px rgba(255,45,120,.6),0 0 50px rgba(155,29,255,.3)}
+.sub-btn:hover{filter:brightness(1.25);transform:translateY(-2px)}
+.tw-cta{text-align:center;margin-top:26px;padding:20px;background:rgba(26,0,48,.4);border:1px solid rgba(155,29,255,.2)}
+.tw-cta p{font-size:.8rem;color:#c0a0d0;margin-bottom:11px;line-height:1.7}
+.tw-btn{display:inline-block;padding:10px 28px;background:#1da1f2;color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.66rem;letter-spacing:.12em;text-decoration:none;border-radius:4px;transition:filter .2s;box-shadow:0 0 15px rgba(29,161,242,.4)}
+.tw-btn:hover{filter:brightness(1.2)}
+
+/* ━━ FOOTER ━━ */
+footer{border-top:1px solid rgba(155,29,255,.2);padding:32px;text-align:center}
+.f-logo{font-family:‘Orbitron’,sans-serif;font-size:.95rem;font-weight:900;text-shadow:0 0 10px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78;letter-spacing:.2em;margin-bottom:5px}
+.f-logo span{color:#ff2d78}
+.f-cp{font-size:.68rem;color:#c0a0d0;margin-top:9px}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+.rev.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+nav ul{display:none}
+nav{padding:13px 16px}
+.sw{padding:60px 16px}
+.form-wrap{padding:26px 16px}
+.plan-tog{padding:14px 16px}
+}
+</style>
+
+</head>
+<body>
+
+<div id="cur"></div><div id="curT"></div>
+<div id="ssGuard"></div>
+
+<!-- SIDE MENU -->
+
+<div id="smOverlay" onclick="closeSM()"></div>
+<div id="sm">
+<div class="sm-head">
+<div class="sm-logo">NV<span>.</span>com</div>
+<button id="smClose" onclick="closeSM()">✕</button>
+</div>
+<nav class="sm-nav">
+<a href="#hero" onclick="closeSM()"><span class="ico">◈</span>TOP</a>
+<a href="#works" onclick="closeSM()"><span class="ico">◉</span>WORKS</a>
+<hr class="sm-hr">
+<a href="#pricing" onclick="closeSM();openPricing()"><span class="ico">◈</span>PRICE LIST</a>
+<a href="#option" onclick="closeSM()"><span class="ico">⚡</span>OPTION</a>
+<hr class="sm-hr">
+<a href="#terms" onclick="closeSM()"><span class="ico">◈</span>TERMS</a>
+<a href="#order" onclick="closeSM()"><span class="ico">◉</span>ORDER</a>
+<hr class="sm-hr">
+<a href="making.html" target="_blank"><span class="ico">▷</span>MAKING 動画</a>
+</nav>
+<div class="sm-foot">
+<p>CONTACT &amp; SNS</p>
+<a href="mailto:nelsonplayroomboothyou@gmail.com">✉ メールで依頼する</a>
+<a href="https://x.com/Nelson_Playroom" target="_blank">𝕏 Twitter / X</a>
+</div>
+</div>
+
+<!-- NAV -->
+
+<nav>
+<!-- 左: ナビリンク -->
+<div class="nav-links">
+<a href="#works">WORKS</a>
+<a href="#pricing" onclick="openPricing()">PRICE</a>
+<a href="#option">OPTION</a>
+<a href="#terms">TERMS</a>
+<a href="#order">ORDER</a>
+<a href="making.html" target="_blank">MAKING</a>
+</div>
+<!-- 中央: ロゴ -->
+<div class="nav-logo">NV<span>.</span>com</div>
+<!-- 右: MENUボタン -->
+<div class="nav-right">
+<button id="menuBtn" onclick="openSM()">☰ MENU</button>
+</div>
+</nav>
+
+<!-- HERO -->
+
+<section id="hero">
+<div class="h-bg"></div><div class="h-grid"></div>
+<p class="h-tag">— ILLUSTRATOR PORTFOLIO — NV.com —</p>
+<h1 class="h-title">
+<span class="l1">シビれる魅力を</span>
+<span class="l1">あなたの手元に。</span>
+<span class="l2">COMMISSION OPEN</span>
+</h1>
+<p class="h-sub">サイバーパンク・ネオポップ・ダークファンタジーを得意とするイラストレーター。<br>サムネイル・アイコン・グッズ・大判・商業案件まで幅広く承ります。</p>
+<div class="h-cta">
+<a href="#works" class="btn-p">WORKS を見る</a>
+<a href="#order" class="btn-s">依頼する</a>
+</div>
+<div class="scr-hint"><span>SCROLL</span><div class="scr-line"></div></div>
+</section>
+
+<div class="ndiv"></div>
+
+<!-- ══ WORKS ══ -->
+
+<section class="sw" id="works">
+<div class="works-in">
+<span class="s-label">— WORKS —</span>
+<h2 class="s-title">制作実績</h2>
+<p style="font-size:.78rem;color:#c0a0d0;margin-bottom:32px;margin-top:-30px;">各プランをクリックで開閉 / 画像タップで拡大表示</p>
+
+```
+<!-- STANDARD -->
+<div class="plan-blk rev">
+<button class="plan-tog" onclick="togPlan(this)">
+<div class="plan-tog-l">
+<span class="plan-badge bs">STANDARD</span>
+<span class="plan-name">スタンダードプラン <span class="plan-range">¥5,000〜¥10,000</span></span>
+</div>
+<span class="plan-arr">▼</span>
+</button>
+<div class="plan-body">
+<div class="plan-grid">
+
+<div class="wc">
+<div class="wc-iw r11"><img src="無題1572_20250728145228.png" alt="アイコン" onclick="openLB(this,'アイコン用イラスト — ¥5,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">ICON ILLUSTRATION</span>
+<p class="wc-ttl">個性を刻むアイコンイラスト</p>
+<span class="wc-pr">¥5,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>SNS・配信・YouTubeなどのアイコン向け。バストアップ〜全身対応。背景あり/なし選択可。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r169"><img src="無題1518_20250224192418.png" alt="サムネ WORLD" onclick="openLB(this,'歌ってみたサムネイル — ¥10,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">COVER SONG THUMBNAIL</span>
+<p class="wc-ttl">闇と光が交差する世界 — WORLD</p>
+<span class="wc-pr">¥10,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>歌ってみた・楽曲動画サムネイル。16:9横長フォーマット。テキスト配置スペース調整可。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r169"><img src="無題1456_20241008195855.png" alt="サムネ MINATOKU" onclick="openLB(this,'歌ってみたサムネイル — ¥10,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">COVER SONG THUMBNAIL</span>
+<p class="wc-ttl">ネオン煌めく港区の夜</p>
+<span class="wc-pr">¥10,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>ポップ&ネオン系。背景込みで賑やかなビジュアル。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r11"><img src="無題1443_20240911060112.png" alt="人外魔装" onclick="openLB(this,'人外魔装イラスト — ¥10,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">DARK FANTASY CHARACTER</span>
+<p class="wc-ttl">翼と鎖纏う反逆の天使</p>
+<span class="wc-pr">¥10,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>ダークファンタジー・人外キャラ全身イラスト。羽・角・尻尾等の追加装飾対応。</p></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- RICH -->
+<div class="plan-blk rev">
+<button class="plan-tog" onclick="togPlan(this)">
+<div class="plan-tog-l">
+<span class="plan-badge br">RICH</span>
+<span class="plan-name">リッチプラン <span class="plan-range">¥15,000〜¥25,000</span></span>
+</div>
+<span class="plan-arr">▼</span>
+</button>
+<div class="plan-body">
+<div class="plan-grid">
+
+<div class="wc">
+<div class="wc-iw r169"><img src="1392_20240518152920.png" alt="チームイラスト" onclick="openLB(this,'チームイラスト — ¥15,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">TEAM CHARACTER</span>
+<p class="wc-ttl">3キャラクター同時描き</p>
+<span class="wc-pr">¥15,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>複数キャラクター（3体目安）の集合イラスト。4体以上は要相談・追加料金あり。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r219"><img src="無題48_20240623160419.png" alt="Xヘッダー" onclick="openLB(this,'Xヘッダー用イラスト — ¥15,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">X / SNS HEADER</span>
+<p class="wc-ttl">ネオン夜景に佇む CHIKO</p>
+<span class="wc-pr">¥15,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>Xヘッダーバナー（1500×500px以上）。ロゴ・テキスト配置スペース調整可。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r11"><img src="無題1324_20240522221810.png" alt="タロット風" onclick="openLB(this,'タロット風イラスト — ¥15,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">TAROT STYLE</span>
+<p class="wc-ttl">対極の二重奏 — SHIOUTMY</p>
+<span class="wc-pr">¥15,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>タロットカードモチーフの装飾的縦型イラスト。枠デザイン込み。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r11"><img src="無題1195_20240304121118.png" alt="スマホ壁紙" onclick="openLB(this,'スマホ用壁紙イラスト — ¥20,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">SMARTPHONE WALLPAPER</span>
+<p class="wc-ttl">魔法少女の降臨</p>
+<span class="wc-pr">¥20,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>スマートフォン縦型壁紙。9:19.5比率。ロック画面・ホーム両対応。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r916"><img src="無題1228_20240225210421.png" alt="ジャケット" onclick="openLB(this,'高解像ジャケットイラスト — ¥25,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">HIGH-RES JACKET ART</span>
+<p class="wc-ttl">TOKYO NIGHT PUNK</p>
+<span class="wc-pr">¥25,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>楽曲・アルバムジャケット向け。配信対応3000px以上。テキスト組み込みも相談可。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r169"><img src="無題1027_20240116163106.png" alt="大判イラスト" onclick="openLB(this,'大判1枚イラスト — ¥25,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">LARGE FORMAT ILLUSTRATION</span>
+<p class="wc-ttl">二人の邂逅 — テクノポア</p>
+<span class="wc-pr">¥25,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>背景込みの世界観ある大型1枚絵。SNS掲載・印刷両対応。</p></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- COMMERCIAL -->
+<div class="plan-blk rev">
+<button class="plan-tog" onclick="togPlan(this)">
+<div class="plan-tog-l">
+<span class="plan-badge bc">COMMERCIAL</span>
+<span class="plan-name">商用プラン <span class="plan-range">商用利用許諾付き</span></span>
+</div>
+<span class="plan-arr">▼</span>
+</button>
+<div class="plan-body">
+<p style="font-size:.8rem;color:#c0a0d0;line-height:1.8;margin-bottom:22px;padding:14px 18px;border-left:2px solid #ffd700;background:rgba(255,215,0,.04);">グッズ販売・店舗展示・営利目的の使用には商用プランをお選びください。下記は商用利用実績の一部です。</p>
+<div class="plan-grid">
+
+<div class="wc">
+<div class="wc-iw r11"><img src="無題753_20240107231942.png" alt="グッズ商用" onclick="openLB(this,'グッズ用ミニキャライラスト（商用可）— ¥10,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">GOODS COMMERCIAL</span>
+<p class="wc-ttl">グッズ用ミニキャラ<span class="wc-com">商用可</span></p>
+<span class="wc-pr">¥10,000~</span>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r169"><img src="無題817_20231204221221.png" alt="サイネージ商用" onclick="openLB(this,'サイネージ用イラスト（商用可）— ¥30,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">SIGNAGE COMMERCIAL</span>
+<p class="wc-ttl">サイネージ用イラスト<span class="wc-com">商用可</span></p>
+<span class="wc-pr">¥30,000~</span>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r169"><img src="無題569_20230415185011.png" alt="サイネージ商用2" onclick="openLB(this,'サイネージ用イラスト（商用可）— ¥30,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">SIGNAGE COMMERCIAL</span>
+<p class="wc-ttl">サイネージ用イラスト<span class="wc-com">商用可</span></p>
+<span class="wc-pr">¥30,000~</span>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r11"><img src="" alt="超高解像商用" onclick="openLB(this,'超高解像人外魔装（商用可）— ¥50,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">ULTRA HD COMMERCIAL</span>
+<p class="wc-ttl">超高解像人外魔装<span class="wc-com">商用可</span></p>
+<span class="wc-pr">¥50,000~</span>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+```
+
+</div>
+</section>
+
+<!-- LIGHTBOX -->
+
+<div id="lb">
+<button id="lbClose" onclick="closeLB()">✕</button>
+<img id="lbImg" src="" alt="">
+<p id="lbCap"></p>
+<p class="lb-warn">⚠ スクリーンショット保護が有効です</p>
+</div>
+
+<div class="ndiv"></div>
+
+<!-- PRICING -->
+
+<section class="sw" id="pricing">
+<div class="pricing-in">
+<span class="s-label">— PRICE LIST —</span>
+<h2 class="s-title">料金一覧</h2>
+<p style="font-size:.78rem;color:#c0a0d0;margin-bottom:28px;margin-top:-30px;">プランバナーをクリックして詳細を確認できます</p>
+
+```
+<!-- ── 各バナー＋直下リスト ── -->
+
+<!-- STANDARD -->
+<div class="price-unit rev">
+<button class="pbtn" onclick="togPrice('std')" id="pbtn-std">
+<div class="pbtn-left">
+<span class="pbtn-icon">🎨</span>
+<div>
+<span class="pbtn-label">STANDARD</span>
+<span class="pbtn-range">¥5,000〜¥10,000</span>
+</div>
+</div>
+<span class="pbtn-arr" id="parr-std">▼</span>
+</button>
+<div class="price-acc-body" id="pab-std">
+<div class="price-acc-grid">
+<div class="pc"><span class="pc-lbl">ICON</span><p class="pc-nm">アイコン用イラスト</p><span class="pc-pr">¥5,000<span>〜</span></span><p class="pc-note">SNS・配信アイコン向け1キャラクター</p></div>
+<div class="pc"><span class="pc-lbl">THUMBNAIL</span><p class="pc-nm">歌ってみたサムネイル</p><span class="pc-pr">¥10,000<span>〜</span></span><p class="pc-note">楽曲・動画サムネイル用16:9</p></div>
+<div class="pc"><span class="pc-lbl">GOODS</span><p class="pc-nm">グッズ用ミニキャライラスト</p><span class="pc-pr">¥10,000<span>〜</span></span><p class="pc-note">アクリルスタンド等グッズ向け</p><span class="pc-com">COMMERCIAL OK</span></div>
+<div class="pc"><span class="pc-lbl">DARK FANTASY</span><p class="pc-nm">人外魔装イラスト</p><span class="pc-pr">¥10,000<span>〜</span></span><p class="pc-note">ダークファンタジー・人外全身</p></div>
+</div>
+</div>
+</div>
+
+<!-- RICH -->
+<div class="price-unit rev">
+<button class="pbtn" onclick="togPrice('rich')" id="pbtn-rich">
+<div class="pbtn-left">
+<span class="pbtn-icon">✨</span>
+<div>
+<span class="pbtn-label">RICH</span>
+<span class="pbtn-range">¥15,000〜¥25,000</span>
+</div>
+</div>
+<span class="pbtn-arr" id="parr-rich">▼</span>
+</button>
+<div class="price-acc-body" id="pab-rich">
+<div class="price-acc-grid">
+<div class="pc"><span class="pc-lbl">TEAM</span><p class="pc-nm">チームイラスト</p><span class="pc-pr">¥15,000<span>〜</span></span><p class="pc-note">複数キャラクター（3体目安）</p></div>
+<div class="pc"><span class="pc-lbl">SNS HEADER</span><p class="pc-nm">X アカウントヘッダー</p><span class="pc-pr">¥15,000<span>〜</span></span><p class="pc-note">Xヘッダーバナー用ワイド</p></div>
+<div class="pc"><span class="pc-lbl">TAROT</span><p class="pc-nm">タロット風イラスト</p><span class="pc-pr">¥15,000<span>〜</span></span><p class="pc-note">タロットカードモチーフ縦型</p></div>
+<div class="pc"><span class="pc-lbl">WALLPAPER</span><p class="pc-nm">スマホ用壁紙イラスト</p><span class="pc-pr">¥20,000<span>〜</span></span><p class="pc-note">スマートフォン縦型壁紙向け</p></div>
+<div class="pc"><span class="pc-lbl">JACKET ART</span><p class="pc-nm">高解像ジャケットイラスト</p><span class="pc-pr">¥25,000<span>〜</span></span><p class="pc-note">楽曲・アルバムジャケット向け</p></div>
+<div class="pc"><span class="pc-lbl">LARGE FORMAT</span><p class="pc-nm">大判1枚イラスト</p><span class="pc-pr">¥25,000<span>〜</span></span><p class="pc-note">背景込みの世界観ある大型1枚絵</p></div>
+</div>
+</div>
+</div>
+
+<!-- COMMERCIAL -->
+<div class="price-unit rev">
+<button class="pbtn" onclick="togPrice('com')" id="pbtn-com">
+<div class="pbtn-left">
+<span class="pbtn-icon">🏢</span>
+<div>
+<span class="pbtn-label">COMMERCIAL</span>
+<span class="pbtn-range">商用利用許諾付き</span>
+</div>
+</div>
+<span class="pbtn-arr" id="parr-com">▼</span>
+</button>
+<div class="price-acc-body" id="pab-com">
+<p style="font-size:.8rem;color:#c0a0d0;line-height:1.8;margin-bottom:18px;padding:14px 18px;border-left:2px solid #ffd700;background:rgba(255,215,0,.04);">グッズ販売・店舗展示・営利目的の使用には商用オプションが必要です。各プランに商用利用許諾を追加したプランです。</p>
+<div class="price-acc-grid">
+<div class="pc hi"><span class="pc-lbl">GOODS COMMERCIAL</span><p class="pc-nm">グッズ用ミニキャライラスト</p><span class="pc-pr">¥10,000<span>〜</span></span><p class="pc-note">グッズ販売・頒布向け商用許諾付き</p><span class="pc-com">COMMERCIAL OK</span></div>
+<div class="pc hi"><span class="pc-lbl">SIGNAGE COMMERCIAL</span><p class="pc-nm">サイネージ用イラスト</p><span class="pc-pr">¥30,000<span>〜</span></span><p class="pc-note">店舗・イベント展示用商用許諾付き</p><span class="pc-com">COMMERCIAL OK</span></div>
+<div class="pc hi"><span class="pc-lbl">ULTRA HD COMMERCIAL</span><p class="pc-nm">超高解像度人外魔装イラスト</p><span class="pc-pr">¥50,000<span>〜</span></span><p class="pc-note">最高品質・あらゆる商用用途対応</p><span class="pc-com">COMMERCIAL OK</span></div>
+</div>
+</div>
+</div>
+```
+
+</div>
+</section>
+
+<div class="ndiv"></div>
+
+<!-- OPTION -->
+
+<section class="sw" id="option">
+<div class="opt-in">
+<span class="s-label">— OPTION —</span>
+<h2 class="s-title">オプションプラン</h2>
+<div class="opt-card rev">
+<h3 class="opt-ttl">⚡ 制作期間ブースター</h3>
+<p class="opt-desc">追加料金をお支払いいただくことで、通常1ヶ月の納期を短縮できるオプションです。急ぎのご依頼に対応します。複数ブースターの組み合わせも可能です。</p>
+<table class="booster-tbl">
+<thead><tr><th>追加料金</th><th>納期短縮</th><th>納期目安</th></tr></thead>
+<tbody>
+<tr><td>¥3,000</td><td>1週間短縮</td><td>約3週間</td></tr>
+<tr><td>¥6,000</td><td>2週間短縮</td><td>約2週間</td></tr>
+<tr><td>¥9,000</td><td>3週間短縮</td><td>約1週間</td></tr>
+</tbody>
+</table>
+<p style="font-size:.73rem;color:#c0a0d0;margin-top:13px;line-height:1.7;">※ 最短納期はご依頼内容の複雑さにより異なります。詳しくはご依頼時に要相談。<br>※ ブースターはご依頼確定後の追加も可（着手前に限る）。</p>
+</div>
+</div>
+</section>
+
+<div class="ndiv"></div>
+
+<!-- TERMS -->
+
+<section class="sw" id="terms">
+<div class="terms-in">
+<span class="s-label">— TERMS OF SERVICE —</span>
+<h2 class="s-title">ご利用規約</h2>
+<div class="rev">
+<div class="t-item"><span class="t-num">1</span><span>作品の<span class="t-hi">著作権は全て作者</span>にあります。納品後も変わりません。軽微な加工は可能ですが、切り貼り・アプリ加筆等の過度な加工は禁止です。</span></div>
+<div class="t-item"><span class="t-num">2</span><span><span class="t-hi">無断転載・自作発言は禁止</span>です。</span></div>
+<div class="t-item"><span class="t-num">3</span><span>納品データおよびキャラクターの<span class="t-hi">商用登録・無断グッズ利用は禁止</span>（グッズ化は要相談）。</span></div>
+<div class="t-item"><span class="t-num">4</span><span>支払いは例外なく<span class="t-hi">前払い制</span>。銀行振り込み または PayPayマネー（マネーライト不可）。</span></div>
+<div class="t-item"><span class="t-num">5</span><span>納期目安は<span class="t-hi">依頼開始から1ヶ月程度</span>。こちらの都合によりお返事が前後する場合があります。</span></div>
+<div class="t-item"><span class="t-num">6</span><span>お取引は下記テンプレートを使用した依頼にて承ります。</span></div>
+<div class="t-item"><span class="t-num">7</span><span><span class="t-hi">無料修正は1回まで</span>。大幅な描き直しは追加料金、または対応不可となります。</span></div>
+<div class="t-item"><span class="t-num">8</span><span>依頼内容によってはお断りする場合があります。</span></div>
+<div class="t-item"><span class="t-num">9</span><span>Twitter DM でのお取引開始時は冒頭に <span class="t-hi">「金木犀」</span> とご記入ください。この必読事項への同意とみなします。</span></div>
+</div>
+</div>
+</section>
+
+<div class="ndiv"></div>
+
+<!-- ORDER -->
+
+<section class="sw" id="order">
+<div class="ord-in">
+<span class="s-label">— ORDER —</span>
+<h2 class="s-title">依頼する</h2>
+<div class="form-wrap rev">
+<p style="font-size:.82rem;color:#c0a0d0;line-height:1.85;margin-bottom:26px;">
+依頼はメールまたはTwitter（X）DM にて承ります。<br>
+下記フォームを入力後、<strong style="color:#00f5ff;">「メール送信画面へ」</strong> を押すと入力内容が自動挿入されたメールアプリが開きます。<br>
+DM の場合は冒頭に必ず <span class="kw">金木犀</span> とご記入ください。
+</p>
+
+```
+<div class="fg">
+<label class="fl">① 依頼の種類</label>
+<select class="fsel" id="fType">
+<option value="">選択してください</option>
+<option>歌ってみたサムネイル（¥10,000〜）</option>
+<option>アイコン用イラスト（¥5,000〜）</option>
+<option>人外魔装イラスト（¥10,000〜）</option>
+<option>大判1枚イラスト（¥25,000〜）</option>
+<option>チームイラスト（¥15,000〜）</option>
+<option>高解像ジャケットイラスト（¥25,000〜）</option>
+<option>サイネージ用イラスト・商用（¥30,000〜）</option>
+<option>グッズ用ミニキャラ・商用（¥10,000〜）</option>
+<option>超高解像人外魔装・商用（¥50,000〜）</option>
+<option>Xヘッダー用イラスト（¥15,000〜）</option>
+<option>スマホ壁紙イラスト（¥20,000〜）</option>
+<option>タロット風イラスト（¥15,000〜）</option>
+<option>その他</option>
+</select>
+</div>
+<div class="fg">
+<label class="fl">② キャラクターの特徴・人数</label>
+<textarea class="fta" id="fChara" placeholder="例：ピンク髪のショートカットの女の子1名。ダークな雰囲気でサイバーパンク系。悪魔の翼と角があります。"></textarea>
+</div>
+<div class="fg">
+<label class="fl">③ 構図・雰囲気・ご要望</label>
+<textarea class="fta" id="fPose" placeholder="例：全身立ち絵でカメラ目線。背景は夜の都市。エモーショナルな雰囲気に。参考イラストのURLもあればご記入ください。"></textarea>
+</div>
+<div class="fg">
+<label class="fl">⚡ オプション：制作期間ブースター（任意）</label>
+<div class="boost-opts">
+<span class="boost-opt"><input type="checkbox" id="b1"><label for="b1">¥3,000 — 1週間短縮</label></span>
+<span class="boost-opt"><input type="checkbox" id="b2"><label for="b2">¥6,000 — 2週間短縮</label></span>
+<span class="boost-opt"><input type="checkbox" id="b3"><label for="b3">¥9,000 — 3週間短縮</label></span>
+</div>
+</div>
+<p class="fnote">※ 「メール送信画面へ」を押すと入力内容が自動でメール本文に挿入されます。送信前に内容をご確認ください。</p>
+<button class="sub-btn" onclick="sendMail()">✉ メール送信画面へ →</button>
+
+<div class="tw-cta">
+<p>メールの代わりにTwitter DM でもご依頼いただけます。<br>冒頭に必ず「<strong style="color:#ff2d78;">金木犀</strong>」とご記入ください。</p>
+<a href="https://x.com/Nelson_Playroom" target="_blank" class="tw-btn">𝕏 Twitter DM で依頼する</a>
+</div>
+</div>
+```
+
+</div>
+</section>
+
+<footer>
+<div class="f-logo">NV<span>.</span>com</div>
+<p style="font-size:.76rem;color:#c0a0d0;margin-top:6px;">イラストレーター ポートフォリオ &amp; 依頼サイト</p>
+<p class="f-cp">© 2024 NV.com / Nelson Playroom. All Rights Reserved. 著作権は全て作者に帰属します。</p>
+</footer>
+
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cur'), curT=document.getElementById('curT');
+let mx=0,my=0,tx=0,ty=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function aT(){tx+=(mx-tx)*.15;ty+=(my-ty)*.15;curT.style.left=tx+'px';curT.style.top=ty+'px';requestAnimationFrame(aT)})();
+document.querySelectorAll('a,button,.wc,.plan-tog,select,textarea,input,label').forEach(el=>{
+el.addEventListener('mouseenter',()=>cur.style.transform='translate(-50%,-50%) scale(2)');
+el.addEventListener('mouseleave',()=>cur.style.transform='translate(-50%,-50%) scale(1)');
+});
+
+/* ── SIDE MENU ── */
+function openSM(){document.getElementById('sm').classList.add('on');document.getElementById('smOverlay').classList.add('on');document.body.style.overflow='hidden'}
+function closeSM(){document.getElementById('sm').classList.remove('on');document.getElementById('smOverlay').classList.remove('on');document.body.style.overflow=''}
+
+/* ── PLAN ACCORDION ── */
+function togPlan(btn){
+const body=btn.nextElementSibling, isOn=body.classList.contains('on');
+document.querySelectorAll('.plan-body').forEach(b=>b.classList.remove('on'));
+document.querySelectorAll('.plan-tog').forEach(b=>b.classList.remove('on'));
+if(!isOn){body.classList.add('on');btn.classList.add('on')}
+}
+
+/* ── DETAIL ACCORDION ── */
+function togDt(btn){
+const body=btn.nextElementSibling, arr=btn.querySelector('span'), isOn=body.classList.contains('on');
+body.classList.toggle('on');
+arr.textContent=isOn?'▼':'▲';
+}
+
+/* ── LIGHTBOX ── */
+function openLB(img,cap){
+document.getElementById('lbImg').src=img.src;
+document.getElementById('lbCap').textContent=cap||'';
+document.getElementById('lb').classList.add('on');
+document.body.style.overflow='hidden';
+startSSP();
+}
+function closeLB(){
+document.getElementById('lb').classList.remove('on');
+document.body.style.overflow='';
+stopSSP();
+}
+document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)closeLB()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB()});
+
+/* ── SCREENSHOT PROTECTION ── */
+const ssg=document.getElementById('ssGuard');
+let sst;
+function startSSP(){
+document.addEventListener('keyup',onPS);
+document.addEventListener('visibilitychange',onVC);
+}
+function stopSSP(){
+document.removeEventListener('keyup',onPS);
+document.removeEventListener('visibilitychange',onVC);
+ssg.style.display='none';
+}
+function blackout(ms=700){
+ssg.style.display='block';
+clearTimeout(sst);
+sst=setTimeout(()=>ssg.style.display='none',ms);
+}
+function onPS(e){
+if(e.key==='PrintScreen'||e.keyCode===44){
+blackout(900);
+try{navigator.clipboard.writeText('')}catch(err){}
+}
+}
+function onVC(){if(document.hidden)blackout(1200)}
+const lbI=document.getElementById('lbImg');
+lbI.addEventListener('contextmenu',e=>e.preventDefault());
+lbI.addEventListener('dragstart',e=>e.preventDefault());
+
+/* ── PRICE NAV ── */
+function openPricing(){
+// 少し遅らせてスクロール後に展開
+setTimeout(()=>{
+// 全て閉じてからSTANDARDを開く
+['std','rich','com'].forEach(k=>{
+document.getElementById('pab-'+k).classList.remove('on');
+document.getElementById('pbtn-'+k).classList.remove('active');
+});
+document.getElementById('pab-std').classList.add('on');
+document.getElementById('pbtn-std').classList.add('active');
+}, 500);
+}
+
+/* ── PRICE ACCORDION ── */
+const priceKeys = ['std','rich','com'];
+function togPrice(key){
+const body = document.getElementById('pab-'+key);
+const btn = document.getElementById('pbtn-'+key);
+const isOn = body.classList.contains('on');
+// close all
+priceKeys.forEach(k=>{
+document.getElementById('pab-'+k).classList.remove('on');
+document.getElementById('pbtn-'+k).classList.remove('active');
+});
+// open clicked if it was closed
+if(!isOn){
+body.classList.add('on');
+btn.classList.add('active');
+}
+}
+
+/* ── MAIL SEND ── */
+function sendMail(){
+const type =document.getElementById('fType').value||'（未選択）';
+const chara=document.getElementById('fChara').value||'（未入力）';
+const pose =document.getElementById('fPose').value||'（未入力）';
+const boosts=[];
+if(document.getElementById('b1').checked)boosts.push('¥3,000 / 1週間短縮');
+if(document.getElementById('b2').checked)boosts.push('¥6,000 / 2週間短縮');
+if(document.getElementById('b3').checked)boosts.push('¥9,000 / 3週間短縮');
+const bText=boosts.length?boosts.join('、'):'なし';
+const sub=encodeURIComponent('イラスト依頼のご相談 — NV.com');
+const bod=encodeURIComponent(
+`【依頼内容テンプレート】
+
+① 依頼の種類
+${type}
+
+② キャラクターの特徴・人物の数
+${chara}
+
+③ 構図・ポーズ・雰囲気等のご指定
+${pose}
+
+⚡ 制作期間ブースター
+${bText}
+
+---
+※ Twitter DM でのお取引開始時は冒頭に「金木犀」とご記入ください。`
+);
+window.location.href=`mailto:nelsonplayroomboothyou@gmail.com?subject=${sub}&body=${bod}`;
+}
+
+/* ── SCROLL REVEAL ── */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
