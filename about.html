@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NV.com — GALLERY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&family=Noto+Sans+JP:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+/* ━━ RESET ━━ */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#0a000f;color:#ffffff;font-family:'Noto Sans JP',sans-serif;overflow-x:hidden}
+
+/* CURSOR: disabled for cross-browser */
+#cur,#curT{display:none}
+
+/* ━━ NAV (3-column grid) ━━ */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 24px;height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;background:rgba(10,0,15,.97);backdrop-filter:blur(8px);border-bottom:2px solid rgba(155,29,255,.5);box-shadow:0 2px 30px rgba(155,29,255,.2)}
+.nav-links{display:flex;align-items:center;gap:16px}
+.nav-links a{font-family:‘Orbitron’,sans-serif;font-size:.55rem;letter-spacing:.1em;color:#c0a0d0;text-decoration:none;transition:color .2s,text-shadow .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active-page{color:#ff2d78;text-shadow:0 0 8px #ff2d78,0 0 20px #ff2d78}
+.nav-links a.top-link:hover{color:#00f5ff;text-shadow:0 0 10px #00f5ff,0 0 20px #00f5ff}
+.nav-logo{font-family:‘Orbitron’,sans-serif;font-size:1.15rem;font-weight:900;letter-spacing:.2em;text-shadow:0 0 8px #ff2d78,0 0 20px #ff2d78,0 0 40px rgba(255,45,120,.7),0 0 80px rgba(255,45,120,.4);text-align:center;justify-self:center;text-decoration:none;color:#ffffff}
+.nav-logo span{color:#ff2d78}
+.nav-right{display:flex;justify-content:flex-end}
+/* MENUボタン非表示 */
+#menuBtn{display:none}
+/* ━━ 戻るボタン（ページ下部） ━━ */
+.return-section{padding:60px 28px;text-align:center}
+.return-btn{display:inline-flex;align-items:center;gap:12px;padding:16px 48px;background:#ff2d78;background:-webkit-linear-gradient(135deg,#ff2d78,#9b1dff);background:linear-gradient(135deg,#ff2d78,#9b1dff);color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.75rem;letter-spacing:.2em;text-decoration:none;border-radius:4px;transition:filter .2s,transform .2s;box-shadow:0 0 24px rgba(255,45,120,.5),0 0 48px rgba(155,29,255,.3)}
+.return-btn:hover{filter:brightness(1.2);transform:translateY(-2px)}
+.return-btn-sub{display:block;font-size:.65rem;color:#c0a0d0;margin-top:12px;font-family:‘Orbitron’,sans-serif;letter-spacing:.15em}
+@media(max-width:900px){.nav-links{display:none}nav{grid-template-columns:auto 1fr auto}.nav-logo{font-size:.95rem;justify-self:center}}
+
+/* ━━ NDIV ━━ */
+.ndiv{height:2px;background:linear-gradient(90deg,transparent,#9b1dff,#ff2d78,#9b1dff,transparent);opacity:.9;box-shadow:0 0 10px rgba(255,45,120,.5)}
+
+/* ━━ PAGE HEADER ━━ */
+.page-header{padding:130px 28px 56px;text-align:center;position:relative;overflow:hidden}
+.ph-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 50% 30%,rgba(155,29,255,.55) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 20% 80%,rgba(255,45,120,.35) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 80% 60%,rgba(0,245,255,.2) 0%,transparent 65%);animation:bgP 8s ease-in-out infinite alternate;pointer-events:none}
+@keyframes bgP{0%{opacity:.7}100%{opacity:1}}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(155,29,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(155,29,255,.18) 1px,transparent 1px);background-size:60px 60px;animation:gM 20s linear infinite;pointer-events:none}
+@keyframes gM{0%{transform:translateY(0)}100%{transform:translateY(60px)}}
+.ph-label{font-family:‘Orbitron’,sans-serif;font-size:.58rem;letter-spacing:.5em;color:#ff2d78;text-shadow:0 0 8px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78,0 0 60px rgba(255,45,120,.5);display:block;margin-bottom:14px;position:relative;z-index:2;opacity:0;animation:fU .7s ease .2s forwards}
+.ph-title{font-family:‘Zen Antique Soft’,serif;font-size:clamp(2.2rem,7vw,5rem);line-height:1.15;color:#ffffff;text-shadow:0 0 20px #ff2d78,0 0 50px rgba(255,45,120,.7),0 0 100px rgba(155,29,255,.5);position:relative;z-index:2;opacity:0;animation:fU .7s ease .4s forwards}
+.ph-sub{font-size:.84rem;color:#c0a0d0;margin-top:16px;line-height:1.85;position:relative;z-index:2;opacity:0;animation:fU .7s ease .6s forwards}
+.back-wrap{position:relative;z-index:2;margin-top:22px;opacity:0;animation:fU .7s ease .8s forwards}
+.back-link{display:inline-flex;align-items:center;gap:8px;padding:9px 22px;border:1px solid rgba(155,29,255,.6);color:#c0a0d0;font-family:‘Orbitron’,sans-serif;font-size:.58rem;letter-spacing:.12em;text-decoration:none;transition:all .2s;border-radius:3px;background:rgba(155,29,255,.08)}
+.back-link:hover{border-color:#00f5ff;color:#00f5ff;box-shadow:0 0 12px rgba(0,245,255,.3);background:rgba(0,245,255,.06)}
+@keyframes fU{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* ━━ FILTER ━━ */
+.filter-wrap{padding:0 28px 36px;display:flex;justify-content:center;flex-wrap:wrap;gap:10px;position:relative;z-index:2;opacity:0;animation:fU .7s ease 1s forwards}
+.f-btn{padding:8px 20px;background:rgba(26,0,48,.7);border:1px solid rgba(155,29,255,.5);color:#c0a0d0;font-family:‘Orbitron’,sans-serif;font-size:.56rem;letter-spacing:.12em;cursor:pointer;border-radius:3px;transition:all .2s}
+.f-btn:hover{border-color:#00f5ff;color:#00f5ff;box-shadow:0 0 10px rgba(0,245,255,.3)}
+.f-btn.on{background:#ff2d78;background:-webkit-linear-gradient(135deg,#ff2d78,#9b1dff);background:linear-gradient(135deg,#ff2d78,#9b1dff);border-color:transparent;color:#fff;box-shadow:0 0 18px rgba(255,45,120,.5),0 0 36px rgba(155,29,255,.3)}
+
+/* ━━ GALLERY GRID ━━ */
+.gallery-wrap{max-width:1400px;margin:0 auto;padding:0 20px 100px}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+
+/* Gallery card */
+.g-card{position:relative;overflow:hidden;cursor:pointer;border:1px solid rgba(155,29,255,.55);background:rgba(35,0,65,.7);border-radius:6px;transition:border-color .3s,transform .3s,box-shadow .3s;opacity:0;transform:translateY(20px);animation:cardIn .5s ease forwards}
+.g-card:hover{border-color:#ff2d78;transform:translateY(-4px) scale(1.01);box-shadow:0 0 30px rgba(255,45,120,.45),0 0 60px rgba(255,45,120,.2)}
+.g-card.hidden{display:none}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+
+.g-img-wrap{position:relative;overflow:hidden}
+.g-img-wrap img{width:100%;display:block;object-fit:cover;transition:transform .5s,filter .4s;filter:saturate(.85);-webkit-user-select:none;user-select:none;pointer-events:none}
+.g-card:hover .g-img-wrap img{transform:scale(1.06);filter:saturate(1)}
+
+/* aspect ratios */
+.ar-wide img{aspect-ratio:16/9}
+.ar-sq img{aspect-ratio:1/1}
+.ar-tall img{aspect-ratio:9/14}
+.ar-head img{aspect-ratio:21/9}
+
+/* expand hint */
+.g-expand{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,0,15,0);transition:background .3s;pointer-events:none}
+.g-card:hover .g-expand{background:rgba(10,0,15,.35)}
+.g-expand-icon{font-family:‘Orbitron’,sans-serif;font-size:.6rem;letter-spacing:.15em;color:#ffffff;background:rgba(255,45,120,.75);padding:8px 18px;border:1px solid #ff2d78;border-radius:3px;opacity:0;transform:scale(.8);transition:opacity .3s,transform .3s;box-shadow:0 0 14px rgba(255,45,120,.5)}
+.g-card:hover .g-expand-icon{opacity:1;transform:scale(1)}
+
+/* overlay info */
+.g-overlay{position:absolute;bottom:0;left:0;right:0;padding:18px 16px 14px;background:linear-gradient(to top,rgba(10,0,15,.96) 0%,transparent 100%);transform:translateY(100%);transition:transform .35s cubic-bezier(.25,.46,.45,.94)}
+.g-card:hover .g-overlay{transform:translateY(0)}
+.g-ov-cat{font-family:‘Orbitron’,sans-serif;font-size:.5rem;letter-spacing:.25em;color:#00f5ff;text-shadow:0 0 8px #00f5ff,0 0 16px rgba(0,245,255,.5);display:block;margin-bottom:3px}
+.g-ov-title{font-family:‘Zen Antique Soft’,serif;font-size:.9rem;color:#ffffff;display:block;margin-bottom:4px;text-shadow:0 0 10px rgba(255,255,255,.3)}
+.g-ov-price{font-family:‘Orbitron’,sans-serif;font-size:.82rem;font-weight:700;color:#ff2d78;text-shadow:0 0 10px #ff2d78,0 0 25px rgba(255,45,120,.7);display:block}
+.g-ov-com{display:inline-block;margin-left:6px;padding:1px 6px;font-size:.45rem;border:1px solid #ffd700;color:#ffd700;text-shadow:0 0 6px #ffd700;letter-spacing:.1em;font-family:‘Orbitron’,sans-serif;vertical-align:middle;background:rgba(255,215,0,.12);border-radius:2px}
+
+/* plan badge */
+.g-badge{position:absolute;top:10px;left:10px;padding:4px 10px;font-family:‘Orbitron’,sans-serif;font-size:.47rem;letter-spacing:.12em;border:1px solid;border-radius:2px}
+.gb-std{color:#d4aaff;border-color:#c084fc;background:rgba(192,132,252,.25);text-shadow:0 0 8px rgba(192,132,252,.8)}
+.gb-rich{color:#00f5ff;border-color:#00f5ff;background:rgba(0,245,255,.2);text-shadow:0 0 8px rgba(0,245,255,.8)}
+.gb-com{color:#ffe84d;border-color:#ffd700;background:rgba(255,215,0,.2);text-shadow:0 0 8px rgba(255,215,0,.8)}
+
+/* ━━ LIGHTBOX ━━ */
+#lb{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;background:rgba(4,0,8,.97)}
+#lb.on{display:flex}
+#lbImg{max-width:88vw;max-height:88vh;object-fit:contain;border:1px solid rgba(155,29,255,.5);box-shadow:0 0 60px rgba(155,29,255,.4);-webkit-user-select:none;user-select:none;pointer-events:none;position:relative;z-index:2001;border-radius:4px}
+#lbClose{position:fixed;top:22px;right:26px;z-index:2002;background:none;border:1px solid rgba(255,45,120,.6);color:#ff2d78;font-size:1.3rem;padding:6px 13px;cursor:pointer;transition:background .2s;border-radius:3px}
+#lbClose:hover{background:rgba(255,45,120,.2)}
+#lbPrev,#lbNext{position:fixed;top:50%;transform:translateY(-50%);z-index:2002;background:rgba(26,0,48,.8);border:1px solid rgba(155,29,255,.5);color:#c084fc;font-size:1.4rem;padding:14px 18px;cursor:pointer;transition:all .2s;border-radius:3px}
+#lbPrev{left:20px}#lbNext{right:20px}
+#lbPrev:hover,#lbNext:hover{border-color:#ff2d78;color:#ff2d78;box-shadow:0 0 16px rgba(255,45,120,.4)}
+#lbCap{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);font-family:‘Orbitron’,sans-serif;font-size:.62rem;letter-spacing:.2em;color:#c0a0d0;text-align:center;z-index:2002;white-space:nowrap}
+.lb-warn{position:fixed;bottom:64px;left:50%;transform:translateX(-50%);font-family:‘Orbitron’,sans-serif;font-size:.46rem;letter-spacing:.2em;color:rgba(155,29,255,.5);z-index:2002;white-space:nowrap}
+#ssGuard{display:none;position:fixed;inset:0;background:#000;z-index:2050;pointer-events:none}
+
+/* ━━ EMPTY STATE ━━ */
+.g-empty{display:none;text-align:center;padding:80px 20px;color:#c0a0d0}
+.g-empty.on{display:block}
+.g-empty-icon{font-size:2.5rem;display:block;margin-bottom:14px}
+.g-empty p{font-family:‘Orbitron’,sans-serif;font-size:.7rem;letter-spacing:.2em}
+
+/* ━━ FOOTER ━━ */
+footer{border-top:2px solid rgba(155,29,255,.5);padding:32px;text-align:center}
+.f-logo{font-family:‘Orbitron’,sans-serif;font-size:.95rem;font-weight:900;text-shadow:0 0 10px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78;letter-spacing:.2em;margin-bottom:5px}
+.f-logo span{color:#ff2d78}
+.f-cp{font-size:.66rem;color:#c0a0d0;margin-top:8px}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+.rev.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+.g-overlay{transform:translateY(0);background:linear-gradient(to top,rgba(10,0,15,.95) 0%,transparent 100%)}
+#lbPrev{left:8px;padding:10px 12px}
+#lbNext{right:8px;padding:10px 12px}
+.filter-wrap{gap:7px;padding:0 16px 28px}
+.f-btn{padding:7px 14px;font-size:.5rem}
+.page-header{padding:100px 20px 44px}
+}
+</style>
+
+</head>
+<body>
+
+<div id="cur"></div><div id="curT"></div>
+<div id="ssGuard"></div>
+
+<!-- NAV -->
+
+<nav>
+<div class="nav-links">
+<a href="portfolio.html" class="top-link">TOP</a>
+<a href="portfolio.html#works">WORKS</a>
+<a href="portfolio.html#pricing">PRICE</a>
+<a href="portfolio.html#order">ORDER</a>
+<a href="gallery.html" class="active-page">GALLERY</a>
+<a href="making.html" target="_blank">MAKING</a>
+</div>
+<a href="portfolio.html" class="nav-logo">NV<span>.</span>com</a>
+<div class="nav-right"></div>
+</nav>
+
+<!-- PAGE HEADER -->
+
+<div class="page-header">
+<div class="ph-bg"></div>
+<div class="ph-grid"></div>
+<span class="ph-label">— PAST WORKS GALLERY —</span>
+<h1 class="ph-title">過去作品<br>ギャラリー</h1>
+<p class="ph-sub">これまでの制作実績アーカイブです。<br>カテゴリで絞り込み / 画像タップで拡大表示できます。</p>
+<div class="back-wrap">
+<a href="portfolio.html" class="back-link">← ポートフォリオに戻る</a>
+</div>
+</div>
+
+<div class="ndiv"></div>
+
+<!-- FILTER -->
+
+<div class="filter-wrap">
+<button class="f-btn on" onclick="filterG('all',this)">ALL</button>
+<button class="f-btn" onclick="filterG('std',this)">STANDARD</button>
+<button class="f-btn" onclick="filterG('rich',this)">RICH</button>
+<button class="f-btn" onclick="filterG('com',this)">COMMERCIAL</button>
+<button class="f-btn" onclick="filterG('thumbnail',this)">サムネイル</button>
+<button class="f-btn" onclick="filterG('icon',this)">アイコン</button>
+<button class="f-btn" onclick="filterG('fantasy',this)">ダークファンタジー</button>
+<button class="f-btn" onclick="filterG('team',this)">チーム</button>
+<button class="f-btn" onclick="filterG('jacket',this)">ジャケット</button>
+<button class="f-btn" onclick="filterG('sns',this)">SNS</button>
+</div>
+
+<!-- GALLERY GRID -->
+
+<div class="gallery-wrap">
+<div class="gallery-grid" id="gGrid">
+
+```
+<div class="g-card" data-tags="std thumbnail" style="animation-delay:.05s">
+<span class="g-badge gb-std">STANDARD</span>
+<div class="g-img-wrap ar-wide" onclick="openLB(0)">
+<img src="無題1572_20250728145228.png" alt="WORLD サムネイル">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">COVER SONG THUMBNAIL</span>
+<span class="g-ov-title">闇と光が交差する世界 — WORLD</span>
+<span class="g-ov-price">¥10,000~</span>
+</div>
+</div>
+
+<div class="g-card" data-tags="std thumbnail" style="animation-delay:.08s">
+<span class="g-badge gb-std">STANDARD</span>
+<div class="g-img-wrap ar-wide" onclick="openLB(1)">
+<img src="無題1518_20250224192418.png" alt="MINATOKU サムネイル">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">COVER SONG THUMBNAIL</span>
+<span class="g-ov-title">ネオン煌めく港区の夜</span>
+<span class="g-ov-price">¥10,000~</span>
+</div>
+</div>
+
+<div class="g-card" data-tags="std icon" style="animation-delay:.11s">
+<span class="g-badge gb-std">STANDARD</span>
+<div class="g-img-wrap ar-sq" onclick="openLB(2)">
+<img src="無題1456_20241008195855.png" alt="アイコン MIHAKU">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">ICON ILLUSTRATION</span>
+<span class="g-ov-title">個性を刻むアイコンイラスト</span>
+<span class="g-ov-price">¥5,000~</span>
+</div>
+</div>
+
+<div class="g-card" data-tags="std fantasy" style="animation-delay:.14s">
+<span class="g-badge gb-std">STANDARD</span>
+<div class="g-img-wrap ar-sq" onclick="openLB(3)">
+<img src="無題1443_20240911060112.png" alt="人外魔装 NU">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">DARK FANTASY CHARACTER</span>
+<span class="g-ov-title">翼と鎖纏う反逆の天使</span>
+<span class="g-ov-price">¥10,000~</span>
+</div>
+</div>
+
+<div class="g-card" data-tags="rich" style="animation-delay:.17s">
+<span class="g-badge gb-rich">RICH</span>
+<div class="g-img-wrap ar-wide" onclick="openLB(4)">
+<img src="無題1434_20240813212023.png" alt="大判イラスト">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">LARGE FORMAT ILLUSTRATION</span>
+<span class="g-ov-title">二人の邂逅 — テクノポア</span>
+<span class="g-ov-price">¥25,000~</span>
+</div>
+</div>
+
+<div class="g-card" data-tags="rich team" style="animation-delay:.2s">
+<span class="g-badge gb-rich">RICH</span>
+<div class="g-img-wrap ar-wide" onclick="openLB(5)">
+<img src="1392_20240518152920.png" alt="チームイラスト">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">TEAM CHARACTER</span>
+<span class="g-ov-title">3キャラクター同時描き</span>
+<span class="g-ov-price">¥15,000~</span>
+</div>
+</div>
+
+<div class="g-card" data-tags="rich jacket" style="animation-delay:.23s">
+<span class="g-badge gb-rich">RICH</span>
+<div class="g-img-wrap ar-tall" onclick="openLB(6)">
+<img src="無題48_20240623160419.png" alt="ジャケット TOKYO NIGHT PUNK">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">HIGH-RES JACKET ART</span>
+<span class="g-ov-title">TOKYO NIGHT PUNK</span>
+<span class="g-ov-price">¥25,000~</span>
+</div>
+</div>
+
+<div class="g-card" data-tags="com" style="animation-delay:.26s">
+<span class="g-badge gb-com">COMMERCIAL</span>
+<div class="g-img-wrap ar-wide" onclick="openLB(7)">
+<img src="無題1324_20240522221810.png" alt="サイネージ SHISHA">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">SIGNAGE / DISPLAY</span>
+<span class="g-ov-title">煙とまどろみの妖精 SHISHA</span>
+<span class="g-ov-price">¥30,000~ <span class="g-ov-com">商用可</span></span>
+</div>
+</div>
+
+<div class="g-card" data-tags="com std" style="animation-delay:.29s">
+<span class="g-badge gb-com">COMMERCIAL</span>
+<div class="g-img-wrap ar-sq" onclick="openLB(8)">
+<img src="無題1195_20240304121118.png" alt="グッズミニキャラ UTO">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">GOODS / MINI CHARACTER</span>
+<span class="g-ov-title">グッズ映えするミニキャラ</span>
+<span class="g-ov-price">¥10,000~ <span class="g-ov-com">商用可</span></span>
+</div>
+</div>
+
+<div class="g-card" data-tags="com fantasy" style="animation-delay:.32s">
+<span class="g-badge gb-com">COMMERCIAL</span>
+<div class="g-img-wrap ar-sq" onclick="openLB(9)">
+<img src="無題1228_20240225210421.png" alt="超高解像 EVA EMOLA">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">ULTRA HD DARK FANTASY</span>
+<span class="g-ov-title">神話降臨 — EVA·EMOLA</span>
+<span class="g-ov-price">¥50,000~ <span class="g-ov-com">商用可</span></span>
+</div>
+</div>
+
+<div class="g-card" data-tags="com sns" style="animation-delay:.35s">
+<span class="g-badge gb-com">COMMERCIAL</span>
+<div class="g-img-wrap ar-wide" onclick="openLB(10)">
+<img src="無題1027_20240116163106.png" alt="サイネージ2">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">SIGNAGE / DISPLAY</span>
+<span class="g-ov-title">Constant dripping wears away the stone.</span>
+<span class="g-ov-price">¥30,000~ <span class="g-ov-com">商用可</span></span>
+</div>
+</div>
+
+<div class="g-card" data-tags="rich sns" style="animation-delay:.38s">
+<span class="g-badge gb-rich">RICH</span>
+<div class="g-img-wrap ar-head" onclick="openLB(11)">
+<img src="無題753_20240107231942.png" alt="Xヘッダー CHIKO">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">X / SNS HEADER</span>
+<span class="g-ov-title">ネオン夜景に佇む CHIKO</span>
+<span class="g-ov-price">¥15,000~</span>
+</div>
+</div>
+
+<div class="g-card" data-tags="rich" style="animation-delay:.41s">
+<span class="g-badge gb-rich">RICH</span>
+<div class="g-img-wrap ar-tall" onclick="openLB(12)">
+<img src="無題817_20231204221221.png" alt="スマホ壁紙">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">SMARTPHONE WALLPAPER</span>
+<span class="g-ov-title">魔法少女の降臨</span>
+<span class="g-ov-price">¥20,000~</span>
+</div>
+</div>
+
+<div class="g-card" data-tags="rich" style="animation-delay:.44s">
+<span class="g-badge gb-rich">RICH</span>
+<div class="g-img-wrap ar-sq" onclick="openLB(13)">
+<img src="無題569_20230415185011.png" alt="タロット風 SHIOUTMY">
+<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+</div>
+<div class="g-overlay">
+<span class="g-ov-cat">TAROT STYLE</span>
+<span class="g-ov-title">対極の二重奏 — SHIOUTMY</span>
+<span class="g-ov-price">¥15,000~</span>
+</div>
+</div>
+```
+
+</div>
+
+<div class="g-empty" id="gEmpty">
+<span class="g-empty-icon">🔍</span>
+<p>該当する作品がありません</p>
+</div>
+</div>
+
+<!-- LIGHTBOX -->
+
+<div id="lb">
+<button id="lbClose" onclick="closeLB()">✕</button>
+<button id="lbPrev" onclick="lbMove(-1)">‹</button>
+<img id="lbImg" src="" alt="">
+<button id="lbNext" onclick="lbMove(1)">›</button>
+<p id="lbCap"></p>
+<p class="lb-warn">⚠ スクリーンショット保護が有効です</p>
+</div>
+
+<div class="ndiv"></div>
+
+<!-- 戻るボタン -->
+
+<div class="return-section">
+<a href="portfolio.html" class="return-btn">← メインページへ戻る</a>
+<span class="return-btn-sub">ポートフォリオ・依頼フォームはこちら</span>
+</div>
+
+<div class="ndiv"></div>
+
+<footer>
+<div class="f-logo">NV<span>.</span>com</div>
+<p style="font-size:.76rem;color:#c0a0d0;margin-top:5px;">過去作品ギャラリー</p>
+<p class="f-cp">© 2024 NV.com / Nelson Playroom. All Rights Reserved.</p>
+</footer>
+
+<script>
+/* ── FILTER ── */
+function filterG(tag, btn){
+document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('on'));
+btn.classList.add('on');
+const cards = document.querySelectorAll('.g-card');
+let visible = 0;
+cards.forEach((card,i)=>{
+const tags = card.dataset.tags || '';
+const show = tag==='all' || tags.split(' ').includes(tag);
+if(show){
+card.classList.remove('hidden');
+card.style.animation='none';
+card.offsetHeight;
+card.style.animation=`cardIn .45s ease ${i*.04}s forwards`;
+card.style.opacity='0';
+visible++;
+} else {
+card.classList.add('hidden');
+}
+});
+document.getElementById('gEmpty').classList.toggle('on', visible===0);
+}
+
+/* ── LIGHTBOX ── */
+const images = [
+{src:'無題1572_20250728145228.png', cap:'歌ってみたサムネイル — ¥10,000〜'},
+{src:'無題1518_20250224192418.png', cap:'歌ってみたサムネイル — ¥10,000〜'},
+{src:'無題1456_20241008195855.png', cap:'アイコン用イラスト — ¥5,000〜'},
+{src:'無題1443_20240911060112.png', cap:'人外魔装イラスト — ¥10,000〜'},
+{src:'無題1434_20240813212023.png', cap:'大判1枚イラスト — ¥25,000〜'},
+{src:'1392_20240518152920.png', cap:'チームイラスト — ¥15,000〜'},
+{src:'無題48_20240623160419.png', cap:'高解像ジャケットイラスト — ¥25,000〜'},
+{src:'無題1324_20240522221810.png', cap:'サイネージ用イラスト（商用可）— ¥30,000〜'},
+{src:'無題1195_20240304121118.png', cap:'グッズ用ミニキャライラスト（商用可）— ¥10,000〜'},
+{src:'無題1228_20240225210421.png', cap:'超高解像度人外魔装（商用可）— ¥50,000〜'},
+{src:'無題1027_20240116163106.png', cap:'サイネージ用イラスト（商用可）— ¥30,000〜'},
+{src:'無題753_20240107231942.png', cap:'Xヘッダー用イラスト — ¥15,000〜'},
+{src:'無題817_20231204221221.png', cap:'スマホ用壁紙イラスト — ¥20,000〜'},
+{src:'無題569_20230415185011.png', cap:'タロット風イラスト — ¥15,000〜'},
+];
+let lbIdx=0;
+
+function openLB(idx){
+lbIdx=idx; showLBImg();
+document.getElementById('lb').classList.add('on');
+document.body.style.overflow='hidden';
+startSSP();
+}
+function showLBImg(){
+document.getElementById('lbImg').src=images[lbIdx].src;
+document.getElementById('lbCap').textContent=`${lbIdx+1} / ${images.length}　　${images[lbIdx].cap}`;
+}
+function lbMove(dir){lbIdx=(lbIdx+dir+images.length)%images.length;showLBImg()}
+function closeLB(){document.getElementById('lb').classList.remove('on');document.body.style.overflow='';stopSSP()}
+document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)closeLB()});
+document.addEventListener('keydown',e=>{
+if(!document.getElementById('lb').classList.contains('on'))return;
+if(e.key==='Escape')closeLB();
+if(e.key==='ArrowLeft')lbMove(-1);
+if(e.key==='ArrowRight')lbMove(1);
+});
+
+/* ── SCREENSHOT PROTECTION ── */
+const ssg=document.getElementById('ssGuard');
+let sst;
+function startSSP(){document.addEventListener('keyup',onPS);document.addEventListener('visibilitychange',onVC)}
+function stopSSP(){document.removeEventListener('keyup',onPS);document.removeEventListener('visibilitychange',onVC);ssg.style.display='none'}
+function blackout(ms=700){ssg.style.display='block';clearTimeout(sst);sst=setTimeout(()=>ssg.style.display='none',ms)}
+function onPS(e){if(e.key==='PrintScreen'||e.keyCode===44){blackout(900);try{navigator.clipboard.writeText('')}catch(err){}}}
+function onVC(){if(document.hidden)blackout(1200)}
+const lbI=document.getElementById('lbImg');
+lbI.addEventListener('contextmenu',e=>e.preventDefault());
+lbI.addEventListener('dragstart',e=>e.preventDefault());
+
+/* ── SCROLL REVEAL ── */
+const io=new IntersectionObserver(es=>{
+es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}})
+},{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
