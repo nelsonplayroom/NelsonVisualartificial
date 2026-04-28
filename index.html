@@ -214,7 +214,7 @@ nav{padding:13px 16px}
 <a href="#option">OPTION</a>
 <a href="#terms">TERMS</a>
 <a href="#order">ORDER</a>
-<a href="about.html" target="_blank">MAKING</a>
+<a href="making.html" target="_blank">MAKING</a>
 </div>
 <!-- 中央: ロゴ -->
 <div class="nav-logo">NV<span>.</span>com</div>
@@ -656,6 +656,9 @@ DM の場合は冒頭に必ず <span class="kw">金木犀</span> とご記入く
 <footer>
 <div class="f-logo">NV<span>.</span>com</div>
 <p style="font-size:.76rem;color:#c0a0d0;margin-top:6px;">イラストレーター ポートフォリオ &amp; 依頼サイト</p>
+<div style="margin:18px 0 10px;">
+<button class="btn-cyan" onclick="copyPageURL(this)" style="border:none;">🔗 このサイトのURLをコピー</button>
+</div>
 <p class="f-cp">© 2024 NV.com / Nelson Playroom. All Rights Reserved. 著作権は全て作者に帰属します。</p>
 </footer>
 
@@ -793,6 +796,27 @@ ${bText}
 ※ Twitter DM でのお取引開始時は冒頭に「金木犀」とご記入ください。`
 );
 window.location.href=`mailto:nelsonplayroomboothyou@gmail.com?subject=${sub}&body=${bod}`;
+}
+
+/* ── URL COPY ── */
+function copyPageURL(btn){
+const url='https://nelsonplayroom.github.io/NelsonVisualartificial/index.html';
+navigator.clipboard.writeText(url).then(()=>{
+const orig=btn.textContent;
+btn.textContent='✓ コピーしました！';
+btn.style.background='linear-gradient(135deg,#00e676,#00bcd4)';
+setTimeout(()=>{btn.textContent=orig;btn.style.background='';},2000);
+}).catch(()=>{
+// フォールバック
+const ta=document.createElement('textarea');
+ta.value=url;ta.style.position='fixed';ta.style.opacity='0';
+document.body.appendChild(ta);ta.select();document.execCommand('copy');
+document.body.removeChild(ta);
+const orig=btn.textContent;
+btn.textContent='✓ コピーしました！';
+btn.style.background='linear-gradient(135deg,#00e676,#00bcd4)';
+setTimeout(()=>{btn.textContent=orig;btn.style.background='';},2000);
+});
 }
 
 /* ── SCROLL REVEAL ── */
