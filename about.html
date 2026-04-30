@@ -25,8 +25,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 24px;height:60px;d
 .nav-logo{font-family:‘Orbitron’,sans-serif;font-size:1.15rem;font-weight:900;letter-spacing:.2em;text-shadow:0 0 8px #ff2d78,0 0 20px #ff2d78,0 0 40px rgba(255,45,120,.7),0 0 80px rgba(255,45,120,.4);text-align:center;justify-self:center;text-decoration:none;color:#ffffff}
 .nav-logo span{color:#ff2d78}
 .nav-right{display:flex;justify-content:flex-end}
-/* MENUボタン非表示 */
 #menuBtn{display:none}
+
 /* ━━ 戻るボタン（ページ下部） ━━ */
 .return-section{padding:60px 28px;text-align:center}
 .return-btn{display:inline-flex;align-items:center;gap:12px;padding:16px 48px;background:#ff2d78;background:-webkit-linear-gradient(135deg,#ff2d78,#9b1dff);background:linear-gradient(135deg,#ff2d78,#9b1dff);color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.75rem;letter-spacing:.2em;text-decoration:none;border-radius:4px;transition:filter .2s,transform .2s;box-shadow:0 0 24px rgba(255,45,120,.5),0 0 48px rgba(155,29,255,.3)}
@@ -96,6 +96,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 24px;height:60px;d
 .gb-std{color:#d4aaff;border-color:#c084fc;background:rgba(192,132,252,.25);text-shadow:0 0 8px rgba(192,132,252,.8)}
 .gb-rich{color:#00f5ff;border-color:#00f5ff;background:rgba(0,245,255,.2);text-shadow:0 0 8px rgba(0,245,255,.8)}
 .gb-com{color:#ffe84d;border-color:#ffd700;background:rgba(255,215,0,.2);text-shadow:0 0 8px rgba(255,215,0,.8)}
+.gb-ext{color:#ff6b35;border-color:#ff6b35;background:rgba(255,107,53,.2);text-shadow:0 0 8px rgba(255,107,53,.8)}
 
 /* ━━ LIGHTBOX ━━ */
 #lb{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;background:rgba(4,0,8,.97)}
@@ -177,6 +178,7 @@ footer{border-top:2px solid rgba(155,29,255,.5);padding:32px;text-align:center}
 <button class="f-btn on" onclick="filterG('all',this)">ALL</button>
 <button class="f-btn" onclick="filterG('std',this)">STANDARD</button>
 <button class="f-btn" onclick="filterG('rich',this)">RICH</button>
+<button class="f-btn" onclick="filterG('extreme',this)">EXTREME</button>
 <button class="f-btn" onclick="filterG('com',this)">COMMERCIAL</button>
 <button class="f-btn" onclick="filterG('thumbnail',this)">サムネイル</button>
 <button class="f-btn" onclick="filterG('icon',this)">アイコン</button>
@@ -191,197 +193,253 @@ footer{border-top:2px solid rgba(155,29,255,.5);padding:32px;text-align:center}
 <div class="gallery-wrap">
 <div class="gallery-grid" id="gGrid">
 
+  <!-- 1 -->
 
-<div class="g-card" data-tags="std thumbnail" style="animation-delay:.05s">
-<span class="g-badge gb-std">STANDARD</span>
-<div class="g-img-wrap ar-wide" onclick="openLB(0)">
-<img src="無題1580_20250917084813.png" alt="単品サムネイル（差分なし）">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">COVER SONG THUMBNAIL</span>
-<span class="g-ov-title">c4nge（サンプル）</span>
-<span class="g-ov-price">¥10,000~</span>
-</div>
-</div>
+  <div class="g-card" data-tags="std thumbnail" style="animation-delay:.05s">
+  <span class="g-badge gb-std">STANDARD</span>
+  <div class="g-img-wrap ar-wide" onclick="openLB(0)">
+  <img src="無題1580_20250917084813.png" alt="単品サムネイル（差分なし）">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">COVER SONG THUMBNAIL</span>
+  <span class="g-ov-title">c4nge（サンプル）</span>
+  <span class="g-ov-price">¥10,000~</span>
+  </div>
+  </div>
 
-<div class="g-card" data-tags="std thumbnail" style="animation-delay:.08s">
-<span class="g-badge gb-std">STANDARD</span>
-<div class="g-img-wrap ar-wide" onclick="openLB(1)">
-<img src="無題1583_20260419125632.png" alt="シニカル・シニカル（サンプル）">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">COVER SONG THUMBNAIL</span>
-<span class="g-ov-title">シニカル・シニカル（サンプル）</span>
-<span class="g-ov-price">¥10,000~</span>
-</div>
-</div>
+  <!-- 2 -->
 
-<div class="g-card" data-tags="std icon" style="animation-delay:.11s">
-<span class="g-badge gb-std">STANDARD</span>
-<div class="g-img-wrap ar-sq" onclick="openLB(2)">
-<img src="無題1097_20240315222638.png" alt="正方形アイコンイラスト">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">ICON ILLUSTRATION</span>
-<span class="g-ov-title">個性を刻むアイコンイラスト</span>
-<span class="g-ov-price">¥5,000~</span>
-</div>
-</div>
+  <div class="g-card" data-tags="std thumbnail" style="animation-delay:.08s">
+  <span class="g-badge gb-std">STANDARD</span>
+  <div class="g-img-wrap ar-wide" onclick="openLB(1)">
+  <img src="無題1583_20260419125632.png" alt="シニカル・シニカル（サンプル）">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">COVER SONG THUMBNAIL</span>
+  <span class="g-ov-title">シニカル・シニカル（サンプル）</span>
+  <span class="g-ov-price">¥10,000~</span>
+  </div>
+  </div>
 
-<div class="g-card" data-tags="std fantasy" style="animation-delay:.14s">
-<span class="g-badge gb-std">STANDARD</span>
-<div class="g-img-wrap ar-sq" onclick="openLB(3)">
-<img src="無題1443_20240911060112.png" alt="人外魔装 NU">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">DARK FANTASY CHARACTER</span>
-<span class="g-ov-title">翼と鎖纏う反逆の天使</span>
-<span class="g-ov-price">¥10,000~</span>
-</div>
-</div>
+  <!-- 3 -->
 
-<div class="g-card" data-tags="rich" style="animation-delay:.17s">
-<span class="g-badge gb-rich">RICH</span>
-<div class="g-img-wrap ar-wide" onclick="openLB(4)">
-<img src="無題1434_20240813212023.png" alt="大判イラスト">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">LARGE FORMAT ILLUSTRATION</span>
-<span class="g-ov-title">二人の邂逅―TECHNO POOR</span>
-<span class="g-ov-price">¥25,000~</span>
-</div>
-</div>
+  <div class="g-card" data-tags="std icon" style="animation-delay:.11s">
+  <span class="g-badge gb-std">STANDARD</span>
+  <div class="g-img-wrap ar-sq" onclick="openLB(2)">
+  <img src="無題1097_20240315222638.png" alt="正方形アイコンイラスト">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">ICON ILLUSTRATION</span>
+  <span class="g-ov-title">個性を刻むアイコンイラスト</span>
+  <span class="g-ov-price">¥5,000~</span>
+  </div>
+  </div>
 
-<div class="g-card" data-tags="rich team" style="animation-delay:.2s">
-<span class="g-badge gb-rich">RICH</span>
-<div class="g-img-wrap ar-wide" onclick="openLB(5)">
-<img src="無題1358_20240417114532.png" alt="チームイラスト">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">TEAM CHARACTER</span>
-<span class="g-ov-title">複数キャラクター同時描き</span>
-<span class="g-ov-price">¥15,000~</span>
-</div>
-</div>
+  <!-- 4 -->
 
-<div class="g-card" data-tags="rich jacket" style="animation-delay:.23s">
-<span class="g-badge gb-rich">RICH</span>
-<div class="g-img-wrap ar-tall" onclick="openLB(6)">
-<img src="無題48_20240623160419.png" alt="ジャケット TOKYO NIGHT PUNK">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">HIGH-RES JACKET ART</span>
-<span class="g-ov-title">TOKYO NIGHT PUNK</span>
-<span class="g-ov-price">¥25,000~</span>
-</div>
-</div>
+  <div class="g-card" data-tags="std fantasy" style="animation-delay:.14s">
+  <span class="g-badge gb-std">STANDARD</span>
+  <div class="g-img-wrap ar-sq" onclick="openLB(3)">
+  <img src="無題1443_20240911060112.png" alt="人外魔装 NU">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">DARK FANTASY CHARACTER</span>
+  <span class="g-ov-title">翼と鎖纏う反逆の天使</span>
+  <span class="g-ov-price">¥10,000~</span>
+  </div>
+  </div>
 
-<div class="g-card" data-tags="com" style="animation-delay:.26s">
-<span class="g-badge gb-com">COMMERCIAL</span>
-<div class="g-img-wrap ar-wide" onclick="openLB(7)">
-<img src="無題1324_20240522221810.png" alt="サイネージ SHISHA">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">SIGNAGE / DISPLAY</span>
-<span class="g-ov-title">サイネージ用イラスト</span>
-<span class="g-ov-price">¥30,000~ <span class="g-ov-com">商用可</span></span>
-</div>
-</div>
+  <!-- 5 -->
 
-<div class="g-card" data-tags="com std" style="animation-delay:.29s">
-<span class="g-badge gb-com">COMMERCIAL</span>
-<div class="g-img-wrap ar-sq" onclick="openLB(8)">
-<img src="無題1195_20240304121118.png" alt="グッズミニキャラ UTO">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">GOODS / MINI CHARACTER</span>
-<span class="g-ov-title">グッズ映えするミニキャラ</span>
-<span class="g-ov-price">¥10,000~ <span class="g-ov-com">商用可</span></span>
-</div>
-</div>
+  <div class="g-card" data-tags="rich" style="animation-delay:.17s">
+  <span class="g-badge gb-rich">RICH</span>
+  <div class="g-img-wrap ar-wide" onclick="openLB(4)">
+  <img src="無題1434_20240813212023.png" alt="大判イラスト">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">LARGE FORMAT ILLUSTRATION</span>
+  <span class="g-ov-title">二人の邂逅―TECHNO POOR</span>
+  <span class="g-ov-price">¥25,000~</span>
+  </div>
+  </div>
 
-<div class="g-card" data-tags="com fantasy" style="animation-delay:.32s">
-<span class="g-badge gb-com">COMMERCIAL</span>
-<div class="g-img-wrap ar-sq" onclick="openLB(9)">
-<img src="無題1228_20240225210421.png" alt="超高解像 EVA EMOLA">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">ULTRA HD DARK FANTASY</span>
-<span class="g-ov-title">超高解像人外魔装</span>
-<span class="g-ov-price">¥50,000~ <span class="g-ov-com">商用可</span></span>
-</div>
-</div>
+  <!-- 6 -->
 
-<div class="g-card" data-tags="com sns" style="animation-delay:.35s">
-<span class="g-badge gb-com">COMMERCIAL</span>
-<div class="g-img-wrap ar-wide" onclick="openLB(10)">
-<img src="無題1027_20240116163106.png" alt="サイネージ2">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">SIGNAGE / DISPLAY</span>
-<span class="g-ov-title">Constant dripping wears away the stone.</span>
-<span class="g-ov-price">¥30,000~ <span class="g-ov-com">商用可</span></span>
-</div>
-</div>
+  <div class="g-card" data-tags="rich team" style="animation-delay:.2s">
+  <span class="g-badge gb-rich">RICH</span>
+  <div class="g-img-wrap ar-wide" onclick="openLB(5)">
+  <img src="無題1358_20240417114532.png" alt="チームイラスト">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">TEAM CHARACTER</span>
+  <span class="g-ov-title">複数キャラクター同時描き</span>
+  <span class="g-ov-price">¥15,000~</span>
+  </div>
+  </div>
 
-<div class="g-card" data-tags="rich sns" style="animation-delay:.38s">
-<span class="g-badge gb-rich">RICH</span>
-<div class="g-img-wrap ar-head" onclick="openLB(11)">
-<img src="無題753_20240107231942.png" alt="Xヘッダー CHIKO">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">X / SNS HEADER</span>
-<span class="g-ov-title">ずっと真夜中でいいのに。オマージュ風ヘッダー</span>
-<span class="g-ov-price">¥15,000~</span>
-</div>
-</div>
+  <!-- 7 -->
 
-<div class="g-card" data-tags="rich" style="animation-delay:.41s">
-<span class="g-badge gb-rich">RICH</span>
-<div class="g-img-wrap ar-tall" onclick="openLB(12)">
-<img src="無題817_20231204221221.png" alt="スマホ壁紙">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">SMARTPHONE WALLPAPER</span>
-<span class="g-ov-title">Devilic Sexy Girl</span>
-<span class="g-ov-price">¥20,000~</span>
-</div>
-</div>
+  <div class="g-card" data-tags="rich jacket" style="animation-delay:.23s">
+  <span class="g-badge gb-rich">RICH</span>
+  <div class="g-img-wrap ar-tall" onclick="openLB(6)">
+  <img src="無題48_20240623160419.png" alt="ジャケット TOKYO NIGHT PUNK">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">HIGH-RES JACKET ART</span>
+  <span class="g-ov-title">TOKYO NIGHT PUNK</span>
+  <span class="g-ov-price">¥25,000~</span>
+  </div>
+  </div>
 
-<div class="g-card" data-tags="rich" style="animation-delay:.44s">
-<span class="g-badge gb-rich">RICH</span>
-<div class="g-img-wrap ar-sq" onclick="openLB(13)">
-<img src="無題569_20230415185011.png" alt="タロット風 SHIOUTMY">
-<div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
-</div>
-<div class="g-overlay">
-<span class="g-ov-cat">TAROT STYLE</span>
-<span class="g-ov-title">対極の二重奏 — SHIO＆UTUNOMIYA</span>
-<span class="g-ov-price">¥15,000~</span>
-</div>
-</div>
+  <!-- 8 -->
 
+  <div class="g-card" data-tags="com" style="animation-delay:.26s">
+  <span class="g-badge gb-com">COMMERCIAL</span>
+  <div class="g-img-wrap ar-wide" onclick="openLB(7)">
+  <img src="無題1324_20240522221810.png" alt="サイネージ SHISHA">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">SIGNAGE / DISPLAY</span>
+  <span class="g-ov-title">サイネージ用イラスト</span>
+  <span class="g-ov-price">¥30,000~ <span class="g-ov-com">商用可</span></span>
+  </div>
+  </div>
 
-</div>
+  <!-- 9 -->
+
+  <div class="g-card" data-tags="com std" style="animation-delay:.29s">
+  <span class="g-badge gb-com">COMMERCIAL</span>
+  <div class="g-img-wrap ar-sq" onclick="openLB(8)">
+  <img src="無題1195_20240304121118.png" alt="グッズミニキャラ UTO">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">GOODS / MINI CHARACTER</span>
+  <span class="g-ov-title">グッズ映えするミニキャラ</span>
+  <span class="g-ov-price">¥10,000~ <span class="g-ov-com">商用可</span></span>
+  </div>
+  </div>
+
+  <!-- 10 -->
+
+  <div class="g-card" data-tags="com fantasy" style="animation-delay:.32s">
+  <span class="g-badge gb-com">COMMERCIAL</span>
+  <div class="g-img-wrap ar-sq" onclick="openLB(9)">
+  <img src="無題1228_20240225210421.png" alt="超高解像 EVA EMOLA">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">ULTRA HD DARK FANTASY</span>
+  <span class="g-ov-title">超高解像人外魔装</span>
+  <span class="g-ov-price">¥50,000~ <span class="g-ov-com">商用可</span></span>
+  </div>
+  </div>
+
+  <!-- 11 -->
+
+  <div class="g-card" data-tags="com sns" style="animation-delay:.35s">
+  <span class="g-badge gb-com">COMMERCIAL</span>
+  <div class="g-img-wrap ar-wide" onclick="openLB(10)">
+  <img src="無題1027_20240116163106.png" alt="サイネージ2">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">SIGNAGE / DISPLAY</span>
+  <span class="g-ov-title">Constant dripping wears away the stone.</span>
+  <span class="g-ov-price">¥30,000~ <span class="g-ov-com">商用可</span></span>
+  </div>
+  </div>
+
+  <!-- 12 -->
+
+  <div class="g-card" data-tags="rich sns" style="animation-delay:.38s">
+  <span class="g-badge gb-rich">RICH</span>
+  <div class="g-img-wrap ar-head" onclick="openLB(11)">
+  <img src="無題753_20240107231942.png" alt="Xヘッダー CHIKO">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">X / SNS HEADER</span>
+  <span class="g-ov-title">ずっと真夜中でいいのに。オマージュ風ヘッダー</span>
+  <span class="g-ov-price">¥15,000~</span>
+  </div>
+  </div>
+
+  <!-- 13 -->
+
+  <div class="g-card" data-tags="rich" style="animation-delay:.41s">
+  <span class="g-badge gb-rich">RICH</span>
+  <div class="g-img-wrap ar-tall" onclick="openLB(12)">
+  <img src="無題817_20231204221221.png" alt="スマホ壁紙">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">SMARTPHONE WALLPAPER</span>
+  <span class="g-ov-title">Devilic Sexy Girl</span>
+  <span class="g-ov-price">¥20,000~</span>
+  </div>
+  </div>
+
+  <!-- 14 -->
+
+  <div class="g-card" data-tags="rich" style="animation-delay:.44s">
+  <span class="g-badge gb-rich">RICH</span>
+  <div class="g-img-wrap ar-sq" onclick="openLB(13)">
+  <img src="無題569_20230415185011.png" alt="タロット風 SHIOUTMY">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">TAROT STYLE</span>
+  <span class="g-ov-title">対極の二重奏 — SHIO＆UTUNOMIYA</span>
+  <span class="g-ov-price">¥15,000~</span>
+  </div>
+  </div>
+
+  <!-- 15 ★NEW: エクストリーム -->
+
+  <div class="g-card" data-tags="extreme team" style="animation-delay:.47s">
+  <span class="g-badge gb-ext">EXTREME</span>
+  <div class="g-img-wrap ar-tall" onclick="openLB(14)">
+  <img src="1542_20250330073416.png" alt="Cyber Yofukashi Girls">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">EXTREME PLAN</span>
+  <span class="g-ov-title">Cyber Yofukashi Girls</span>
+  <span class="g-ov-price">¥50,000~</span>
+  </div>
+  </div>
+
+  <!-- 16 ★NEW: 商用・表情差分 -->
+
+  <div class="g-card" data-tags="com" style="animation-delay:.50s">
+  <span class="g-badge gb-com">COMMERCIAL</span>
+  <div class="g-img-wrap ar-sq" onclick="openLB(15)">
+  <img src="無題1603_20260429113050.png" alt="Pukey Goddess Shot Trick（FA）">
+  <div class="g-expand"><span class="g-expand-icon">⊕ 拡大</span></div>
+  </div>
+  <div class="g-overlay">
+  <span class="g-ov-cat">COMMERCIAL PLAN</span>
+  <span class="g-ov-title">Pukey Goddess Shot Trick（FA）</span>
+  <span class="g-ov-price">¥60,000~ <span class="g-ov-com">商用可</span></span>
+  </div>
+  </div>
+
+</div><!-- /gallery-grid -->
 
 <div class="g-empty" id="gEmpty">
 <span class="g-empty-icon">🔍</span>
 <p>該当する作品がありません</p>
 </div>
-</div>
+</div><!-- /gallery-wrap -->
 
 <!-- LIGHTBOX -->
 
@@ -414,64 +472,66 @@ footer{border-top:2px solid rgba(155,29,255,.5);padding:32px;text-align:center}
 <script>
 /* ── FILTER ── */
 function filterG(tag, btn){
-document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('on'));
-btn.classList.add('on');
-const cards = document.querySelectorAll('.g-card');
-let visible = 0;
-cards.forEach((card,i)=>{
-const tags = card.dataset.tags || '';
-const show = tag==='all' || tags.split(' ').includes(tag);
-if(show){
-card.classList.remove('hidden');
-card.style.animation='none';
-card.offsetHeight;
-card.style.animation=`cardIn .45s ease ${i*.04}s forwards`;
-card.style.opacity='0';
-visible++;
-} else {
-card.classList.add('hidden');
-}
-});
-document.getElementById('gEmpty').classList.toggle('on', visible===0);
+  document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const cards = document.querySelectorAll('.g-card');
+  let visible = 0;
+  cards.forEach((card,i)=>{
+    const tags = card.dataset.tags || '';
+    const show = tag==='all' || tags.split(' ').includes(tag);
+    if(show){
+      card.classList.remove('hidden');
+      card.style.animation='none';
+      card.offsetHeight;
+      card.style.animation=`cardIn .45s ease ${i*.04}s forwards`;
+      card.style.opacity='0';
+      visible++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+  document.getElementById('gEmpty').classList.toggle('on', visible===0);
 }
 
 /* ── LIGHTBOX ── */
 const images = [
-{src:'無題1580_20250917084813.png', cap:'歌ってみたサムネイル — ¥10,000〜'},
-{src:'無題1583_20260419125632.png', cap:'歌ってみたサムネイル — ¥10,000〜'},
-{src:'無題1097_20240315222638.png', cap:'アイコン用イラスト — ¥5,000〜'},
-{src:'無題1443_20240911060112.png', cap:'人外魔装イラスト — ¥10,000〜'},
-{src:'無題1434_20240813212023.png', cap:'大判1枚イラスト — ¥25,000〜'},
-{src:'無題1358_20240417114532.png', cap:'チームイラスト — ¥15,000〜'},
-{src:'無題48_20240623160419.png', cap:'高解像ジャケットイラスト — ¥25,000〜'},
-{src:'無題1324_20240522221810.png', cap:'サイネージ用イラスト（商用可）— ¥30,000〜'},
-{src:'無題1195_20240304121118.png', cap:'グッズ用ミニキャライラスト（商用可）— ¥10,000〜'},
-{src:'無題1228_20240225210421.png', cap:'超高解像度人外魔装（商用可）— ¥50,000〜'},
-{src:'無題1027_20240116163106.png', cap:'サイネージ用イラスト（商用可）— ¥30,000〜'},
-{src:'無題753_20240107231942.png', cap:'Xヘッダー用イラスト — ¥15,000〜'},
-{src:'無題817_20231204221221.png', cap:'スマホ用壁紙イラスト — ¥20,000〜'},
-{src:'無題569_20230415185011.png', cap:'タロット風イラスト — ¥15,000〜'},
+  {src:'無題1580_20250917084813.png',       cap:'歌ってみたサムネイル — ¥10,000〜'},
+  {src:'無題1583_20260419125632.png',       cap:'歌ってみたサムネイル — ¥10,000〜'},
+  {src:'無題1097_20240315222638.png',       cap:'アイコン用イラスト — ¥5,000〜'},
+  {src:'無題1443_20240911060112.png',       cap:'人外魔装イラスト — ¥10,000〜'},
+  {src:'無題1434_20240813212023.png',       cap:'大判1枚イラスト — ¥25,000〜'},
+  {src:'無題1358_20240417114532.png',       cap:'チームイラスト — ¥15,000〜'},
+  {src:'無題48_20240623160419.png',         cap:'高解像ジャケットイラスト — ¥25,000〜'},
+  {src:'無題1324_20240522221810.png',       cap:'サイネージ用イラスト（商用可）— ¥30,000〜'},
+  {src:'無題1195_20240304121118.png',       cap:'グッズ用ミニキャライラスト（商用可）— ¥10,000〜'},
+  {src:'無題1228_20240225210421.png',       cap:'超高解像度人外魔装（商用可）— ¥50,000〜'},
+  {src:'無題1027_20240116163106.png',       cap:'サイネージ用イラスト（商用可）— ¥30,000〜'},
+  {src:'無題753_20240107231942.png',        cap:'Xヘッダー用イラスト — ¥15,000〜'},
+  {src:'無題817_20231204221221.png',        cap:'スマホ用壁紙イラスト — ¥20,000〜'},
+  {src:'無題569_20230415185011.png',        cap:'タロット風イラスト — ¥15,000〜'},
+  {src:'1542_20250330073416.png',           cap:'超高解像抱き合わせイラスト（EXTREME）— ¥50,000〜'},
+  {src:'無題1603_20260429113050.png',       cap:'表情差分盛り合わせイラスト（商用可）— ¥60,000〜'},
 ];
 let lbIdx=0;
 
 function openLB(idx){
-lbIdx=idx; showLBImg();
-document.getElementById('lb').classList.add('on');
-document.body.style.overflow='hidden';
-startSSP();
+  lbIdx=idx; showLBImg();
+  document.getElementById('lb').classList.add('on');
+  document.body.style.overflow='hidden';
+  startSSP();
 }
 function showLBImg(){
-document.getElementById('lbImg').src=images[lbIdx].src;
-document.getElementById('lbCap').textContent=`${lbIdx+1} / ${images.length}　　${images[lbIdx].cap}`;
+  document.getElementById('lbImg').src=images[lbIdx].src;
+  document.getElementById('lbCap').textContent=`${lbIdx+1} / ${images.length}　　${images[lbIdx].cap}`;
 }
 function lbMove(dir){lbIdx=(lbIdx+dir+images.length)%images.length;showLBImg()}
 function closeLB(){document.getElementById('lb').classList.remove('on');document.body.style.overflow='';stopSSP()}
 document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)closeLB()});
 document.addEventListener('keydown',e=>{
-if(!document.getElementById('lb').classList.contains('on'))return;
-if(e.key==='Escape')closeLB();
-if(e.key==='ArrowLeft')lbMove(-1);
-if(e.key==='ArrowRight')lbMove(1);
+  if(!document.getElementById('lb').classList.contains('on'))return;
+  if(e.key==='Escape')closeLB();
+  if(e.key==='ArrowLeft')lbMove(-1);
+  if(e.key==='ArrowRight')lbMove(1);
 });
 
 /* ── SCREENSHOT PROTECTION ── */
@@ -488,7 +548,7 @@ lbI.addEventListener('dragstart',e=>e.preventDefault());
 
 /* ── SCROLL REVEAL ── */
 const io=new IntersectionObserver(es=>{
-es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}})
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}})
 },{threshold:.08});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
 </script>
