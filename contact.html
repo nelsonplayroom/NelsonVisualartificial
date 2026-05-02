@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NV.com — ウェブデザイン依頼フォーム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&family=Noto+Sans+JP:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#ff2d78;--purple:#9b1dff;--light-purple:#c084fc;
+  --cyan:#00f5ff;--white:#ffffff;--text-muted:#c0a0d0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#0a000f;color:#ffffff;font-family:'Noto Sans JP',sans-serif;overflow-x:hidden}
+
+/* ━━ NAV ━━ */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 24px;height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;background:rgba(10,0,15,.97);backdrop-filter:blur(8px);border-bottom:2px solid rgba(155,29,255,.5);box-shadow:0 2px 30px rgba(155,29,255,.2)}
+.nav-links{display:flex;align-items:center;gap:16px}
+.nav-links a{font-family:‘Orbitron’,sans-serif;font-size:.55rem;letter-spacing:.1em;color:#c0a0d0;text-decoration:none;transition:color .2s,text-shadow .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active-page{color:#ff2d78;text-shadow:0 0 8px #ff2d78,0 0 20px #ff2d78}
+.nav-links a.top-link:hover{color:#00f5ff;text-shadow:0 0 10px #00f5ff,0 0 20px #00f5ff}
+.nav-logo{font-family:‘Orbitron’,sans-serif;font-size:1.15rem;font-weight:900;letter-spacing:.2em;text-shadow:0 0 8px #ff2d78,0 0 20px #ff2d78,0 0 40px rgba(255,45,120,.7),0 0 80px rgba(255,45,120,.4);text-align:center;justify-self:center;text-decoration:none;color:#fff}
+.nav-logo span{color:#ff2d78}
+.nav-right{display:flex;justify-content:flex-end}
+@media(max-width:900px){.nav-links{display:none}nav{grid-template-columns:auto 1fr auto}.nav-logo{font-size:.95rem;justify-self:center}}
+
+/* ━━ NDIV ━━ */
+.ndiv{height:2px;background:linear-gradient(90deg,transparent,#9b1dff,#ff2d78,#9b1dff,transparent);opacity:.9;box-shadow:0 0 10px rgba(255,45,120,.5)}
+
+/* ━━ PAGE HEADER ━━ */
+.page-header{padding:130px 28px 60px;text-align:center;position:relative;overflow:hidden}
+.ph-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 50% 30%,rgba(155,29,255,.55) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 20% 80%,rgba(255,45,120,.35) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 80% 60%,rgba(0,245,255,.2) 0%,transparent 65%);animation:bgP 8s ease-in-out infinite alternate;pointer-events:none}
+@keyframes bgP{0%{opacity:.7}100%{opacity:1}}
+.ph-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(155,29,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(155,29,255,.18) 1px,transparent 1px);background-size:60px 60px;animation:gM 20s linear infinite;pointer-events:none}
+@keyframes gM{0%{transform:translateY(0)}100%{transform:translateY(60px)}}
+.ph-label{font-family:‘Orbitron’,sans-serif;font-size:.58rem;letter-spacing:.5em;color:#ff2d78;text-shadow:0 0 8px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78;display:block;margin-bottom:14px;position:relative;z-index:2;opacity:0;animation:fU .7s ease .2s forwards}
+.ph-title{font-family:‘Zen Antique Soft’,serif;font-size:clamp(2rem,6vw,4.5rem);line-height:1.2;color:#ffffff;text-shadow:0 0 20px #ff2d78,0 0 50px rgba(255,45,120,.7),0 0 100px rgba(155,29,255,.5);position:relative;z-index:2;opacity:0;animation:fU .7s ease .4s forwards}
+.ph-sub{font-size:.84rem;color:#c0a0d0;margin-top:16px;line-height:1.9;position:relative;z-index:2;opacity:0;animation:fU .7s ease .6s forwards}
+.back-wrap{position:relative;z-index:2;margin-top:22px;opacity:0;animation:fU .7s ease .8s forwards}
+.back-link{display:inline-flex;align-items:center;gap:8px;padding:9px 22px;border:1px solid rgba(155,29,255,.6);color:#c0a0d0;font-family:‘Orbitron’,sans-serif;font-size:.58rem;letter-spacing:.12em;text-decoration:none;transition:all .2s;border-radius:3px;background:rgba(155,29,255,.08)}
+.back-link:hover{border-color:#00f5ff;color:#00f5ff;box-shadow:0 0 12px rgba(0,245,255,.3)}
+@keyframes fU{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* ━━ SECTION ━━ */
+.sw{padding:80px 28px}
+.s-label{font-family:‘Orbitron’,sans-serif;font-size:.55rem;letter-spacing:.5em;color:#ff2d78;text-shadow:0 0 8px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78;margin-bottom:10px;display:block}
+.s-title{font-family:‘Zen Antique Soft’,serif;font-size:clamp(1.5rem,3.5vw,2.6rem);color:#ffffff;text-shadow:0 0 15px rgba(192,132,252,.9),0 0 40px rgba(155,29,255,.6);margin-bottom:44px}
+
+/* ━━ PRICE ACCORDION ━━ */
+.pricing-in{max-width:1100px;margin:0 auto}
+.price-unit{margin-bottom:10px}
+.pbtn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 26px;background:rgba(40,0,70,.85);border:1px solid rgba(155,29,255,.7);cursor:pointer;transition:background .25s,border-color .25s;border-radius:4px}
+.pbtn:hover,.pbtn.active{border-color:#ff2d78;background:rgba(90,0,50,.9);box-shadow:0 0 25px rgba(255,45,120,.4)}
+.pbtn-left{display:flex;align-items:center;gap:14px}
+.pbtn-icon{font-size:1.5rem;line-height:1}
+.pbtn-label{font-family:‘Orbitron’,sans-serif;font-size:.72rem;letter-spacing:.15em;color:#ffffff;text-shadow:0 0 10px rgba(255,255,255,.5);display:block;margin-bottom:3px}
+.pbtn-range{font-family:‘Orbitron’,sans-serif;font-size:.62rem;font-weight:700;color:#ff2d78;text-shadow:0 0 10px #ff2d78,0 0 20px rgba(255,45,120,.6);display:block}
+.pbtn-arr{font-size:.9rem;color:#c0a0d0;transition:transform .3s,color .3s;flex-shrink:0}
+.pbtn.active .pbtn-arr{transform:rotate(180deg);color:#ff2d78}
+.price-acc-body{display:none;padding:20px 4px 4px}
+.price-acc-body.on{display:block}
+.price-acc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+
+/* Price card */
+.pc{padding:24px 22px;background:rgba(35,0,65,.75);border:1px solid rgba(155,29,255,.65);border-radius:6px;transition:all .2s}
+.pc:hover{border-color:#9b1dff;background:rgba(45,0,80,.7)}
+.pc.hi{border-color:#ff2d78;background:rgba(75,0,45,.8);box-shadow:inset 0 0 20px rgba(255,45,120,.08)}
+.pc-lbl{font-family:‘Orbitron’,sans-serif;font-size:.5rem;letter-spacing:.3em;color:#00f5ff;text-shadow:0 0 8px #00f5ff,0 0 16px rgba(0,245,255,.5);margin-bottom:6px;display:block}
+.pc-nm{font-family:‘Zen Antique Soft’,serif;font-size:.95rem;color:#ffffff;margin-bottom:9px;line-height:1.5}
+.pc-pr{font-family:‘Orbitron’,sans-serif;font-size:1.3rem;font-weight:700;color:#ff2d78;text-shadow:0 0 10px #ff2d78,0 0 25px rgba(255,45,120,.7)}
+.pc-pr span{font-size:.62rem;color:#c0a0d0;font-weight:400}
+.pc-note{font-size:.76rem;color:#c0a0d0;margin-top:10px;line-height:1.75}
+.pc-note li{margin-left:1em;margin-top:3px}
+
+/* ━━ OPTION SECTION ━━ */
+.opt-in{max-width:900px;margin:0 auto}
+.opt-card{padding:28px 32px;background:rgba(0,20,40,.75);border:1px solid rgba(0,245,255,.7);border-radius:8px;margin-bottom:18px;box-shadow:0 0 20px rgba(0,245,255,.1)}
+.opt-ttl{font-family:‘Zen Antique Soft’,serif;font-size:1.05rem;color:#00f5ff;text-shadow:0 0 10px #00f5ff,0 0 25px rgba(0,245,255,.6);margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.opt-ttl::before{content:’’;width:3px;height:1em;background:#00f5ff;box-shadow:0 0 10px #00f5ff,0 0 20px #00f5ff;display:block}
+.opt-tbl{width:100%;border-collapse:collapse;margin-top:4px}
+.opt-tbl th,.opt-tbl td{padding:10px 14px;font-size:.8rem;border-bottom:1px solid rgba(155,29,255,.15);text-align:left}
+.opt-tbl th{font-family:‘Orbitron’,sans-serif;font-size:.52rem;letter-spacing:.18em;color:#00f5ff}
+.opt-tbl td{color:#c0a0d0}
+.opt-tbl td:last-child{color:#ff2d78;font-family:‘Orbitron’,sans-serif;font-weight:700;white-space:nowrap}
+.opt-note{font-size:.74rem;color:#c0a0d0;margin-top:13px;line-height:1.7}
+
+/* ━━ TERMS ━━ */
+.terms-in{max-width:800px;margin:0 auto}
+.t-item{display:flex;gap:17px;padding:18px 20px;background:rgba(26,0,48,.4);border-left:2px solid #9b1dff;border-bottom:1px solid rgba(155,29,255,.11);margin-bottom:9px;font-size:.85rem;line-height:1.85;color:#d0b0e0}
+.t-num{font-family:‘Orbitron’,sans-serif;font-size:.7rem;color:#ff2d78;text-shadow:0 0 8px #ff2d78,0 0 20px rgba(255,45,120,.7);min-width:22px;padding-top:2px;font-weight:700}
+.t-hi{color:#00f5ff;text-shadow:0 0 8px #00f5ff,0 0 16px rgba(0,245,255,.5);font-weight:700}
+
+/* ━━ ORDER FORM ━━ */
+.ord-in{max-width:720px;margin:0 auto}
+.form-wrap{background:rgba(35,0,65,.75);border:1px solid rgba(155,29,255,.7);padding:40px;border-radius:8px;box-shadow:0 0 30px rgba(155,29,255,.15)}
+.fg{margin-bottom:20px}
+.fl{display:block;font-family:‘Orbitron’,sans-serif;font-size:.56rem;letter-spacing:.3em;color:#00f5ff;margin-bottom:7px}
+.fi,.fsel,.fta{width:100%;background:rgba(10,0,20,.8);border:1px solid rgba(155,29,255,.4);color:#ffffff;padding:10px 13px;font-family:‘Noto Sans JP’,sans-serif;font-size:.84rem;outline:none;transition:border-color .2s,box-shadow .2s;border-radius:4px}
+.fi:focus,.fsel:focus,.fta:focus{border-color:#ff2d78;box-shadow:0 0 13px rgba(255,45,120,.14)}
+.fsel option{background:#1a0030}
+.fta{height:120px;resize:vertical}
+.cb-group{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.cb-item{display:flex;align-items:center;gap:7px;cursor:pointer}
+.cb-item input[type=checkbox]{accent-color:#ff2d78;width:14px;height:14px;cursor:pointer}
+.cb-item label{font-size:.78rem;color:#c0a0d0;cursor:pointer}
+.kw{display:inline-block;margin:3px 0 13px;padding:4px 13px;background:rgba(255,45,120,.2);border:1px solid #ff2d78;color:#ff2d78;text-shadow:0 0 8px #ff2d78;font-family:‘Zen Antique Soft’,serif;font-size:.92rem;letter-spacing:.3em;box-shadow:0 0 12px rgba(255,45,120,.3)}
+.fnote{font-size:.73rem;color:#c0a0d0;margin-top:7px;line-height:1.65}
+.sub-btn{width:100%;padding:14px;margin-top:9px;background:linear-gradient(135deg,#ff2d78,#9b1dff);border:none;color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.76rem;letter-spacing:.2em;cursor:pointer;border-radius:4px;transition:filter .2s,transform .2s;box-shadow:0 0 26px rgba(255,45,120,.6),0 0 50px rgba(155,29,255,.3)}
+.sub-btn:hover{filter:brightness(1.25);transform:translateY(-2px)}
+.tw-cta{text-align:center;margin-top:26px;padding:20px;background:rgba(26,0,48,.4);border:1px solid rgba(155,29,255,.2)}
+.tw-cta p{font-size:.8rem;color:#c0a0d0;margin-bottom:11px;line-height:1.7}
+.tw-btn{display:inline-block;padding:10px 28px;background:#1da1f2;color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.66rem;letter-spacing:.12em;text-decoration:none;border-radius:4px;transition:filter .2s;box-shadow:0 0 15px rgba(29,161,242,.4)}
+.tw-btn:hover{filter:brightness(1.2)}
+
+/* ━━ RETURN SECTION ━━ */
+.return-section{padding:60px 28px 40px;text-align:center}
+.return-btn{display:inline-flex;align-items:center;gap:12px;padding:16px 48px;background:linear-gradient(135deg,#ff2d78,#9b1dff);color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.75rem;letter-spacing:.2em;text-decoration:none;border-radius:4px;transition:filter .2s,transform .2s;box-shadow:0 0 24px rgba(255,45,120,.5),0 0 48px rgba(155,29,255,.3)}
+.return-btn:hover{filter:brightness(1.2);transform:translateY(-2px)}
+.return-btn-sub{display:block;font-size:.65rem;color:#c0a0d0;margin-top:12px;font-family:‘Orbitron’,sans-serif;letter-spacing:.15em}
+.copy-wrap{margin-top:24px}
+.btn-cyan{padding:11px 30px;background:linear-gradient(135deg,#00c6ff,#00f5ff,#0072ff);border:none;color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.7rem;letter-spacing:.12em;cursor:pointer;border-radius:4px;text-decoration:none;display:inline-block;transition:filter .2s,transform .2s;box-shadow:0 0 20px rgba(0,245,255,.6),0 0 40px rgba(0,114,255,.3);text-shadow:0 0 8px rgba(255,255,255,.6)}
+.btn-cyan:hover{filter:brightness(1.25);transform:translateY(-2px)}
+
+/* ━━ FOOTER ━━ */
+footer{border-top:1px solid rgba(155,29,255,.2);padding:32px;text-align:center}
+.f-logo{font-family:‘Orbitron’,sans-serif;font-size:.95rem;font-weight:900;text-shadow:0 0 10px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78;letter-spacing:.2em;margin-bottom:5px}
+.f-logo span{color:#ff2d78}
+.f-cp{font-size:.68rem;color:#c0a0d0;margin-top:9px}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+.rev.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+.sw{padding:60px 16px}
+.form-wrap{padding:26px 16px}
+.opt-card{padding:20px 16px}
+.page-header{padding:100px 20px 44px}
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+<div class="nav-links">
+  <a href="index.html" class="top-link">TOP</a>
+  <a href="index.html#works">WORKS</a>
+  <a href="index.html#pricing">PRICE</a>
+  <a href="index.html#order">ORDER</a>
+  <a href="about.html">GALLERY</a>
+  <a href="webdesign.html" class="active-page">WEB</a>
+</div>
+<a href="index.html" class="nav-logo">NV<span>.</span>com</a>
+<div class="nav-right"></div>
+</nav>
+
+<!-- PAGE HEADER -->
+
+<div class="page-header">
+<div class="ph-bg"></div>
+<div class="ph-grid"></div>
+<span class="ph-label">— WEB DESIGN COMMISSION —</span>
+<h1 class="ph-title">ウェブデザイン<br>依頼フォーム</h1>
+<p class="ph-sub">完全オーダーメイドのウェブデザイン制作を承ります。<br>ライトプランからサーバー・ドメイン完全委託まで幅広く対応。</p>
+<div class="back-wrap">
+  <a href="index.html" class="back-link">← メインページに戻る</a>
+</div>
+</div>
+
+<div class="ndiv"></div>
+
+<!-- ══ PRICING ══ -->
+
+<section class="sw" id="pricing">
+<div class="pricing-in">
+<span class="s-label">— PRICE LIST —</span>
+<h2 class="s-title rev">料金一覧</h2>
+<p style="font-size:.78rem;color:#c0a0d0;margin-bottom:28px;margin-top:-30px;" class="rev">プランバナーをクリックして詳細を確認できます</p>
+
+<!-- LIGHT -->
+
+<div class="price-unit rev">
+<button class="pbtn" onclick="togPrice('light')" id="pbtn-light">
+  <div class="pbtn-left">
+    <span class="pbtn-icon">💡</span>
+    <div>
+      <span class="pbtn-label">LIGHT PLAN</span>
+      <span class="pbtn-range">¥30,000〜¥60,000</span>
+    </div>
+  </div>
+  <span class="pbtn-arr" id="parr-light">▼</span>
+</button>
+<div class="price-acc-body" id="pab-light">
+<div class="price-acc-grid">
+
+  <div class="pc">
+    <span class="pc-lbl">HTML CODE DESIGN</span>
+    <p class="pc-nm">HTMLコードデザイン（ライト）</p>
+    <span class="pc-pr">¥30,000<span>〜</span></span>
+    <p class="pc-note">
+      1ページ構成のシンプルなプランです。<br>
+      <ul style="list-style:none;padding:0;margin-top:6px;">
+        <li>・添付画像数：10枚まで</li>
+        <li>・サイドメニューリンク：3つまで</li>
+        <li>・修正：デザイン完成時 + 月1回のみ</li>
+      </ul>
+    </p>
+  </div>
+
+  <div class="pc hi">
+    <span class="pc-lbl">FULL DELEGATION LIGHT</span>
+    <p class="pc-nm">ウェブデザイン＋ドメイン・サーバ完全委託プラン（ライト）</p>
+    <span class="pc-pr">¥60,000<span>〜</span></span>
+    <p class="pc-note">
+      ライトプラン＋ドメイン取得・サーバ設定まで代行。<br>
+      <ul style="list-style:none;padding:0;margin-top:6px;">
+        <li>・コード修正・トラブル対応のみ承ります</li>
+        <li>・修正可能回数：月3回まで</li>
+      </ul>
+    </p>
+  </div>
+
+</div>
+</div>
+</div>
+
+<!-- REGULAR -->
+
+<div class="price-unit rev">
+<button class="pbtn" onclick="togPrice('regular')" id="pbtn-regular">
+  <div class="pbtn-left">
+    <span class="pbtn-icon">⚡</span>
+    <div>
+      <span class="pbtn-label">REGULAR PLAN</span>
+      <span class="pbtn-range">¥100,000〜¥150,000</span>
+    </div>
+  </div>
+  <span class="pbtn-arr" id="parr-regular">▼</span>
+</button>
+<div class="price-acc-body" id="pab-regular">
+<div class="price-acc-grid">
+
+  <div class="pc">
+    <span class="pc-lbl">HTML CODE DESIGN</span>
+    <p class="pc-nm">HTMLコードデザイン（レギュラー）</p>
+    <span class="pc-pr">¥100,000<span>〜</span></span>
+    <p class="pc-note">
+      2ページ構成のウェブデザインプランです。<br>
+      <ul style="list-style:none;padding:0;margin-top:6px;">
+        <li>・添付画像数：20枚まで</li>
+        <li>・サイドメニューリンク：5つまで</li>
+      </ul>
+    </p>
+  </div>
+
+  <div class="pc hi">
+    <span class="pc-lbl">FULL DELEGATION REGULAR</span>
+    <p class="pc-nm">ウェブデザイン＋ドメイン・サーバ完全委託プラン（レギュラー）</p>
+    <span class="pc-pr">¥150,000<span>〜</span></span>
+    <p class="pc-note">
+      レギュラープラン＋ドメイン取得・サーバ設定まで代行。<br>
+      <ul style="list-style:none;padding:0;margin-top:6px;">
+        <li>・定期的な保守点検・アップデート対応</li>
+        <li>・ご希望に合わせたサイト更新</li>
+        <li>・修正可能回数：月5回まで</li>
+      </ul>
+    </p>
+  </div>
+
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<div class="ndiv"></div>
+
+<!-- ══ OPTION ══ -->
+
+<section class="sw" id="option">
+<div class="opt-in">
+<span class="s-label">— DESIGN OPTION —</span>
+<h2 class="s-title rev">デザイン追加オプション</h2>
+
+<div class="opt-card rev">
+<h3 class="opt-ttl">✦ 追加オプション一覧（全プラン共通）</h3>
+<table class="opt-tbl">
+<thead>
+  <tr><th>オプション内容</th><th>追加料金</th></tr>
+</thead>
+<tbody>
+  <tr><td>アニメ演出追加</td><td>+¥10,000</td></tr>
+  <tr><td>ページ数 1枚追加</td><td>+¥5,000</td></tr>
+  <tr><td>添付リンク 1点追加</td><td>+¥1,000</td></tr>
+  <tr><td>画像ファイル 1点追加</td><td>+¥500</td></tr>
+</tbody>
+</table>
+<p class="opt-note">※ オプションは複数組み合わせ可能です。ご依頼時にご希望をお伝えください。<br>※ ページ数追加・アニメ演出の詳細はご相談の上で決定いたします。</p>
+</div>
+
+</div>
+</section>
+
+<div class="ndiv"></div>
+
+<!-- ══ TERMS ══ -->
+
+<section class="sw" id="terms">
+<div class="terms-in">
+<span class="s-label">— TERMS OF SERVICE —</span>
+<h2 class="s-title rev">ご利用規約</h2>
+<div class="rev">
+  <div class="t-item"><span class="t-num">1</span><span>制作物の<span class="t-hi">著作権は全て作者</span>に帰属します。納品後も変わりません。</span></div>
+  <div class="t-item"><span class="t-num">2</span><span>支払いは例外なく<span class="t-hi">前払い制</span>です。銀行振り込み または PayPayマネー（マネーライト不可）。</span></div>
+  <div class="t-item"><span class="t-num">3</span><span><span class="t-hi">無断転載・自作発言・再販は禁止</span>です。</span></div>
+  <div class="t-item"><span class="t-num">4</span><span>修正対応回数はプランごとの規定回数に従います。<span class="t-hi">規定回数を超える修正は別途有償</span>となります。</span></div>
+  <div class="t-item"><span class="t-num">5</span><span>納期目安は<span class="t-hi">依頼確定から2〜4週間程度</span>。内容の複雑さや混雑状況により前後する場合があります。</span></div>
+  <div class="t-item"><span class="t-num">6</span><span>ドメイン・サーバ委託プランにおけるドメイン・サーバ費用は<span class="t-hi">実費別途</span>となります。事前にご確認ください。</span></div>
+  <div class="t-item"><span class="t-num">7</span><span>依頼内容によってはお断りする場合があります。</span></div>
+  <div class="t-item"><span class="t-num">8</span><span>Twitter DM でのお取引開始時は冒頭に <span class="t-hi">「金木犀」</span> とご記入ください。必読事項への同意とみなします。</span></div>
+</div>
+</div>
+</section>
+
+<div class="ndiv"></div>
+
+<!-- ══ ORDER FORM ══ -->
+
+<section class="sw" id="order">
+<div class="ord-in">
+<span class="s-label">— ORDER —</span>
+<h2 class="s-title rev">依頼する</h2>
+<div class="form-wrap rev">
+<p style="font-size:.82rem;color:#c0a0d0;line-height:1.85;margin-bottom:26px;">
+依頼はメールまたはTwitter（X）DM にて承ります。<br>
+下記フォームを入力後、<strong style="color:#00f5ff;">「メール送信画面へ」</strong> を押すと入力内容が自動挿入されたメールアプリが開きます。<br>
+DM の場合は冒頭に必ず <span class="kw">金木犀</span> とご記入ください。
+</p>
+
+<div class="fg">
+<label class="fl" for="fPlan">① ご希望プラン</label>
+<select class="fsel" id="fPlan">
+  <option value="">選択してください</option>
+  <option>HTMLコードデザイン（ライト）— ¥30,000〜</option>
+  <option>ウェブデザイン＋ドメイン・サーバ完全委託（ライト）— ¥60,000〜</option>
+  <option>HTMLコードデザイン（レギュラー）— ¥100,000〜</option>
+  <option>ウェブデザイン＋ドメイン・サーバ完全委託（レギュラー）— ¥150,000〜</option>
+</select>
+</div>
+
+<div class="fg">
+<label class="fl">② デザイン追加オプション（任意・複数選択可）</label>
+<div class="cb-group">
+  <span class="cb-item"><input type="checkbox" id="op1"><label for="op1">アニメ演出追加（+¥10,000）</label></span>
+  <span class="cb-item"><input type="checkbox" id="op2"><label for="op2">ページ数1枚追加（+¥5,000）</label></span>
+  <span class="cb-item"><input type="checkbox" id="op3"><label for="op3">添付リンク1点追加（+¥1,000）</label></span>
+  <span class="cb-item"><input type="checkbox" id="op4"><label for="op4">画像ファイル1点追加（+¥500）</label></span>
+</div>
+</div>
+
+<div class="fg">
+<label class="fl" for="fSiteName">③ サイト名・屋号（任意）</label>
+<input class="fi" type="text" id="fSiteName" placeholder="例：NV.com / Nelson Playroom">
+</div>
+
+<div class="fg">
+<label class="fl" for="fImage">④ 希望するデザインイメージ・参考URL</label>
+<textarea class="fta" id="fImage" placeholder="例：サイバーパンク・ネオン系のデザイン。参考サイト：https://..."></textarea>
+</div>
+
+<div class="fg">
+<label class="fl" for="fContent">⑤ 掲載したいコンテンツ・ページ構成</label>
+<textarea class="fta" id="fContent" placeholder="例：トップページ（作品ギャラリー・料金表・依頼フォーム）の1ページ構成。画像は10枚程度。"></textarea>
+</div>
+
+<div class="fg">
+<label class="fl" for="fOther">⑥ その他ご要望・ご質問</label>
+<textarea class="fta" id="fOther" placeholder="ドメイン希望名、納期希望、その他お気軽にどうぞ。"></textarea>
+</div>
+
+<p class="fnote">※ 「メール送信画面へ」を押すと入力内容が自動でメール本文に挿入されます。送信前に内容をご確認ください。</p>
+<button class="sub-btn" onclick="sendMail()">✉ メール送信画面へ →</button>
+
+<div class="tw-cta">
+<p>メールの代わりにTwitter DM でもご依頼いただけます。<br>冒頭に必ず「<strong style="color:#ff2d78;">金木犀</strong>」とご記入ください。</p>
+<a href="https://x.com/Nelson_Playroom" target="_blank" class="tw-btn">𝕏 Twitter DM で依頼する</a>
+</div>
+</div>
+</div>
+</section>
+
+<div class="ndiv"></div>
+
+<!-- 戻るボタン＋URLコピーボタン -->
+
+<div class="return-section">
+<a href="index.html" class="return-btn">← メインページへ戻る</a>
+<span class="return-btn-sub">ポートフォリオ・イラスト依頼フォームはこちら</span>
+<div class="copy-wrap">
+  <button class="btn-cyan" onclick="copyPageURL(this)" style="border:none;">🔗 このサイトのURLをコピー</button>
+</div>
+</div>
+
+<div class="ndiv"></div>
+
+<footer>
+<div class="f-logo">NV<span>.</span>com</div>
+<p style="font-size:.76rem;color:#c0a0d0;margin-top:6px;">ウェブデザイン依頼フォーム</p>
+<p class="f-cp">© 2024 NV.com / Nelson Playroom. All Rights Reserved.</p>
+</footer>
+
+<script>
+/* ── ページトップへ ── */
+if(history.scrollRestoration) history.scrollRestoration='manual';
+window.addEventListener('load',function(){
+  if(window.location.hash) history.replaceState(null,'',window.location.pathname+window.location.search);
+  window.scrollTo(0,0);
+});
+
+/* ── PRICE ACCORDION ── */
+const priceKeys=['light','regular'];
+function togPrice(key){
+  const body=document.getElementById('pab-'+key);
+  const btn =document.getElementById('pbtn-'+key);
+  const isOn=body.classList.contains('on');
+  priceKeys.forEach(k=>{
+    document.getElementById('pab-'+k).classList.remove('on');
+    document.getElementById('pbtn-'+k).classList.remove('active');
+  });
+  if(!isOn){body.classList.add('on');btn.classList.add('active')}
+}
+
+/* ── MAIL SEND ── */
+function sendMail(){
+  const plan   = document.getElementById('fPlan').value    || '（未選択）';
+  const site   = document.getElementById('fSiteName').value|| '（未入力）';
+  const image  = document.getElementById('fImage').value   || '（未入力）';
+  const content= document.getElementById('fContent').value || '（未入力）';
+  const other  = document.getElementById('fOther').value   || '（未入力）';
+  const opts=[];
+  if(document.getElementById('op1').checked) opts.push('アニメ演出追加（+¥10,000）');
+  if(document.getElementById('op2').checked) opts.push('ページ数1枚追加（+¥5,000）');
+  if(document.getElementById('op3').checked) opts.push('添付リンク1点追加（+¥1,000）');
+  if(document.getElementById('op4').checked) opts.push('画像ファイル1点追加（+¥500）');
+  const optText=opts.length?opts.join('、'):'なし';
+  const sub=encodeURIComponent('ウェブデザイン依頼のご相談 — NV.com');
+  const bod=encodeURIComponent(
+`【ウェブデザイン依頼テンプレート】
+
+① ご希望プラン
+${plan}
+
+② 追加オプション
+${optText}
+
+③ サイト名・屋号
+${site}
+
+④ 希望デザインイメージ・参考URL
+${image}
+
+⑤ 掲載コンテンツ・ページ構成
+${content}
+
+⑥ その他ご要望・ご質問
+${other}
+
+---
+※ Twitter DM でのお取引開始時は冒頭に「金木犀」とご記入ください。`
+  );
+  window.location.href=`mailto:nelsonplayroomboothyou@gmail.com?subject=${sub}&body=${bod}`;
+}
+
+/* ── URL COPY ── */
+function copyPageURL(btn){
+  const url='http://nelsonvisualarts.com/';
+  navigator.clipboard.writeText(url).then(()=>{
+    const orig=btn.textContent;
+    btn.textContent='✓ コピーしました！';
+    btn.style.background='linear-gradient(135deg,#00e676,#00bcd4)';
+    setTimeout(()=>{btn.textContent=orig;btn.style.background='';},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');
+    ta.value=url;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');
+    document.body.removeChild(ta);
+    const orig=btn.textContent;
+    btn.textContent='✓ コピーしました！';
+    btn.style.background='linear-gradient(135deg,#00e676,#00bcd4)';
+    setTimeout(()=>{btn.textContent=orig;btn.style.background='';},2000);
+  });
+}
+
+/* ── SCROLL REVEAL ── */
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}})
+},{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
