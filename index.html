@@ -1,863 +1,888 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>天紫月華 ✦ Tenshi Ruruka</title>
+<title>NV.com — イラストレーター ポートフォリオ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&family=Noto+Sans+JP:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body {
-  background-color:#f0eef8;
-  color:#2a1f3d;
-  font-family:'Noto Serif JP','Shippori Mincho',serif;
-  overflow-x:hidden;
-  min-height:100vh;
+:root {
+--pink:#ff2d78; --purple:#9b1dff; --light-purple:#c084fc;
+--cyan:#00f5ff; --white:#ffffff; --text-muted:#c0a0d0;
+--neon-glow:0 0 10px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78;
+--cyan-glow:0 0 10px #00f5ff,0 0 20px #00f5ff;
 }
-body::after {
-  content:'';
-  position:fixed;
-  inset:0;
-  background-image:
-    radial-gradient(ellipse 60% 40% at 20% 30%,rgba(180,160,230,.35) 0%,transparent 60%),
-    radial-gradient(ellipse 50% 50% at 80% 70%,rgba(140,200,240,.30) 0%,transparent 60%),
-    radial-gradient(ellipse 40% 60% at 50% 10%,rgba(220,210,245,.25) 0%,transparent 50%);
-  pointer-events:none;
-  z-index:0;
-}
-.petals-container { position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden; }
-.petal {
-  position:absolute;top:-30px;width:10px;height:10px;
-  border-radius:80% 0 80% 0;opacity:0;
-  animation:petalFall linear infinite;
-}
-@keyframes petalFall {
-  0%  { opacity:0;transform:translateY(-30px) rotate(0deg) translateX(0); }
-  10% { opacity:.7; }
-  90% { opacity:.4; }
-  100%{ opacity:0;transform:translateY(110vh) rotate(720deg) translateX(60px); }
-}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#0a000f;color:#ffffff;font-family:'Noto Sans JP',sans-serif;overflow-x:hidden;}
 
-/* NAV */
-nav {
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:0 24px;height:68px;
-  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
-  background:rgba(240,238,248,.82);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(160,130,210,.25);
-}
-.nav-left  { display:flex;gap:28px;align-items:center; }
-.nav-center{ display:flex;justify-content:center; }
-.nav-right { display:flex;gap:28px;align-items:center;justify-content:flex-end; }
-nav a {
-  text-decoration:none;color:#5a3e8a;
-  font-family:'Cormorant Garamond',serif;font-size:15px;
-  letter-spacing:.08em;transition:color .3s,opacity .3s;opacity:.85;
-}
-nav a:hover { color:#8b60c8;opacity:1; }
-.nav-logo-img { height:44px;width:auto;display:block; }
+/* ━━ NAV ━━ */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 24px;height:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;background:rgba(10,0,15,.97);backdrop-filter:blur(8px);border-bottom:2px solid rgba(155,29,255,.5);box-shadow:0 2px 30px rgba(155,29,255,.2)}
+.nav-links{display:flex;align-items:center;gap:16px}
+.nav-links a{font-family:‘Orbitron’,sans-serif;font-size:.55rem;letter-spacing:.1em;color:#c0a0d0;text-decoration:none;transition:color .2s,text-shadow .2s;white-space:nowrap}
+.nav-links a:hover{color:#00f5ff;text-shadow:0 0 10px #00f5ff,0 0 20px #00f5ff}
+.nav-logo{font-family:‘Orbitron’,sans-serif;font-size:1.15rem;font-weight:900;letter-spacing:.2em;text-shadow:0 0 8px #ff2d78,0 0 20px #ff2d78,0 0 40px rgba(255,45,120,.7),0 0 80px rgba(255,45,120,.4);text-align:center;justify-self:center}
+.nav-logo span{color:#ff2d78}
+.nav-right{display:flex;justify-content:flex-end}
+@media(max-width:900px){.nav-links{display:none}nav{grid-template-columns:auto 1fr auto}.nav-logo{font-size:.95rem;justify-self:center}}
 
-/* HERO */
-#hero {
-  position:relative;z-index:2;min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  padding-top:68px;overflow:hidden;
-}
-.hero-bg {
-  position:absolute;inset:0;z-index:-1;
-  background:radial-gradient(ellipse at center,rgba(160,130,220,.6) 0%,rgba(190,210,240,.5) 40%,rgba(240,238,248,.55) 100%);
-}
-.hero-bg-img {
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;object-position:center top;opacity:.22;z-index:-1;pointer-events:none;
-}
-.hero-deco { position:absolute;inset:0;pointer-events:none;z-index:0; }
-.hero-content {
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;align-items:center;text-align:center;
-  padding:40px 24px 80px;gap:0;
-}
-.hero-name-logo {
-  width:min(480px,90vw);height:auto;display:block;margin:0 auto 12px;
-  animation:fadeSlideDown 1.2s ease .2s both;
-  filter:drop-shadow(0 4px 24px rgba(120,80,200,.25));
-}
-.hero-catchcopy {
-  font-family:'Shippori Mincho',serif;font-size:clamp(13px,2.5vw,17px);
-  color:#6a4a9a;letter-spacing:.25em;margin-bottom:16px;
-  opacity:0;animation:fadeIn 1s ease .7s both;
-}
-.hero-visual-wrapper {
-  position:relative;width:min(520px,92vw);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  margin-top:32px;opacity:0;animation:fadeIn 1s ease .9s both;
-}
-.symbol-wrapper { position:relative;z-index:5;cursor:pointer;margin-bottom:12px; }
-.symbol-img {
-  width:120px;height:120px;object-fit:contain;
-  animation:spinSlow 20s linear infinite;
-  filter:drop-shadow(0 0 12px rgba(130,90,200,.5));display:block;
-  transition:filter .3s;
-}
-.symbol-wrapper:hover .symbol-img { filter:drop-shadow(0 0 20px rgba(130,90,200,.9)); }
-.symbol-hint {
-  position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);
-  font-family:'Cormorant Garamond',serif;font-size:10px;color:#8b60c8;
-  letter-spacing:.15em;white-space:nowrap;opacity:.7;
-}
-.hero-chara {
-  width:min(380px,80vw);height:auto;display:block;margin:70px auto 0;
-  filter:drop-shadow(0 8px 32px rgba(120,80,200,.20));
-  transition:opacity .5s,transform .5s;
-  animation:charaFloat 6s ease-in-out 1s infinite;
-}
-.hero-chara.changing { opacity:0;transform:scale(.95); }
-.scroll-hint {
-  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  opacity:.6;animation:bounce 2s ease-in-out infinite;
-}
-.scroll-hint span { font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:.2em;color:#6a4a9a; }
-.scroll-hint-arrow { width:1px;height:28px;background:linear-gradient(to bottom,transparent,#8b60c8); }
+/* ━━ HERO ━━ */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+.h-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 30% 50%,rgba(155,29,255,.55) 0%,transparent 65%),radial-gradient(ellipse 70% 60% at 75% 35%,rgba(255,45,120,.45) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 50% 85%,rgba(0,245,255,.25) 0%,transparent 60%);animation:bgP 8s ease-in-out infinite alternate}
+@keyframes bgP{0%{opacity:.7}100%{opacity:1}}
+.h-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(155,29,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(155,29,255,.18) 1px,transparent 1px);background-size:60px 60px;animation:gM 20s linear infinite}
+@keyframes gM{0%{transform:translateY(0)}100%{transform:translateY(60px)}}
+.h-tag{font-family:‘Orbitron’,sans-serif;font-size:.58rem;letter-spacing:.4em;color:#00f5ff;text-shadow:0 0 8px #00f5ff,0 0 20px #00f5ff,0 0 40px rgba(0,245,255,.6);margin-bottom:18px;opacity:0;animation:fU .8s ease .3s forwards}
+.h-title{font-family:‘Zen Antique Soft’,serif;font-size:clamp(1.8rem,5.5vw,5rem);line-height:1.2;opacity:0;animation:fU .8s ease .5s forwards}
+.h-title .l1{display:block;color:#ffffff;text-shadow:0 0 20px #ff2d78,0 0 50px rgba(255,45,120,.8),0 0 100px rgba(155,29,255,.6),0 0 150px rgba(155,29,255,.3)}
+.h-title .l2{display:block;font-family:‘Orbitron’,sans-serif;font-size:clamp(.85rem,2vw,1.7rem);letter-spacing:.5em;color:#c0a0d0;margin-top:8px}
+.h-sub{font-size:.86rem;color:#c0a0d0;max-width:480px;line-height:1.9;margin-top:18px;opacity:0;animation:fU .8s ease .7s forwards}
+.h-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fU .8s ease .9s forwards}
+.btn-p{padding:11px 30px;background:#ff2d78;background:-webkit-linear-gradient(135deg,#ff2d78,#9b1dff);background:linear-gradient(135deg,#ff2d78,#9b1dff);border:none;color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.7rem;letter-spacing:.12em;cursor:pointer;border-radius:4px;text-decoration:none;display:inline-block;transition:filter .2s,transform .2s;box-shadow:0 0 20px rgba(255,45,120,.6),0 0 40px rgba(155,29,255,.3)}
+.btn-p:hover{filter:brightness(1.25);transform:translateY(-2px)}
+.btn-s{padding:11px 30px;background:transparent;border:1px solid #9b1dff;color:#c084fc;font-family:‘Orbitron’,sans-serif;font-size:.7rem;letter-spacing:.12em;cursor:pointer;border-radius:4px;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-s:hover{border-color:#00f5ff;color:#00f5ff;box-shadow:0 0 10px #00f5ff,0 0 20px #00f5ff}
+.btn-cyan{padding:11px 30px;background:linear-gradient(135deg,#00c6ff,#00f5ff,#0072ff);border:none;color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.7rem;letter-spacing:.12em;cursor:pointer;border-radius:4px;text-decoration:none;display:inline-block;transition:filter .2s,transform .2s;box-shadow:0 0 20px rgba(0,245,255,.6),0 0 40px rgba(0,114,255,.3);text-shadow:0 0 8px rgba(255,255,255,.6)}
+.btn-cyan:hover{filter:brightness(1.25);transform:translateY(-2px)}
+.scr-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0;animation:fU .8s ease 1.1s forwards}
+.scr-hint span{font-family:‘Orbitron’,sans-serif;font-size:.5rem;letter-spacing:.3em;color:#c0a0d0}
+.scr-line{width:2px;height:34px;background:linear-gradient(to bottom,#9b1dff,transparent);box-shadow:0 0 6px #9b1dff;animation:sP 1.5s ease-in-out infinite}
+@keyframes sP{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.5);opacity:.4}}
+@keyframes fU{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-@keyframes charaFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
-@keyframes spinSlow   { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-@keyframes fadeSlideDown { from{opacity:0;transform:translateY(-24px)} to{opacity:1;transform:translateY(0)} }
-@keyframes fadeIn        { from{opacity:0;transform:translateY(12px)}  to{opacity:1;transform:translateY(0)} }
-@keyframes bounce        { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+/* ━━ GENERIC SECTION ━━ */
+.sw{padding:86px 28px}
+.s-label{font-family:‘Orbitron’,sans-serif;font-size:.55rem;letter-spacing:.5em;color:#ff2d78;text-shadow:0 0 8px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78,0 0 60px rgba(255,45,120,.5);margin-bottom:10px;display:block}
+.s-title{font-family:‘Zen Antique Soft’,serif;font-size:clamp(1.5rem,3.5vw,2.6rem);color:#ffffff;text-shadow:0 0 15px rgba(192,132,252,.9),0 0 40px rgba(155,29,255,.6);margin-bottom:44px}
+.ndiv{height:2px;background:linear-gradient(90deg,transparent,#9b1dff,#ff2d78,#9b1dff,transparent);opacity:.9;box-shadow:0 0 10px rgba(255,45,120,.5)}
 
-/* SECTIONS */
-section { position:relative;z-index:2;padding:80px 24px; }
-.section-inner { max-width:820px;margin:0 auto; }
-.section-title {
-  font-family:'Cormorant Garamond',serif;font-size:clamp(22px,4vw,34px);
-  font-weight:400;color:#5a3e8a;text-align:center;letter-spacing:.18em;
-  margin-bottom:8px;
-}
-.section-title-jp {
-  font-family:'Shippori Mincho',serif;font-size:clamp(11px,1.8vw,14px);
-  color:#9b7cc8;text-align:center;letter-spacing:.4em;margin-bottom:48px;display:block;
-}
-.section-divider {
-  display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:48px;
-}
-.section-divider::before,.section-divider::after {
-  content:'';width:80px;height:1px;
-  background:linear-gradient(to right,transparent,rgba(140,100,210,.5));
-}
-.section-divider::after { background:linear-gradient(to right,rgba(140,100,210,.5),transparent); }
-.section-divider span { font-size:14px;color:#9b7cc8;opacity:.7; }
+/* ━━ WORKS ━━ */
+.works-in{max-width:1300px;margin:0 auto}
+.plan-blk{margin-bottom:18px}
+.plan-tog{width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 26px;background:rgba(40,0,70,.85);border:1px solid rgba(155,29,255,.7);cursor:pointer;transition:background .25s,border-color .25s;border-radius:4px}
+.plan-tog:hover,.plan-tog.on{border-color:#ff2d78;background:rgba(90,0,50,.9);box-shadow:0 0 20px rgba(255,45,120,.3)}
+.plan-tog-l{display:flex;align-items:center;gap:14px}
+.plan-badge{font-family:‘Orbitron’,sans-serif;font-size:.52rem;letter-spacing:.12em;padding:5px 11px;border:1px solid;border-radius:2px}
+.bs{color:#d4aaff;border-color:#c084fc;background:rgba(192,132,252,.25);text-shadow:0 0 8px rgba(192,132,252,.8)}
+.br{color:#00f5ff;border-color:#00f5ff;background:rgba(0,245,255,.2);text-shadow:0 0 8px rgba(0,245,255,.8)}
+.be{color:#ff6b35;border-color:#ff6b35;background:rgba(255,107,53,.2);text-shadow:0 0 8px rgba(255,107,53,.8)}
+.bc{color:#ffe84d;border-color:#ffd700;background:rgba(255,215,0,.2);text-shadow:0 0 8px rgba(255,215,0,.8)}
+.plan-name{font-family:‘Zen Antique Soft’,serif;font-size:1rem;color:#ffffff}
+.plan-range{font-family:‘Orbitron’,sans-serif;font-size:.65rem;color:#c0a0d0;margin-left:4px}
+.plan-arr{font-size:.9rem;color:#c0a0d0;transition:transform .3s,color .3s}
+.plan-tog.on .plan-arr{transform:rotate(180deg);color:#ff2d78}
+.plan-body{display:none;padding:22px 0 0}
+.plan-body.on{display:block}
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
 
-/* ABOUT */
-#about { background:rgba(255,255,255,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px); }
-.about-grid { display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center; }
-.about-illust { position:relative;display:flex;justify-content:center; }
-.about-illust img {
-  width:min(280px,90%);height:auto;display:block;
-  border-radius:24px 48px 24px 48px;
-  box-shadow:0 12px 40px rgba(120,80,200,.18),0 2px 8px rgba(120,80,200,.1);
-}
-.about-illust::before {
-  content:'';position:absolute;inset:-8px;
-  border-radius:28px 52px 28px 52px;
-  border:1px solid rgba(160,130,210,.3);pointer-events:none;
-}
-.about-text { display:flex;flex-direction:column;gap:20px; }
-.about-name-block { display:flex;flex-direction:column;gap:4px; }
-.about-name { font-family:'Shippori Mincho',serif;font-size:clamp(20px,3vw,28px);color:#4a2f7a;font-weight:700;letter-spacing:.1em; }
-.about-name-en { font-family:'Cormorant Garamond',serif;font-size:14px;color:#9b7cc8;letter-spacing:.25em; }
-.about-tag {
-  display:inline-block;padding:4px 14px;border-radius:20px;
-  background:rgba(160,130,210,.15);border:1px solid rgba(160,130,210,.35);
-  font-size:12px;color:#6a4a9a;letter-spacing:.12em;
-  font-family:'Shippori Mincho',serif;width:fit-content;
-}
-.about-catchphrase {
-  font-family:'Shippori Mincho',serif;font-size:clamp(13px,2vw,16px);
-  color:#4a2f7a;font-weight:600;letter-spacing:.08em;line-height:1.9;
-  border-left:3px solid rgba(140,100,210,.5);padding-left:16px;
-}
-.about-desc { font-family:'Noto Serif JP',serif;font-size:clamp(12px,1.8vw,14px);color:#3a2a5a;line-height:2.1;letter-spacing:.06em; }
+/* Work card */
+.wc{position:relative;border:1px solid rgba(155,29,255,.6);background:rgba(35,0,65,.7);overflow:hidden;border-radius:6px;transition:border-color .3s,transform .3s}
+.wc:hover{border-color:#ff2d78;transform:translateY(-3px);box-shadow:0 0 30px rgba(255,45,120,.5),0 0 60px rgba(255,45,120,.2)}
+.wc-iw{position:relative;overflow:hidden;cursor:pointer}
+.wc-iw img{width:100%;display:block;object-fit:cover;transition:transform .4s;-webkit-user-select:none;user-select:none;pointer-events:auto}
+.wc:hover .wc-iw img{transform:scale(1.04)}
+.wc-iw.r169 img{aspect-ratio:16/9}
+.wc-iw.r11 img{aspect-ratio:1/1}
+.wc-iw.r916 img{aspect-ratio:9/16}
+.wc-iw.r219 img{aspect-ratio:21/9}
+.exp-ico{position:absolute;bottom:8px;right:8px;background:rgba(10,0,15,.7);border:1px solid rgba(255,45,120,.5);color:#ff2d78;font-size:.65rem;padding:5px 8px;font-family:‘Orbitron’,sans-serif;opacity:0;transition:opacity .25s;pointer-events:none}
+.wc:hover .exp-ico{opacity:1}
+.wc-body{padding:14px 16px}
+.wc-cat{font-family:‘Orbitron’,sans-serif;font-size:.5rem;letter-spacing:.22em;color:#00f5ff;text-shadow:0 0 8px #00f5ff,0 0 16px rgba(0,245,255,.6);margin-bottom:4px;display:block}
+.wc-ttl{font-family:‘Zen Antique Soft’,serif;font-size:.92rem;color:#ffffff;margin-bottom:5px}
+.wc-pr{font-family:‘Orbitron’,sans-serif;font-size:.9rem;font-weight:700;color:#ff2d78;text-shadow:0 0 10px #ff2d78,0 0 25px rgba(255,45,120,.8),0 0 50px rgba(255,45,120,.4)}
+.wc-com{display:inline-block;margin-left:7px;padding:2px 7px;font-size:.48rem;border:1px solid #ffd700;color:#ffd700;text-shadow:0 0 6px #ffd700;letter-spacing:.1em;font-family:‘Orbitron’,sans-serif;vertical-align:middle;background:rgba(255,215,0,.12)}
+.wc-dt-tog{width:100%;margin-top:9px;padding:7px 11px;background:rgba(155,29,255,.1);border:1px solid rgba(155,29,255,.25);color:#c0a0d0;font-family:‘Orbitron’,sans-serif;font-size:.52rem;letter-spacing:.1em;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;transition:all .2s;border-radius:2px}
+.wc-dt-tog:hover{background:rgba(255,45,120,.08);border-color:#ff2d78;color:#ff2d78}
+.wc-dt-body{display:none;padding:11px 11px 4px}
+.wc-dt-body.on{display:block}
+.wc-dt-body p{font-size:.76rem;color:#c0a0d0;line-height:1.8}
 
-/* GALLERY */
-#gallery { background:rgba(230,225,248,.35); }
-.costume-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px; }
-.costume-card {
-  position:relative;border-radius:20px;overflow:hidden;
-  background:rgba(255,255,255,.5);border:1px solid rgba(160,130,210,.25);
-  box-shadow:0 4px 20px rgba(120,80,200,.08);
-  transition:transform .3s,box-shadow .3s;
-  aspect-ratio:3/5;display:flex;align-items:flex-end;justify-content:center;cursor:pointer;
-}
-.costume-card:hover { transform:translateY(-6px) scale(1.02);box-shadow:0 12px 36px rgba(120,80,200,.22); }
-.costume-card img { width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .4s; }
-.costume-card:hover img { transform:scale(1.04); }
-.costume-label {
-  position:absolute;bottom:0;left:0;right:0;padding:24px 10px 10px;
-  background:linear-gradient(to bottom,transparent,rgba(60,30,100,.65));
-  font-family:'Cormorant Garamond',serif;font-size:11px;
-  color:rgba(255,255,255,.9);letter-spacing:.12em;text-align:center;
-}
+/* ━━ LIGHTBOX ━━ */
+#lb{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;background:rgba(4,0,8,.96)}
+#lb.on{display:flex}
+#lbImg{max-width:88vw;max-height:88vh;object-fit:contain;border:1px solid rgba(155,29,255,.4);box-shadow:0 0 60px rgba(155,29,255,.3);-webkit-user-select:none;user-select:none;pointer-events:none;position:relative;z-index:2001}
+#lbClose{position:fixed;top:22px;right:26px;z-index:2002;background:none;border:1px solid rgba(255,45,120,.5);color:#ff2d78;font-size:1.3rem;padding:6px 13px;cursor:pointer;transition:background .2s;border-radius:3px}
+#lbClose:hover{background:rgba(255,45,120,.15)}
+#lbCap{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);font-family:‘Orbitron’,sans-serif;font-size:.62rem;letter-spacing:.2em;color:#c0a0d0;text-align:center;z-index:2002}
+.lb-warn{position:fixed;bottom:66px;left:50%;transform:translateX(-50%);font-family:‘Orbitron’,sans-serif;font-size:.48rem;letter-spacing:.2em;color:rgba(155,29,255,.5);z-index:2002;white-space:nowrap}
+#ssGuard{display:none;position:fixed;inset:0;background:#000;z-index:2050;pointer-events:none}
 
-/* BIRTHDAY */
-#birthday {
-  background:rgba(255,255,255,.45);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);overflow:hidden;
-}
-#birthday .section-inner { max-width:900px; }
+/* ━━ PRICING ━━ */
+.pricing-in{max-width:1100px;margin:0 auto}
+.p-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:13px}
+.pc{padding:22px 20px;background:rgba(35,0,65,.75);border:1px solid rgba(155,29,255,.65);border-radius:6px;transition:all .2s}
+.pc:hover{border-color:#9b1dff;background:rgba(45,0,80,.7)}
+.pc.hi{border-color:#ff2d78;background:rgba(75,0,45,.8);box-shadow:inset 0 0 20px rgba(255,45,120,.08)}
+.pc-lbl{font-family:‘Orbitron’,sans-serif;font-size:.5rem;letter-spacing:.3em;color:#00f5ff;text-shadow:0 0 8px #00f5ff,0 0 16px rgba(0,245,255,.5);margin-bottom:6px;display:block}
+.pc-nm{font-family:‘Zen Antique Soft’,serif;font-size:.92rem;color:#ffffff;margin-bottom:9px}
+.pc-pr{font-family:‘Orbitron’,sans-serif;font-size:1.25rem;font-weight:700;color:#ff2d78;text-shadow:0 0 10px #ff2d78,0 0 25px rgba(255,45,120,.7)}
+.pc-pr span{font-size:.62rem;color:#c0a0d0;font-weight:400}
+.pc-note{font-size:.72rem;color:#c0a0d0;margin-top:7px;line-height:1.6}
+.pc-com{display:inline-block;margin-top:7px;padding:3px 9px;border:1px solid #00f5ff;font-family:‘Orbitron’,sans-serif;font-size:.47rem;color:#00f5ff;letter-spacing:.14em;border-radius:2px}
 
-.birthday-gate {
-  display:flex;flex-direction:column;align-items:center;gap:32px;
-  padding:56px 32px;border-radius:28px;
-  background:rgba(255,255,255,.55);border:1px solid rgba(160,130,210,.28);
-  box-shadow:0 8px 40px rgba(120,80,200,.10);
-  position:relative;overflow:hidden;
-}
-.birthday-gate::before {
-  content:'✦';position:absolute;top:18px;left:24px;font-size:14px;
-  color:rgba(160,130,210,.35);animation:sparkleFloat 3.5s ease-in-out infinite;
-}
-.birthday-gate::after {
-  content:'✦';position:absolute;bottom:18px;right:24px;font-size:18px;
-  color:rgba(160,130,210,.30);animation:sparkleFloat 4.5s ease-in-out 1.5s infinite;
-}
-.birthday-gate-deco { display:flex;align-items:center;gap:14px;opacity:.55; }
-.birthday-gate-deco::before,.birthday-gate-deco::after {
-  content:'';width:60px;height:1px;background:linear-gradient(to right,transparent,rgba(140,100,210,.7));
-}
-.birthday-gate-deco::after { background:linear-gradient(to right,rgba(140,100,210,.7),transparent); }
-.birthday-gate-deco span { font-size:20px;color:rgba(140,100,210,.6); }
-.birthday-gate-question {
-  font-family:'Shippori Mincho',serif;font-size:clamp(17px,3.5vw,26px);
-  color:#3a2460;font-weight:700;letter-spacing:.15em;text-align:center;line-height:1.8;
-}
-.birthday-gate-sub {
-  font-family:'Cormorant Garamond',serif;font-size:13px;
-  color:#9b7cc8;letter-spacing:.3em;font-style:italic;margin-top:-20px;
-}
-.birthday-reveal-btn {
-  position:relative;display:inline-flex;align-items:center;gap:10px;
-  padding:16px 52px;border:none;border-radius:50px;
-  background:linear-gradient(135deg,#8b60c8 0%,#6a9ed4 100%);color:#fff;
-  font-family:'Shippori Mincho',serif;font-size:clamp(14px,2vw,18px);
-  font-weight:700;letter-spacing:.3em;cursor:pointer;
-  box-shadow:0 6px 28px rgba(120,80,200,.35),0 2px 8px rgba(120,80,200,.2);
-  transition:transform .25s,box-shadow .25s,filter .25s;overflow:hidden;
-}
-.birthday-reveal-btn::before {
-  content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;
-  background:rgba(255,255,255,.25);transform:skewX(-20deg);transition:left .5s;
-}
-.birthday-reveal-btn:hover::before { left:140%; }
-.birthday-reveal-btn:hover { transform:translateY(-3px) scale(1.04);box-shadow:0 12px 40px rgba(120,80,200,.50),0 4px 12px rgba(120,80,200,.3);filter:brightness(1.08); }
-.birthday-reveal-btn:active { transform:translateY(0) scale(.98); }
-.btn-star { font-size:14px;opacity:.85; }
+/* ━━ PRICE BANNER & ACCORDION ━━ */
+.price-unit{margin-bottom:10px}
+.pbtn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 26px;background:rgba(40,0,70,.85);border:1px solid rgba(155,29,255,.7);cursor:pointer;transition:background .25s,border-color .25s;border-radius:4px}
+.pbtn:hover,.pbtn.active{border-color:#ff2d78;background:rgba(90,0,50,.9);box-shadow:0 0 25px rgba(255,45,120,.4)}
+.pbtn-left{display:flex;align-items:center;gap:14px}
+.pbtn-icon{font-size:1.5rem;line-height:1}
+.pbtn-label{font-family:‘Orbitron’,sans-serif;font-size:.72rem;letter-spacing:.15em;color:#ffffff;text-shadow:0 0 10px rgba(255,255,255,.5);display:block;margin-bottom:3px}
+.pbtn-range{font-family:‘Orbitron’,sans-serif;font-size:.62rem;font-weight:700;color:#ff2d78;text-shadow:0 0 10px #ff2d78,0 0 20px rgba(255,45,120,.6);display:block}
+.pbtn-arr{font-size:.9rem;color:#c0a0d0;transition:transform .3s,color .3s;flex-shrink:0}
+.pbtn.active .pbtn-arr{transform:rotate(180deg);color:#ff2d78}
+.price-acc-body{display:none;padding:20px 4px 4px}
+.price-acc-body.on{display:block}
+.price-acc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
 
-@keyframes sparkleFloat { 0%,100%{opacity:.4;transform:translateY(0) scale(1)} 50%{opacity:1;transform:translateY(-8px) scale(1.2)} }
+/* ━━ OPTION ━━ */
+.opt-in{max-width:900px;margin:0 auto}
+.opt-card{padding:28px 32px;background:rgba(0,20,40,.75);border:1px solid rgba(0,245,255,.7);border-radius:8px;margin-bottom:18px;box-shadow:0 0 20px rgba(0,245,255,.1)}
+.opt-ttl{font-family:‘Zen Antique Soft’,serif;font-size:1.05rem;color:#00f5ff;text-shadow:0 0 10px #00f5ff,0 0 25px rgba(0,245,255,.6);margin-bottom:11px;display:flex;align-items:center;gap:9px}
+.opt-ttl::before{content:’’;width:3px;height:1em;background:#00f5ff;box-shadow:0 0 10px #00f5ff,0 0 20px #00f5ff;display:block}
+.opt-desc{font-size:.84rem;color:#c0a0d0;line-height:1.9}
+.booster-tbl{margin-top:14px;width:100%;border-collapse:collapse}
+.booster-tbl th,.booster-tbl td{padding:9px 13px;font-size:.78rem;border-bottom:1px solid rgba(155,29,255,.13);text-align:left}
+.booster-tbl th{font-family:‘Orbitron’,sans-serif;font-size:.52rem;letter-spacing:.18em;color:#00f5ff}
+.booster-tbl td{color:#c0a0d0}
+.booster-tbl td:last-child{color:#ff2d78;font-family:‘Orbitron’,sans-serif;font-weight:700}
 
-/* Birthday reveal area */
-.birthday-reveal-area { display:none;flex-direction:column;align-items:center;gap:28px; }
-.birthday-reveal-area.shown { display:flex;animation:birthdayReveal .9s cubic-bezier(.22,1,.36,1) both; }
-@keyframes birthdayReveal { from{opacity:0;transform:translateY(36px) scale(.96)} to{opacity:1;transform:translateY(0) scale(1)} }
+/* ━━ TERMS ━━ */
+.terms-in{max-width:800px;margin:0 auto}
+.t-item{display:flex;gap:17px;padding:18px 20px;background:rgba(26,0,48,.4);border-left:2px solid #9b1dff;border-bottom:1px solid rgba(155,29,255,.11);margin-bottom:9px;font-size:.85rem;line-height:1.85;color:#d0b0e0}
+.t-num{font-family:‘Orbitron’,sans-serif;font-size:.7rem;color:#ff2d78;text-shadow:0 0 8px #ff2d78,0 0 20px rgba(255,45,120,.7);min-width:22px;padding-top:2px;font-weight:700}
+.t-hi{color:#00f5ff;text-shadow:0 0 8px #00f5ff,0 0 16px rgba(0,245,255,.5);font-weight:700}
 
-/* Slideshow wrapper */
-.birthday-slideshow-wrap {
-  width:100%;
-  background:rgba(255,255,255,.60);
-  border:1px solid rgba(160,130,210,.22);
-  border-radius:24px;
-  box-shadow:0 8px 40px rgba(120,80,200,.13),0 2px 8px rgba(120,80,200,.08);
-  padding:28px 56px 24px;
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:16px;
-}
-/* スライド表示エリア */
-.birthday-slideshow {
-  position:relative;
-  width:100%;
-  overflow:hidden;
-  border-radius:14px;
-}
-.birthday-slideshow-track {
-  display:flex;
-  transition:transform .5s cubic-bezier(.4,0,.2,1);
-  align-items:flex-start;
-}
-/* 各スライドのセル */
-.birthday-slideshow-track .slide-cell {
-  width:100%;
-  flex-shrink:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:4px 8px;
-}
-/* 画像は縦横比維持、最大幅のみ制限 */
-.birthday-slideshow-track .slide-cell img {
-  max-width:min(480px,100%);
-  width:auto;
-  height:auto;
-  display:block;
-  border-radius:12px;
-  box-shadow:0 6px 28px rgba(120,80,200,.18);
-}
-/* 前後ボタン */
-.slideshow-btn {
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;
-  background:rgba(255,255,255,.85);backdrop-filter:blur(6px);
-  box-shadow:0 2px 10px rgba(120,80,200,.22);
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s,transform .2s;z-index:10;
-}
-.slideshow-btn:hover { background:rgba(230,220,255,.98);transform:translateY(-50%) scale(1.10); }
-.slideshow-btn.prev { left:8px; }
-.slideshow-btn.next { right:8px; }
-.slideshow-btn svg { width:16px;height:16px;stroke:#5a3e8a;stroke-width:2.5;fill:none; }
-/* ドットナビ */
-.slideshow-dots {
-  display:flex;gap:7px;justify-content:center;align-items:center;flex-wrap:wrap;
-}
-.slideshow-dot {
-  width:7px;height:7px;border-radius:50%;border:none;cursor:pointer;padding:0;
-  background:rgba(140,100,210,.22);transition:background .25s,transform .25s;
-}
-.slideshow-dot.active { background:#8b60c8;transform:scale(1.35); }
-/* カウンター */
-.slideshow-counter {
-  font-family:'Cormorant Garamond',serif;font-size:12px;color:#9b7cc8;
-  letter-spacing:.2em;text-align:center;
-}
+/* ━━ ORDER ━━ */
+.ord-in{max-width:720px;margin:0 auto}
+.form-wrap{background:rgba(35,0,65,.75);border:1px solid rgba(155,29,255,.7);padding:40px;border-radius:8px;box-shadow:0 0 30px rgba(155,29,255,.15)}
+.fg{margin-bottom:20px}
+.fl{display:block;font-family:‘Orbitron’,sans-serif;font-size:.56rem;letter-spacing:.3em;color:#00f5ff;margin-bottom:7px}
+.fi,.fsel,.fta{width:100%;background:rgba(10,0,20,.8);border:1px solid rgba(155,29,255,.4);color:#ffffff;padding:10px 13px;font-family:‘Noto Sans JP’,sans-serif;font-size:.84rem;outline:none;transition:border-color .2s,box-shadow .2s;border-radius:4px}
+.fi:focus,.fsel:focus,.fta:focus{border-color:#ff2d78;box-shadow:0 0 13px rgba(255,45,120,.14)}
+.fsel option{background:#1a0030}
+.fta{height:120px;resize:vertical}
+.boost-opts{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px}
+.boost-opt{display:flex;align-items:center;gap:7px;cursor:pointer}
+.boost-opt input[type=checkbox]{accent-color:#ff2d78;width:14px;height:14px;cursor:pointer}
+.boost-opt label{font-size:.78rem;color:#c0a0d0;cursor:pointer}
+.kw{display:inline-block;margin:3px 0 13px;padding:4px 13px;background:rgba(255,45,120,.2);border:1px solid #ff2d78;color:#ff2d78;text-shadow:0 0 8px #ff2d78;font-family:‘Zen Antique Soft’,serif;font-size:.92rem;letter-spacing:.3em;box-shadow:0 0 12px rgba(255,45,120,.3)}
+.fnote{font-size:.73rem;color:#c0a0d0;margin-top:7px;line-height:1.65}
+.sub-btn{width:100%;padding:14px;margin-top:9px;background:#ff2d78;background:-webkit-linear-gradient(135deg,#ff2d78,#9b1dff);background:linear-gradient(135deg,#ff2d78,#9b1dff);border:none;color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.76rem;letter-spacing:.2em;cursor:pointer;border-radius:4px;transition:filter .2s,transform .2s;box-shadow:0 0 26px rgba(255,45,120,.6),0 0 50px rgba(155,29,255,.3)}
+.sub-btn:hover{filter:brightness(1.25);transform:translateY(-2px)}
+.tw-cta{text-align:center;margin-top:26px;padding:20px;background:rgba(26,0,48,.4);border:1px solid rgba(155,29,255,.2)}
+.tw-cta p{font-size:.8rem;color:#c0a0d0;margin-bottom:11px;line-height:1.7}
+.tw-btn{display:inline-block;padding:10px 28px;background:#1da1f2;color:#fff;font-family:‘Orbitron’,sans-serif;font-size:.66rem;letter-spacing:.12em;text-decoration:none;border-radius:4px;transition:filter .2s;box-shadow:0 0 15px rgba(29,161,242,.4)}
+.tw-btn:hover{filter:brightness(1.2)}
 
-.birthday-caption { text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px; }
-.birthday-caption-title { font-family:'Shippori Mincho',serif;font-size:clamp(15px,2.5vw,20px);color:#4a2f7a;font-weight:700;letter-spacing:.25em; }
-.birthday-caption-en { font-family:'Cormorant Garamond',serif;font-size:13px;color:#9b7cc8;letter-spacing:.3em;font-style:italic; }
-.birthday-caption-dots { display:flex;gap:8px;margin-top:4px; }
-.birthday-caption-dots span { width:4px;height:4px;border-radius:50%;background:rgba(140,100,210,.4);display:block; }
-
-/* GUIDELINE */
-#guideline { background:rgba(230,225,248,.35); }
-#guideline .section-inner { max-width:700px; }
-.guideline-grid {
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;
-}
-.guideline-card {
-  border-radius:16px;padding:20px 16px;text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-  border:1.5px solid;
-}
-.guideline-card.ok   { background:rgba(210,200,245,.45);border-color:rgba(140,100,210,.35); }
-.guideline-card.cond { background:rgba(230,218,255,.45);border-color:rgba(160,120,220,.28); }
-.guideline-card.ng   { background:rgba(245,235,255,.45);border-color:rgba(180,140,230,.28); }
-.guideline-card-title {
-  font-family:'Shippori Mincho',serif;font-size:14px;font-weight:700;
-  color:#3a2a5a;letter-spacing:.08em;
-}
-.guideline-badge {
-  display:inline-flex;align-items:center;gap:5px;
-  font-family:'Shippori Mincho',serif;font-size:12px;font-weight:700;letter-spacing:.05em;
-  padding:3px 12px;border-radius:20px;
-}
-.guideline-badge.ok   { background:rgba(120,90,200,.15);color:#4a2f7a; }
-.guideline-badge.cond { background:rgba(160,120,220,.18);color:#6a3a9a; }
-.guideline-badge.ng   { background:rgba(180,140,230,.15);color:#7a4aaa; }
-.guideline-note {
-  font-family:'Noto Serif JP',serif;font-size:11px;color:#6a5a8a;
-  letter-spacing:.05em;line-height:1.7;
-}
-.guideline-disclaimer {
-  margin-top:32px;padding:16px 20px;border-radius:12px;
-  background:rgba(255,255,255,.55);border:1px solid rgba(160,130,210,.25);
-  font-family:'Noto Serif JP',serif;font-size:12px;color:#5a4a7a;
-  line-height:2;letter-spacing:.05em;text-align:center;
-}
-
-/* LINKS */
-#links { background:rgba(255,255,255,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px); }
-.links-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;max-width:700px;margin:0 auto; }
-.link-card {
-  display:flex;align-items:center;gap:14px;padding:18px 22px;border-radius:16px;
-  text-decoration:none;color:#4a2f7a;background:rgba(255,255,255,.65);
-  border:1px solid rgba(160,130,210,.3);box-shadow:0 3px 16px rgba(120,80,200,.08);
-  transition:transform .3s,box-shadow .3s,background .3s;
-  font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.08em;
-}
-.link-card:hover { transform:translateY(-4px);box-shadow:0 10px 32px rgba(120,80,200,.22);background:rgba(230,220,255,.8); }
-.link-icon { width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px; }
-.link-icon.x-icon  { background:linear-gradient(135deg,#1a1a2e,#16213e); }
-.link-icon.yt-icon { background:linear-gradient(135deg,#c0392b,#922b21); }
-.link-icon.tt-icon { background:linear-gradient(135deg,#010101,#2b2b2b); }
-.link-icon.fb-icon { background:linear-gradient(135deg,#e8a0bf,#c87fd6); }
-.link-name { display:flex;flex-direction:column;gap:2px; }
-.link-name strong { font-size:15px;font-weight:600; }
-.link-name span { font-size:11px;color:#9b7cc8;letter-spacing:.1em;font-family:'Noto Serif JP',serif; }
-
-/* FOOTER */
-footer {
-  position:relative;z-index:2;text-align:center;padding:48px 24px 36px;
-  background:rgba(60,30,100,.08);border-top:1px solid rgba(160,130,210,.2);
-}
-.footer-symbol { width:52px;height:52px;object-fit:contain;margin:0 auto 16px;display:block;opacity:.5;animation:spinSlow 20s linear infinite; }
-.footer-name { font-family:'Cormorant Garamond',serif;font-size:16px;color:#6a4a9a;letter-spacing:.25em;margin-bottom:8px; }
-.footer-copy { font-family:'Noto Serif JP',serif;font-size:11px;color:#9b7cc8;opacity:.7;letter-spacing:.1em; }
-
-/* MODAL */
-.modal-overlay {
-  position:fixed;inset:0;background:rgba(30,15,60,.7);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  z-index:200;display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;transition:opacity .3s;
-}
-.modal-overlay.active { opacity:1;pointer-events:all; }
-.modal-img { max-height:90vh;max-width:90vw;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5);object-fit:contain;animation:modalPop .35s ease both; }
-@keyframes modalPop { from{transform:scale(.85);opacity:0} to{transform:scale(1);opacity:1} }
-.modal-close {
-  position:absolute;top:20px;right:24px;background:none;border:none;
-  color:#fff;font-size:32px;cursor:pointer;opacity:.8;
-  font-family:'Cormorant Garamond',serif;line-height:1;transition:opacity .2s;
-}
-.modal-close:hover { opacity:1; }
-
-/* RESPONSIVE */
-@media(max-width:680px){
-  nav { padding:0 14px;height:58px; }
-  .nav-left,.nav-right { gap:14px; }
-  nav a { font-size:12px; }
-  .nav-logo-img { height:32px; }
-  .about-grid { grid-template-columns:1fr; }
-  .about-illust { order:-1; }
-  .about-illust img { width:min(220px,75%); }
-  .costume-grid { grid-template-columns:repeat(2,1fr);gap:12px; }
-  .links-grid { grid-template-columns:1fr; }
-  section { padding:60px 16px; }
-  .birthday-slideshow-wrap { padding:20px 44px 18px; }
-  .birthday-slideshow-track .slide-cell img { max-width:min(320px,100%); }
-  .slideshow-btn { width:34px;height:34px; }
-}
-@media(max-width:400px){
-  .nav-left a:not(:first-child),.nav-right a:not(:last-child) { display:none; }
-}
+/* ━━ FOOTER ━━ */
+footer{border-top:1px solid rgba(155,29,255,.2);padding:32px;text-align:center}
+.f-logo{font-family:‘Orbitron’,sans-serif;font-size:.95rem;font-weight:900;text-shadow:0 0 10px #ff2d78,0 0 20px #ff2d78,0 0 40px #ff2d78;letter-spacing:.2em;margin-bottom:5px}
+.f-logo span{color:#ff2d78}
+.f-cp{font-size:.68rem;color:#c0a0d0;margin-top:9px}
 
 /* REVEAL */
-.reveal { opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s; }
-.reveal.visible { opacity:1;transform:translateY(0); }
-.reveal-delay-1 { transition-delay:.1s; }
-.reveal-delay-2 { transition-delay:.2s; }
-.reveal-delay-3 { transition-delay:.3s; }
-.reveal-delay-4 { transition-delay:.4s; }
+.rev{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+.rev.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+nav ul{display:none}
+nav{padding:13px 16px}
+.sw{padding:60px 16px}
+.form-wrap{padding:26px 16px}
+.plan-tog{padding:14px 16px}
+}
 </style>
+
 </head>
 <body>
 
-<div class="petals-container" id="petals"></div>
+<div id="ssGuard"></div>
+
+<!-- NAV -->
 
 <nav>
-  <div class="nav-left">
-    <a href="#about">About</a>
-    <a href="#gallery">Gallery</a>
-  </div>
-  <div class="nav-center">
-    <img src="ネームロゴダーク.png" alt="天紫月華" class="nav-logo-img">
-  </div>
-  <div class="nav-right">
-    <a href="#links">Links</a>
-    <a href="https://ruruka104.fanbox.cc/" target="_blank" rel="noopener">Fanbox</a>
-  </div>
+<div class="nav-links">
+<a href="#works">WORKS</a>
+<a href="#pricing" onclick="openPricing()">PRICE</a>
+<a href="#option">OPTION</a>
+<a href="#terms">TERMS</a>
+<a href="#order">ORDER</a>
+<a href="https://youtube.com/channel/UCwUa3bI8uzn61uG2iB5sFHg?si=kEPsnLqQFKt7YZ3h" target="_blank">MAKING</a>
+</div>
+<div class="nav-logo">NV<span>.</span>com</div>
+<div class="nav-right"></div>
 </nav>
 
 <!-- HERO -->
+
 <section id="hero">
-  <div class="hero-bg"></div>
-  <img src="IMG_4419.jpeg" alt="" class="hero-bg-img">
-  <svg class="hero-deco" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <circle cx="100" cy="150" r="80" fill="rgba(180,155,230,0.10)"/>
-    <circle cx="1100" cy="200" r="100" fill="rgba(140,200,240,0.10)"/>
-    <circle cx="200" cy="680" r="60" fill="rgba(200,180,240,0.10)"/>
-    <circle cx="1050" cy="650" r="75" fill="rgba(160,210,240,0.10)"/>
-    <circle cx="600" cy="50" r="50" fill="rgba(180,155,230,0.08)"/>
-  </svg>
-  <div class="hero-content">
-    <img src="ネームロゴダーク.png" alt="天紫月華 Tenshi Ruruka" class="hero-name-logo">
-    <p class="hero-catchcopy">禁忌を犯した哀れな元猫</p>
-    <div class="hero-visual-wrapper">
-      <div class="symbol-wrapper" id="symbolBtn" title="クリックで衣装チェンジ">
-        <img src="IMG_2376.png" alt="シンボルマーク" class="symbol-img">
-        <span class="symbol-hint">✦ tap to change ✦</span>
-      </div>
-      <img src="立ち絵ノーマル②.png" alt="天紫月華" class="hero-chara" id="heroChara">
-    </div>
-  </div>
-  <div class="scroll-hint">
-    <span>SCROLL</span>
-    <div class="scroll-hint-arrow"></div>
-  </div>
+<div class="h-bg"></div><div class="h-grid"></div>
+<p class="h-tag">— ILLUSTRATOR PORTFOLIO — NV.com —</p>
+<h1 class="h-title">
+<span class="l1">シビれる魅力を</span>
+<span class="l1">あなたの手元に。</span>
+<span class="l2">COMMISSION OPEN</span>
+</h1>
+<p class="h-sub">サイバーパンク・ネオンポップを得意とするイラストレーター。<br>サムネイル・アイコン・グッズ・大判・商業案件まで幅広く承ります。</p>
+<div class="h-cta">
+<a href="#works" class="btn-p">WORKS を見る</a>
+<a href="#order" class="btn-s">依頼する</a>
+<a href="about.html" class="btn-cyan">過去作品を見る</a>
+</div>
+<div class="scr-hint"><span>SCROLL</span><div class="scr-line"></div></div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-inner">
-    <h2 class="section-title reveal">About</h2>
-    <span class="section-title-jp reveal reveal-delay-1">自己紹介</span>
-    <div class="section-divider reveal reveal-delay-2"><span>✦</span></div>
-    <div class="about-grid">
-      <div class="about-illust reveal reveal-delay-1">
-        <img src="IMG_4418.jpeg" alt="天紫月華イラスト">
-      </div>
-      <div class="about-text reveal reveal-delay-2">
-        <div class="about-name-block">
-          <span class="about-name">天紫月華</span>
-          <span class="about-name-en">Tenshi Ruruka</span>
-        </div>
-        <span class="about-tag">心優しき見習い魔法少女</span>
-        <p class="about-catchphrase">
-          君の不幸は僕が貰うよ。<br>
-          みんなにひとさじの幸福を届けたい。
-        </p>
-        <p class="about-desc">
-          不幸上等見習い魔法少女 天紫月華と申します。<br>
-          禁忌を犯した哀れな元猫として、<br>
-          皆さんの不幸を引き受け、<br>
-          その分の幸福をお届けするために活動しています。
-        </p>
-      </div>
-    </div>
-  </div>
+<div class="ndiv"></div>
+
+<!-- ══ WORKS ══ -->
+
+<section class="sw" id="works">
+<div class="works-in">
+<span class="s-label">— WORKS —</span>
+<h2 class="s-title">制作実績</h2>
+<p style="font-size:.78rem;color:#c0a0d0;margin-bottom:32px;margin-top:-30px;">各プランをクリックで開閉 / 画像タップで拡大表示</p>
+
+<!-- STANDARD -->
+
+<div class="plan-blk rev">
+<button class="plan-tog" onclick="togPlan(this)">
+<div class="plan-tog-l">
+<span class="plan-badge bs">STANDARD</span>
+<span class="plan-name">スタンダードプラン <span class="plan-range">¥5,000〜¥10,000</span></span>
+</div>
+<span class="plan-arr">▼</span>
+</button>
+<div class="plan-body">
+<div class="plan-grid">
+
+<div class="wc">
+<div class="wc-iw r11"><img src="無題1097_20240315222638.png" alt="アイコン" onclick="openLB(this,'アイコン用イラスト — ¥5,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">ICON ILLUSTRATION</span>
+<p class="wc-ttl">個性を刻むアイコンイラスト</p>
+<span class="wc-pr">¥5,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>SNS・配信・YouTubeなどのアイコン向け。バストアップ〜全身対応。背景あり/なし選択可。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r169"><img src="無題1580_20250917084813.png" alt="c4nge（サンプル）" onclick="openLB(this,'歌ってみたサムネイル — ¥10,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">COVER SONG THUMBNAIL</span>
+<p class="wc-ttl">単品サムネイル（差分なし）</p>
+<span class="wc-pr">¥10,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>歌ってみた・楽曲動画サムネイル。16:9横長フォーマット。テキスト配置スペース調整可。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r169"><img src="無題1583_20260419125632.png" alt="シニカル・シニカル（サンプル）" onclick="openLB(this,'歌ってみたサムネイル — ¥10,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">COVER SONG THUMBNAIL</span>
+<p class="wc-ttl">単品サムネイル（差分なし）</p>
+<span class="wc-pr">¥10,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>ポップ&ネオン系。背景込みで賑やかなビジュアル。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r11"><img src="無題1443_20240911060112.png" alt="人外魔装" onclick="openLB(this,'人外魔装イラスト — ¥10,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">DARK FANTASY CHARACTER</span>
+<p class="wc-ttl">翼と鎖纏う反逆の天使</p>
+<span class="wc-pr">¥10,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>ダークファンタジー・人外キャラ全身イラスト。羽・角・尻尾等の追加装飾対応。</p></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- RICH -->
+
+<div class="plan-blk rev">
+<button class="plan-tog" onclick="togPlan(this)">
+<div class="plan-tog-l">
+<span class="plan-badge br">RICH</span>
+<span class="plan-name">リッチプラン <span class="plan-range">¥15,000〜¥25,000</span></span>
+</div>
+<span class="plan-arr">▼</span>
+</button>
+<div class="plan-body">
+<div class="plan-grid">
+
+<div class="wc">
+<div class="wc-iw r169"><img src="無題1358_20240417114532.png" alt="チームイラスト" onclick="openLB(this,'チームイラスト — ¥15,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">TEAM CHARACTER</span>
+<p class="wc-ttl">複数キャラクター同時描き</p>
+<span class="wc-pr">¥15,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>複数キャラクター（2，3体目安）の集合イラスト。4体以上は要相談・追加料金あり。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r219"><img src="無題753_20240107231942.png" alt="Xヘッダー" onclick="openLB(this,'Xヘッダー用イラスト — ¥15,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">X / SNS HEADER</span>
+<p class="wc-ttl">ずっと真夜中でいいのに。オマージュ風ヘッダー</p>
+<span class="wc-pr">¥15,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>Xヘッダーバナー（1500×500px以上）。ロゴ・テキスト配置スペース調整可。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r11"><img src="無題569_20230415185011.png" alt="タロット風" onclick="openLB(this,'タロット風イラスト — ¥15,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">TAROT STYLE</span>
+<p class="wc-ttl">対極の二重奏 — SHIO＆UTUNOMIYA</p>
+<span class="wc-pr">¥15,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>タロットカードモチーフの装飾的縦型イラスト。枠デザイン込み。モノクロ＋希望カラー1色の構成となります。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r11"><img src="無題817_20231204221221.png" alt="スマホ壁紙" onclick="openLB(this,'スマホ用壁紙イラスト — ¥20,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">SMARTPHONE WALLPAPER</span>
+<p class="wc-ttl">Devilic Sexy Girl</p>
+<span class="wc-pr">¥20,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>スマートフォン縦型壁紙。9:19.5比率。ロック画面・ホーム両対応。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r916"><img src="無題48_20240623160419.png" alt="ジャケット" onclick="openLB(this,'高解像ジャケットイラスト — ¥25,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">HIGH-RES JACKET ART</span>
+<p class="wc-ttl">TOKYO NIGHT PUNK</p>
+<span class="wc-pr">¥25,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>楽曲・アルバムジャケット向け。配信対応3000px以上。テキスト組み込みも相談可。</p></div>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r169"><img src="無題1434_20240813212023.png" alt="大判イラスト" onclick="openLB(this,'大判1枚イラスト — ¥25,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">LARGE FORMAT ILLUSTRATION</span>
+<p class="wc-ttl">二人の邂逅―TECHNO POOR</p>
+<span class="wc-pr">¥25,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>背景込みの世界観ある大型1枚絵。SNS掲載・印刷両対応。</p></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- EXTREME ★NEW -->
+
+<div class="plan-blk rev">
+<button class="plan-tog" onclick="togPlan(this)">
+<div class="plan-tog-l">
+<span class="plan-badge be">EXTREME</span>
+<span class="plan-name">エクストリームプラン <span class="plan-range">¥50,000〜</span></span>
+</div>
+<span class="plan-arr">▼</span>
+</button>
+<div class="plan-body">
+<div class="plan-grid">
+
+<div class="wc">
+<div class="wc-iw r916"><img src="1542_20250330073416.png" alt="Cyber Yofukashi Girls" onclick="openLB(this,'超高解像抱き合わせイラスト — ¥50,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">EXTREME PLAN</span>
+<p class="wc-ttl">Cyber Yofukashi Girls</p>
+<span class="wc-pr">¥50,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>画質3k以上、最低人数2人〜の高画質イラストです。イベントポスター等におすすめです。</p></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- COMMERCIAL -->
+
+<div class="plan-blk rev">
+<button class="plan-tog" onclick="togPlan(this)">
+<div class="plan-tog-l">
+<span class="plan-badge bc">COMMERCIAL</span>
+<span class="plan-name">商用プラン <span class="plan-range">商用利用許諾付き</span></span>
+</div>
+<span class="plan-arr">▼</span>
+</button>
+<div class="plan-body">
+<p style="font-size:.8rem;color:#c0a0d0;line-height:1.8;margin-bottom:22px;padding:14px 18px;border-left:2px solid #ffd700;background:rgba(255,215,0,.04);">グッズ販売・店舗展示・営利目的の使用には商用プランをお選びください。下記は商用利用実績の一部です。</p>
+<div class="plan-grid">
+
+<div class="wc">
+<div class="wc-iw r11"><img src="無題1195_20240304121118.png" alt="グッズ商用" onclick="openLB(this,'グッズ用ミニキャライラスト（商用可）— ¥10,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">GOODS COMMERCIAL</span>
+<p class="wc-ttl">グッズ用ミニキャラ<span class="wc-com">商用可</span></p>
+<span class="wc-pr">¥10,000~</span>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r169"><img src="無題1027_20240116163106.png" alt="サイネージ商用" onclick="openLB(this,'サイネージ用イラスト（商用可）— ¥30,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">SIGNAGE COMMERCIAL</span>
+<p class="wc-ttl">サイネージ用イラスト<span class="wc-com">商用可</span></p>
+<span class="wc-pr">¥30,000~</span>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r169"><img src="無題1324_20240522221810.png" alt="サイネージ商用2" onclick="openLB(this,'サイネージ用イラスト（商用可）— ¥30,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">SIGNAGE COMMERCIAL</span>
+<p class="wc-ttl">サイネージ用イラスト<span class="wc-com">商用可</span></p>
+<span class="wc-pr">¥30,000~</span>
+</div>
+</div>
+
+<div class="wc">
+<div class="wc-iw r11"><img src="無題1228_20240225210421.png" alt="超高解像商用" onclick="openLB(this,'超高解像人外魔装（商用可）— ¥50,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">ULTRA HD COMMERCIAL</span>
+<p class="wc-ttl">超高解像人外魔装<span class="wc-com">商用可</span></p>
+<span class="wc-pr">¥50,000~</span>
+</div>
+</div>
+
+<!-- ★NEW: 表情差分盛り合わせ -->
+
+<div class="wc">
+<div class="wc-iw r11"><img src="無題1603_20260429113050.png" alt="Pukey Goddess Shot Trick（FA）" onclick="openLB(this,'表情差分盛り合わせイラスト（商用可）— ¥60,000〜')"><span class="exp-ico">⊕ 拡大</span></div>
+<div class="wc-body">
+<span class="wc-cat">COMMERCIAL PLAN</span>
+<p class="wc-ttl">Pukey Goddess Shot Trick（FA）<span class="wc-com">商用可</span></p>
+<span class="wc-pr">¥60,000~</span>
+<button class="wc-dt-tog" onclick="togDt(this)">詳細 <span>▼</span></button>
+<div class="wc-dt-body"><p>画質2k以上の画質で、キャラ表情差分をふんだんに盛り込んだイラストです。ひと目でメインキャラクターの魅力が伝わる最高の1枚となっております。</p></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
 </section>
 
-<!-- GALLERY -->
-<section id="gallery">
-  <div class="section-inner">
-    <h2 class="section-title reveal">Gallery</h2>
-    <span class="section-title-jp reveal reveal-delay-1">衣装ギャラリー</span>
-    <div class="section-divider reveal reveal-delay-2"><span>✦</span></div>
-    <div class="costume-grid">
-      <div class="costume-card reveal reveal-delay-1" data-img="立ち絵ノーマル.png">
-        <img src="立ち絵ノーマル.png" alt="ノーマル">
-        <div class="costume-label">初期衣装</div>
-      </div>
-      <div class="costume-card reveal reveal-delay-2" data-img="立ち絵初期.png">
-        <img src="立ち絵初期.png" alt="サイバーアイドル">
-        <div class="costume-label">サイバーアイドル</div>
-      </div>
-      <div class="costume-card reveal reveal-delay-3" data-img="立ち絵ノーマル②.png">
-        <img src="立ち絵ノーマル②.png" alt="旅猫衣装">
-        <div class="costume-label">旅猫衣装</div>
-      </div>
-      <div class="costume-card reveal reveal-delay-4" data-img="立ち絵軍曹.png">
-        <img src="立ち絵軍曹.png" alt="軍曹">
-        <div class="costume-label">軍曹</div>
-      </div>
-      <div class="costume-card reveal reveal-delay-1" data-img="立ち絵白ドレス.png">
-        <img src="立ち絵白ドレス.png" alt="白ドレス">
-        <div class="costume-label">白ドレス</div>
-      </div>
-      <div class="costume-card reveal reveal-delay-2" data-img="立ち絵黒ドレス.png">
-        <img src="立ち絵黒ドレス.png" alt="黒ドレス">
-        <div class="costume-label">黒ドレス</div>
-      </div>
-      <div class="costume-card reveal reveal-delay-3" data-img="立ち絵ギャルピ.png">
-        <img src="立ち絵ギャルピ.png" alt="制服">
-        <div class="costume-label">制服</div>
-      </div>
-      <div class="costume-card reveal reveal-delay-4" data-img="立ち絵ルームウェア.png">
-        <img src="立ち絵ルームウェア.png" alt="ルームウェア">
-        <div class="costume-label">ルームウェア</div>
-      </div>
-      <div class="costume-card reveal reveal-delay-1" data-img="立ち絵ゆるふわ.png">
-        <img src="立ち絵ゆるふわ.png" alt="春桜衣装">
-        <div class="costume-label">春桜衣装</div>
-      </div>
-      <div class="costume-card reveal reveal-delay-2" data-img="立ち絵和装.png">
-        <img src="立ち絵和装.png" alt="和装メイド">
-        <div class="costume-label">和装メイド</div>
-      </div>
-    </div>
-  </div>
+<!-- LIGHTBOX -->
+
+<div id="lb">
+<button id="lbClose" onclick="closeLB()">✕</button>
+<img id="lbImg" src="" alt="">
+<p id="lbCap"></p>
+<p class="lb-warn">⚠ スクリーンショット保護が有効です</p>
+</div>
+
+<div class="ndiv"></div>
+
+<!-- PRICING -->
+
+<section class="sw" id="pricing">
+<div class="pricing-in">
+<span class="s-label">— PRICE LIST —</span>
+<h2 class="s-title">料金一覧</h2>
+<p style="font-size:.78rem;color:#c0a0d0;margin-bottom:28px;margin-top:-30px;">プランバナーをクリックして詳細を確認できます</p>
+
+<!-- STANDARD -->
+
+<div class="price-unit rev">
+<button class="pbtn" onclick="togPrice('std')" id="pbtn-std">
+<div class="pbtn-left">
+<span class="pbtn-icon">🎨</span>
+<div>
+<span class="pbtn-label">STANDARD</span>
+<span class="pbtn-range">¥5,000〜¥10,000</span>
+</div>
+</div>
+<span class="pbtn-arr" id="parr-std">▼</span>
+</button>
+<div class="price-acc-body" id="pab-std">
+<div class="price-acc-grid">
+<div class="pc"><span class="pc-lbl">ICON</span><p class="pc-nm">アイコン用イラスト</p><span class="pc-pr">¥5,000<span>〜</span></span><p class="pc-note">SNS・配信アイコン向け1キャラクター</p></div>
+<div class="pc"><span class="pc-lbl">THUMBNAIL</span><p class="pc-nm">歌ってみたサムネイル</p><span class="pc-pr">¥10,000<span>〜</span></span><p class="pc-note">楽曲・動画サムネイル用16:9</p></div>
+<div class="pc"><span class="pc-lbl">GOODS</span><p class="pc-nm">グッズ用ミニキャライラスト</p><span class="pc-pr">¥10,000<span>〜</span></span><p class="pc-note">アクリルスタンド等グッズ向け</p><span class="pc-com">COMMERCIAL OK</span></div>
+<div class="pc"><span class="pc-lbl">DARK FANTASY</span><p class="pc-nm">人外魔装イラスト</p><span class="pc-pr">¥10,000<span>〜</span></span><p class="pc-note">ダークファンタジー・人外全身</p></div>
+</div>
+</div>
+</div>
+
+<!-- RICH -->
+
+<div class="price-unit rev">
+<button class="pbtn" onclick="togPrice('rich')" id="pbtn-rich">
+<div class="pbtn-left">
+<span class="pbtn-icon">✨</span>
+<div>
+<span class="pbtn-label">RICH</span>
+<span class="pbtn-range">¥15,000〜¥25,000</span>
+</div>
+</div>
+<span class="pbtn-arr" id="parr-rich">▼</span>
+</button>
+<div class="price-acc-body" id="pab-rich">
+<div class="price-acc-grid">
+<div class="pc"><span class="pc-lbl">TEAM</span><p class="pc-nm">チームイラスト</p><span class="pc-pr">¥15,000<span>〜</span></span><p class="pc-note">複数キャラクター（3体目安）</p></div>
+<div class="pc"><span class="pc-lbl">SNS HEADER</span><p class="pc-nm">X アカウントヘッダー</p><span class="pc-pr">¥15,000<span>〜</span></span><p class="pc-note">Xヘッダーバナー用ワイド</p></div>
+<div class="pc"><span class="pc-lbl">TAROT</span><p class="pc-nm">タロット風イラスト</p><span class="pc-pr">¥15,000<span>〜</span></span><p class="pc-note">タロットカードモチーフ縦型</p></div>
+<div class="pc"><span class="pc-lbl">WALLPAPER</span><p class="pc-nm">スマホ用壁紙イラスト</p><span class="pc-pr">¥20,000<span>〜</span></span><p class="pc-note">スマートフォン縦型壁紙向け</p></div>
+<div class="pc"><span class="pc-lbl">JACKET ART</span><p class="pc-nm">高解像ジャケットイラスト</p><span class="pc-pr">¥25,000<span>〜</span></span><p class="pc-note">楽曲・アルバムジャケット向け</p></div>
+<div class="pc"><span class="pc-lbl">LARGE FORMAT</span><p class="pc-nm">大判1枚イラスト</p><span class="pc-pr">¥25,000<span>〜</span></span><p class="pc-note">背景込みの世界観ある大型1枚絵</p></div>
+</div>
+</div>
+</div>
+
+<!-- EXTREME ★NEW -->
+
+<div class="price-unit rev">
+<button class="pbtn" onclick="togPrice('extreme')" id="pbtn-extreme">
+<div class="pbtn-left">
+<span class="pbtn-icon">🔥</span>
+<div>
+<span class="pbtn-label">EXTREME</span>
+<span class="pbtn-range">¥50,000〜</span>
+</div>
+</div>
+<span class="pbtn-arr" id="parr-extreme">▼</span>
+</button>
+<div class="price-acc-body" id="pab-extreme">
+<div class="price-acc-grid">
+<div class="pc hi"><span class="pc-lbl">EXTREME ILLUSTRATION</span><p class="pc-nm">超高解像抱き合わせイラスト</p><span class="pc-pr">¥50,000<span>〜</span></span><p class="pc-note">画質3k以上、最低2人〜。イベントポスター等におすすめ。</p></div>
+</div>
+</div>
+</div>
+
+<!-- COMMERCIAL -->
+
+<div class="price-unit rev">
+<button class="pbtn" onclick="togPrice('com')" id="pbtn-com">
+<div class="pbtn-left">
+<span class="pbtn-icon">🏢</span>
+<div>
+<span class="pbtn-label">COMMERCIAL</span>
+<span class="pbtn-range">商用利用許諾付き</span>
+</div>
+</div>
+<span class="pbtn-arr" id="parr-com">▼</span>
+</button>
+<div class="price-acc-body" id="pab-com">
+<p style="font-size:.8rem;color:#c0a0d0;line-height:1.8;margin-bottom:18px;padding:14px 18px;border-left:2px solid #ffd700;background:rgba(255,215,0,.04);">グッズ販売・店舗展示・営利目的の使用には商用オプションが必要です。各プランに商用利用許諾を追加したプランです。</p>
+<div class="price-acc-grid">
+<div class="pc hi"><span class="pc-lbl">GOODS COMMERCIAL</span><p class="pc-nm">グッズ用ミニキャライラスト</p><span class="pc-pr">¥10,000<span>〜</span></span><p class="pc-note">グッズ販売・頒布向け商用許諾付き</p><span class="pc-com">COMMERCIAL OK</span></div>
+<div class="pc hi"><span class="pc-lbl">SIGNAGE COMMERCIAL</span><p class="pc-nm">サイネージ用イラスト</p><span class="pc-pr">¥30,000<span>〜</span></span><p class="pc-note">店舗・イベント展示用商用許諾付き</p><span class="pc-com">COMMERCIAL OK</span></div>
+<div class="pc hi"><span class="pc-lbl">ULTRA HD COMMERCIAL</span><p class="pc-nm">超高解像度人外魔装イラスト</p><span class="pc-pr">¥50,000<span>〜</span></span><p class="pc-note">最高品質・あらゆる商用用途対応</p><span class="pc-com">COMMERCIAL OK</span></div>
+<!-- ★NEW -->
+<div class="pc hi"><span class="pc-lbl">COMMERCIAL EXPRESSION</span><p class="pc-nm">表情差分盛り合わせイラスト</p><span class="pc-pr">¥60,000<span>〜</span></span><p class="pc-note">キャラ表情差分ふんだんな最高品質商用イラスト</p><span class="pc-com">COMMERCIAL OK</span></div>
+</div>
+</div>
+</div>
+
+<!-- ウェブデザイン依頼ボタン -->
+
+<div class="rev" style="text-align:center;margin-top:36px;padding:32px 20px;background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.25);border-radius:6px;">
+<p style="font-family:'Orbitron',sans-serif;font-size:.58rem;letter-spacing:.3em;color:#00f5ff;text-shadow:0 0 8px #00f5ff;margin-bottom:10px;">— WEB DESIGN —</p>
+<p style="font-size:.82rem;color:#c0a0d0;line-height:1.8;margin-bottom:20px;">ウェブサイト制作のご依頼も承っております。<br>料金プラン・オプション詳細は専用ページにてご確認ください。</p>
+<a href="contact.html" class="btn-cyan" style="font-size:.72rem;letter-spacing:.18em;padding:13px 40px;">🌐 ウェブデザイン依頼はこちら →</a>
+</div>
+
+</div>
 </section>
 
-<!-- BIRTHDAY ILLUSTRATION -->
-<section id="birthday">
-  <div class="section-inner">
-    <h2 class="section-title reveal">Birthday Illustration</h2>
-    <span class="section-title-jp reveal reveal-delay-1">バースデーイラスト</span>
-    <div class="section-divider reveal reveal-delay-2"><span>✦</span></div>
+<div class="ndiv"></div>
 
-    <div class="birthday-gate reveal reveal-delay-3" id="birthdayGate">
-      <div class="birthday-gate-deco"><span>✦</span></div>
-      <p class="birthday-gate-question">2匹と1人の旅を<br>見届けますか？</p>
-      <p class="birthday-gate-sub">— a special birthday illustration —</p>
-      <button class="birthday-reveal-btn" id="birthdayRevealBtn">
-        <span class="btn-star">✦</span>
-        見届ける
-        <span class="btn-star">✦</span>
-      </button>
-    </div>
+<!-- OPTION -->
 
-    <div class="birthday-reveal-area" id="birthdayRevealArea">
-      <!-- スライドショー -->
-      <div class="birthday-slideshow-wrap">
-        <div class="birthday-slideshow" id="birthdaySlideshow">
-          <div class="birthday-slideshow-track" id="slideshowTrack">
-            <div class="slide-cell"><img src="IMG_7132.JPG"  alt="お誕生日記念特別イラスト"></div>
-            <div class="slide-cell"><img src="IMG_7146.jpeg" alt="バースデーイラスト 02"></div>
-            <div class="slide-cell"><img src="IMG_7147.jpeg" alt="バースデーイラスト 03"></div>
-            <div class="slide-cell"><img src="IMG_7148.jpeg" alt="バースデーイラスト 04"></div>
-            <div class="slide-cell"><img src="IMG_7150.jpeg" alt="バースデーイラスト 05"></div>
-            <div class="slide-cell"><img src="IMG_7151.jpeg" alt="バースデーイラスト 06"></div>
-            <div class="slide-cell"><img src="IMG_7152.jpeg" alt="バースデーイラスト 07"></div>
-            <div class="slide-cell"><img src="IMG_7153.jpeg" alt="バースデーイラスト 08"></div>
-            <div class="slide-cell"><img src="IMG_7154.jpeg" alt="バースデーイラスト 09"></div>
-            <div class="slide-cell"><img src="IMG_7155.jpeg" alt="バースデーイラスト 10"></div>
-            <div class="slide-cell"><img src="IMG_7156.jpeg" alt="バースデーイラスト 11"></div>
-            <div class="slide-cell"><img src="IMG_7157.jpeg" alt="バースデーイラスト 12"></div>
-          </div>
-          <button class="slideshow-btn prev" id="slidePrev" aria-label="前の画像">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button class="slideshow-btn next" id="slideNext" aria-label="次の画像">
-            <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
-          </button>
-        </div>
-        <div class="slideshow-dots" id="slideshowDots"></div>
-        <div class="slideshow-counter" id="slideshowCounter">1 / 12</div>
-      </div>
-      <div class="birthday-caption">
-        <span class="birthday-caption-title">バースデーイラスト</span>
-        <span class="birthday-caption-en">Birthday Illustration</span>
-        <div class="birthday-caption-dots"><span></span><span></span><span></span></div>
-      </div>
-    </div>
-  </div>
+<section class="sw" id="option">
+<div class="opt-in">
+<span class="s-label">— OPTION —</span>
+<h2 class="s-title">オプションプラン</h2>
+<div class="opt-card rev">
+<h3 class="opt-ttl">⚡ 制作期間ブースター</h3>
+<p class="opt-desc">追加料金をお支払いいただくことで、通常1ヶ月の納期を短縮できるオプションです。急ぎのご依頼に対応します。複数ブースターの組み合わせも可能です。</p>
+<table class="booster-tbl">
+<thead><tr><th>追加料金</th><th>納期短縮</th><th>納期目安</th></tr></thead>
+<tbody>
+<tr><td>¥3,000</td><td>1週間短縮</td><td>約3週間</td></tr>
+<tr><td>¥6,000</td><td>2週間短縮</td><td>約2週間</td></tr>
+<tr><td>¥9,000</td><td>3週間短縮</td><td>約1週間</td></tr>
+</tbody>
+</table>
+<p style="font-size:.73rem;color:#c0a0d0;margin-top:13px;line-height:1.7;">※ 最短納期はご依頼内容の複雑さにより異なります。詳しくはご依頼時に要相談。<br>※ ブースターはご依頼確定後の追加も可（着手前に限る）。</p>
+</div>
+</div>
 </section>
 
-<!-- GUIDELINE -->
-<section id="guideline">
-  <div class="section-inner">
-    <h2 class="section-title reveal">Guidelines</h2>
-    <span class="section-title-jp reveal reveal-delay-1">利用ガイドライン</span>
-    <div class="section-divider reveal reveal-delay-2"><span>✦</span></div>
-    <div class="guideline-grid reveal reveal-delay-3">
-      <div class="guideline-card ok">
-        <span class="guideline-card-title">イラスト・ファンアート</span>
-        <span class="guideline-badge ok">○ 許可</span>
-        <p class="guideline-note">非営利のみ</p>
-      </div>
-      <div class="guideline-card ok">
-        <span class="guideline-card-title">小説・SS</span>
-        <span class="guideline-badge ok">○ 許可</span>
-        <p class="guideline-note">非営利のみ</p>
-      </div>
-      <div class="guideline-card ok">
-        <span class="guideline-card-title">漫画・同人誌</span>
-        <span class="guideline-badge ok">○ 許可</span>
-        <p class="guideline-note">非営利のみ</p>
-      </div>
-      <div class="guideline-card ok">
-        <span class="guideline-card-title">コスプレ</span>
-        <span class="guideline-badge ok">○ 許可</span>
-        <p class="guideline-note">非営利のみ</p>
-      </div>
-      <div class="guideline-card cond">
-        <span class="guideline-card-title">グッズ</span>
-        <span class="guideline-badge cond">△ 条件付き</span>
-        <p class="guideline-note">非営利のみ<br>詳細はFanboxにて</p>
-      </div>
-      <div class="guideline-card ng">
-        <span class="guideline-card-title">AI生成</span>
-        <span class="guideline-badge ng">× 禁止</span>
-        <p class="guideline-note">いかなる用途も不可</p>
-      </div>
-    </div>
-    <p class="guideline-disclaimer reveal reveal-delay-4">
-      すべての二次創作は非営利を原則とします。<br>
-      不明な点はFanboxまたはSNSにてお問い合わせください。
-    </p>
-  </div>
+<div class="ndiv"></div>
+
+<!-- TERMS -->
+
+<section class="sw" id="terms">
+<div class="terms-in">
+<span class="s-label">— TERMS OF SERVICE —</span>
+<h2 class="s-title">ご利用規約</h2>
+<div class="rev">
+<div class="t-item"><span class="t-num">1</span><span>作品の<span class="t-hi">著作権は全て作者</span>にあります。納品後も変わりません。軽微な加工は可能ですが、切り貼り・アプリ加筆等の過度な加工は禁止です。</span></div>
+<div class="t-item"><span class="t-num">2</span><span><span class="t-hi">無断転載・自作発言は禁止</span>です。</span></div>
+<div class="t-item"><span class="t-num">3</span><span>納品データおよびキャラクターの<span class="t-hi">商用登録・無断グッズ利用は禁止</span>（グッズ化は要相談）。</span></div>
+<div class="t-item"><span class="t-num">4</span><span>支払いは例外なく<span class="t-hi">前払い制</span>。銀行振り込み または PayPayマネー（マネーライト不可）。</span></div>
+<div class="t-item"><span class="t-num">5</span><span>納期目安は<span class="t-hi">依頼開始から1ヶ月程度</span>。こちらの都合によりお返事が前後する場合があります。</span></div>
+<div class="t-item"><span class="t-num">6</span><span>お取引は下記テンプレートを使用した依頼にて承ります。</span></div>
+<div class="t-item"><span class="t-num">7</span><span><span class="t-hi">無料修正は1回まで</span>。大幅な描き直しは追加料金、または対応不可となります。</span></div>
+<div class="t-item"><span class="t-num">8</span><span>依頼内容によってはお断りする場合があります。</span></div>
+<div class="t-item"><span class="t-num">9</span><span>Twitter DM でのお取引開始時は冒頭に <span class="t-hi">「金木犀」</span> とご記入ください。この必読事項への同意とみなします。</span></div>
+</div>
+</div>
 </section>
 
-<!-- LINKS -->
-<section id="links">
-  <div class="section-inner">
-    <h2 class="section-title reveal">Links</h2>
-    <span class="section-title-jp reveal reveal-delay-1">各種リンク</span>
-    <div class="section-divider reveal reveal-delay-2"><span>✦</span></div>
-    <div class="links-grid">
-      <a href="https://x.com/ruruka_104?s=21" target="_blank" rel="noopener" class="link-card reveal reveal-delay-1">
-        <div class="link-icon x-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </div>
-        <div class="link-name"><strong>𝕏 / Twitter</strong><span>@ruruka_104</span></div>
-      </a>
-      <a href="https://youtube.com/@104_ruruka?si=dz1KFzm2bfA8OPPg" target="_blank" rel="noopener" class="link-card reveal reveal-delay-2">
-        <div class="link-icon yt-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </div>
-        <div class="link-name"><strong>YouTube</strong><span>@104_ruruka</span></div>
-      </a>
-      <a href="https://www.tiktok.com/@104ruruka?_r=1&_t=ZS-96U1NSEgJtc" target="_blank" rel="noopener" class="link-card reveal reveal-delay-3">
-        <div class="link-icon tt-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
-        </div>
-        <div class="link-name"><strong>TikTok</strong><span>@104ruruka</span></div>
-      </a>
-      <a href="https://ruruka104.fanbox.cc/" target="_blank" rel="noopener" class="link-card reveal reveal-delay-4">
-        <div class="link-icon fb-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-        </div>
-        <div class="link-name"><strong>FANBOX</strong><span>ruruka104</span></div>
-      </a>
-    </div>
-  </div>
+<div class="ndiv"></div>
+
+<!-- ORDER -->
+
+<section class="sw" id="order">
+<div class="ord-in">
+<span class="s-label">— ORDER —</span>
+<h2 class="s-title">依頼する</h2>
+<div class="form-wrap rev">
+<p style="font-size:.82rem;color:#c0a0d0;line-height:1.85;margin-bottom:26px;">
+依頼はメールまたはTwitter（X）DM にて承ります。<br>
+下記フォームを入力後、<strong style="color:#00f5ff;">「メール送信画面へ」</strong> を押すと入力内容が自動挿入されたメールアプリが開きます。<br>
+DM の場合は冒頭に必ず <span class="kw">金木犀</span> とご記入ください。
+</p>
+
+<div class="fg">
+<label class="fl" for="fType">① 依頼の種類</label>
+<select class="fsel" id="fType">
+<option value="">選択してください</option>
+<option>歌ってみたサムネイル（¥10,000〜）</option>
+<option>アイコン用イラスト（¥5,000〜）</option>
+<option>人外魔装イラスト（¥10,000〜）</option>
+<option>大判1枚イラスト（¥25,000〜）</option>
+<option>チームイラスト（¥15,000〜）</option>
+<option>高解像ジャケットイラスト（¥25,000〜）</option>
+<option>サイネージ用イラスト・商用（¥30,000〜）</option>
+<option>グッズ用ミニキャラ・商用（¥10,000〜）</option>
+<option>超高解像人外魔装・商用（¥50,000〜）</option>
+<option>Xヘッダー用イラスト（¥15,000〜）</option>
+<option>スマホ壁紙イラスト（¥20,000〜）</option>
+<option>タロット風イラスト（¥15,000〜）</option>
+<option>超高解像抱き合わせイラスト・エクストリーム（¥50,000〜）</option>
+<option>表情差分盛り合わせイラスト・商用（¥60,000〜）</option>
+<option>その他</option>
+</select>
+</div>
+<div class="fg">
+<label class="fl" for="fChara">② キャラクターの特徴・人数</label>
+<textarea class="fta" id="fChara" placeholder="例：ピンク髪のショートカットの女の子1名。ダークな雰囲気でサイバーパンク系。悪魔の翼と角があります。"></textarea>
+</div>
+<div class="fg">
+<label class="fl" for="fPose">③ 構図・雰囲気・ご要望</label>
+<textarea class="fta" id="fPose" placeholder="例：全身立ち絵でカメラ目線。背景は夜の都市。エモーショナルな雰囲気に。参考イラストのURLもあればご記入ください。"></textarea>
+</div>
+<div class="fg">
+<label class="fl">⚡ オプション：制作期間ブースター（任意）</label>
+<div class="boost-opts">
+<span class="boost-opt"><input type="checkbox" id="b1"><label for="b1">¥3,000 — 1週間短縮</label></span>
+<span class="boost-opt"><input type="checkbox" id="b2"><label for="b2">¥6,000 — 2週間短縮</label></span>
+<span class="boost-opt"><input type="checkbox" id="b3"><label for="b3">¥9,000 — 3週間短縮</label></span>
+</div>
+</div>
+<p class="fnote">※ 「メール送信画面へ」を押すと入力内容が自動でメール本文に挿入されます。送信前に内容をご確認ください。</p>
+<button class="sub-btn" onclick="sendMail()">✉ メール送信画面へ →</button>
+
+<div class="tw-cta">
+<p>メールの代わりにTwitter DM でもご依頼いただけます。<br>冒頭に必ず「<strong style="color:#ff2d78;">金木犀</strong>」とご記入ください。</p>
+<a href="https://x.com/Nelson_Playroom" target="_blank" class="tw-btn">𝕏 Twitter DM で依頼する</a>
+</div>
+</div>
+</div>
 </section>
 
 <footer>
-  <img src="IMG_2376.png" alt="" class="footer-symbol">
-  <p class="footer-name">天紫月華 ✦ Tenshi Ruruka</p>
-  <p class="footer-copy">&copy; 2024 Tenshi Ruruka. All rights reserved.</p>
+<div class="f-logo">NV<span>.</span>com</div>
+<p style="font-size:.76rem;color:#c0a0d0;margin-top:6px;">イラストレーター ポートフォリオ &amp; 依頼サイト</p>
+<div style="margin:18px 0 10px;">
+<button class="btn-cyan" onclick="copyPageURL(this)" style="border:none;">🔗 このサイトのURLをコピー</button>
+</div>
+<p class="f-cp">© 2024 NV.com / Nelson Playroom. All Rights Reserved. 著作権は全て作者に帰属します。</p>
 </footer>
 
-<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
-  <button class="modal-close" id="modalClose" aria-label="閉じる">&times;</button>
-  <img src="" alt="" class="modal-img" id="modalImg">
-</div>
-
 <script>
-/* ===== PETALS ===== */
-(function(){
-  var container=document.getElementById('petals');
-  var colors=['rgba(190,160,235,.7)','rgba(160,200,240,.7)','rgba(230,220,255,.7)','rgba(200,180,250,.65)','rgba(180,220,245,.65)'];
-  for(var i=0;i<18;i++){
-    (function(idx){
-      var p=document.createElement('div');
-      p.className='petal';
-      var s=6+Math.random()*10;
-      p.style.cssText=[
-        'left:'+Math.random()*100+'%',
-        'width:'+s+'px','height:'+s+'px',
-        'background:'+colors[idx%colors.length],
-        'animation-duration:'+(8+Math.random()*12)+'s',
-        'animation-delay:'+(Math.random()*10)+'s'
-      ].join(';');
-      container.appendChild(p);
-    })(i);
-  }
-})();
-
-/* ===== COSTUME CHANGE ===== */
-var costumes=[
-  '立ち絵ノーマル.png','立ち絵初期.png','立ち絵ノーマル②.png',
-  '立ち絵軍曹.png','立ち絵ギャルピ.png',
-  '立ち絵黒ドレス.png','立ち絵白ドレス.png','立ち絵ルームウェア.png','立ち絵ゆるふわ.png','立ち絵和装.png'
-];
-var currentCostume=0;
-var charaEl=document.getElementById('heroChara');
-document.getElementById('symbolBtn').addEventListener('click',function(){
-  currentCostume=(currentCostume+1)%costumes.length;
-  charaEl.classList.add('changing');
-  setTimeout(function(){ charaEl.src=costumes[currentCostume]; charaEl.classList.remove('changing'); },280);
+/* ── ページ読み込み時にトップへ強制スクロール ── */
+if (history.scrollRestoration) {
+history.scrollRestoration = 'manual';
+}
+window.addEventListener('load', function() {
+if (window.location.hash) {
+history.replaceState(null, '', window.location.pathname + window.location.search);
+}
+window.scrollTo(0, 0);
 });
 
-/* ===== GALLERY MODAL ===== */
-var modal=document.getElementById('modalOverlay');
-var modalImg=document.getElementById('modalImg');
-var modalClose=document.getElementById('modalClose');
-document.querySelectorAll('.costume-card').forEach(function(card){
-  card.addEventListener('click',function(){ modalImg.src=card.getAttribute('data-img'); modal.classList.add('active'); });
+/* ── PLAN ACCORDION ── */
+function togPlan(btn){
+const body=btn.nextElementSibling, isOn=body.classList.contains('on');
+document.querySelectorAll('.plan-body').forEach(b=>b.classList.remove('on'));
+document.querySelectorAll('.plan-tog').forEach(b=>b.classList.remove('on'));
+if(!isOn){body.classList.add('on');btn.classList.add('on')}
+}
+
+/* ── DETAIL ACCORDION ── */
+function togDt(btn){
+const body=btn.nextElementSibling, arr=btn.querySelector('span'), isOn=body.classList.contains('on');
+body.classList.toggle('on');
+arr.textContent=isOn?'▼':'▲';
+}
+
+/* ── LIGHTBOX ── */
+function openLB(img,cap){
+document.getElementById('lbImg').src=img.src;
+document.getElementById('lbCap').textContent=cap||'';
+document.getElementById('lb').classList.add('on');
+document.body.style.overflow='hidden';
+startSSP();
+}
+function closeLB(){
+document.getElementById('lb').classList.remove('on');
+document.body.style.overflow='';
+stopSSP();
+}
+document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)closeLB()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB()});
+
+/* ── SCREENSHOT PROTECTION ── */
+const ssg=document.getElementById('ssGuard');
+let sst;
+function startSSP(){
+document.addEventListener('keyup',onPS);
+document.addEventListener('visibilitychange',onVC);
+}
+function stopSSP(){
+document.removeEventListener('keyup',onPS);
+document.removeEventListener('visibilitychange',onVC);
+ssg.style.display='none';
+}
+function blackout(ms=700){
+ssg.style.display='block';
+clearTimeout(sst);
+sst=setTimeout(()=>ssg.style.display='none',ms);
+}
+function onPS(e){
+if(e.key==='PrintScreen'||e.keyCode===44){
+blackout(900);
+try{navigator.clipboard.writeText('')}catch(err){}
+}
+}
+function onVC(){if(document.hidden)blackout(1200)}
+const lbI=document.getElementById('lbImg');
+lbI.addEventListener('contextmenu',e=>e.preventDefault());
+lbI.addEventListener('dragstart',e=>e.preventDefault());
+
+/* ── PRICE NAV ── */
+function openPricing(){
+setTimeout(()=>{
+['std','rich','extreme','com'].forEach(k=>{
+document.getElementById('pab-'+k).classList.remove('on');
+document.getElementById('pbtn-'+k).classList.remove('active');
 });
-function closeModal(){ modal.classList.remove('active'); }
-modalClose.addEventListener('click',closeModal);
-modal.addEventListener('click',function(e){ if(e.target===modal) closeModal(); });
-document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModal(); });
-
-/* ===== BIRTHDAY REVEAL ===== */
-var birthdayRevealBtn=document.getElementById('birthdayRevealBtn');
-var birthdayGate=document.getElementById('birthdayGate');
-var birthdayRevealArea=document.getElementById('birthdayRevealArea');
-if(birthdayRevealBtn){
-  birthdayRevealBtn.addEventListener('click',function(){
-    birthdayGate.style.transition='opacity .5s ease,transform .5s ease';
-    birthdayGate.style.opacity='0';
-    birthdayGate.style.transform='translateY(-12px) scale(.97)';
-    setTimeout(function(){
-      birthdayGate.style.display='none';
-      birthdayRevealArea.classList.add('shown');
-      initSlideshow();
-      setTimeout(function(){ birthdayRevealArea.scrollIntoView({behavior:'smooth',block:'start'}); },100);
-    },480);
-  });
+document.getElementById('pab-std').classList.add('on');
+document.getElementById('pbtn-std').classList.add('active');
+}, 500);
 }
 
-/* ===== SLIDESHOW ===== */
-var slideIndex=0;
-var slideshowInited=false;
-function initSlideshow(){
-  if(slideshowInited) return;
-  slideshowInited=true;
-  var track=document.getElementById('slideshowTrack');
-  var cells=track.querySelectorAll('.slide-cell');
-  var total=cells.length;
-  var dotsContainer=document.getElementById('slideshowDots');
-  var counter=document.getElementById('slideshowCounter');
-
-  /* ドット生成 */
-  for(var i=0;i<total;i++){
-    (function(idx){
-      var d=document.createElement('button');
-      d.className='slideshow-dot'+(idx===0?' active':'');
-      d.setAttribute('aria-label',(idx+1)+'枚目');
-      d.addEventListener('click',function(){ goTo(idx); });
-      dotsContainer.appendChild(d);
-    })(i);
-  }
-
-  function goTo(n){
-    slideIndex=((n%total)+total)%total;
-    track.style.transform='translateX(-'+slideIndex+'00%)';
-    dotsContainer.querySelectorAll('.slideshow-dot').forEach(function(d,i){ d.classList.toggle('active',i===slideIndex); });
-    counter.textContent=(slideIndex+1)+' / '+total;
-  }
-  document.getElementById('slidePrev').addEventListener('click',function(){ goTo(slideIndex-1); });
-  document.getElementById('slideNext').addEventListener('click',function(){ goTo(slideIndex+1); });
-
-  /* 横長画像のみ中央揃え */
-  cells.forEach(function(cell){
-    var img=cell.querySelector('img');
-    function applyAlign(){
-      if(img.naturalWidth>img.naturalHeight){
-        cell.style.justifyContent='center';
-      } else {
-        cell.style.justifyContent='flex-start';
-      }
-    }
-    if(img.complete && img.naturalWidth){ applyAlign(); }
-    else { img.addEventListener('load', applyAlign); }
-  });
-
-  /* スワイプ */
-  var slideshow=document.getElementById('birthdaySlideshow');
-  var startX=0;
-  slideshow.addEventListener('touchstart',function(e){ startX=e.touches[0].clientX; },{passive:true});
-  slideshow.addEventListener('touchend',function(e){
-    var dx=e.changedTouches[0].clientX-startX;
-    if(Math.abs(dx)>40){ goTo(slideIndex+(dx<0?1:-1)); }
-  },{passive:true});
+/* ── PRICE ACCORDION ── */
+const priceKeys = ['std','rich','extreme','com'];
+function togPrice(key){
+const body = document.getElementById('pab-'+key);
+const btn = document.getElementById('pbtn-'+key);
+const isOn = body.classList.contains('on');
+priceKeys.forEach(k=>{
+document.getElementById('pab-'+k).classList.remove('on');
+document.getElementById('pbtn-'+k).classList.remove('active');
+});
+if(!isOn){
+body.classList.add('on');
+btn.classList.add('active');
+}
 }
 
-/* ===== SCROLL REVEAL ===== */
-var reveals=document.querySelectorAll('.reveal');
-function checkReveal(){
-  var wh=window.innerHeight;
-  reveals.forEach(function(el){ if(el.getBoundingClientRect().top<wh-60) el.classList.add('visible'); });
+/* ── MAIL SEND ── */
+function sendMail(){
+const type =document.getElementById('fType').value||'（未選択）';
+const chara=document.getElementById('fChara').value||'（未入力）';
+const pose =document.getElementById('fPose').value||'（未入力）';
+const boosts=[];
+if(document.getElementById('b1').checked)boosts.push('¥3,000 / 1週間短縮');
+if(document.getElementById('b2').checked)boosts.push('¥6,000 / 2週間短縮');
+if(document.getElementById('b3').checked)boosts.push('¥9,000 / 3週間短縮');
+const bText=boosts.length?boosts.join('、'):'なし';
+const sub=encodeURIComponent('イラスト依頼のご相談 — NV.com');
+const bod=encodeURIComponent(
+`【依頼内容テンプレート】
+
+① 依頼の種類
+${type}
+
+② キャラクターの特徴・人物の数
+${chara}
+
+③ 構図・ポーズ・雰囲気等のご指定
+${pose}
+
+⚡ 制作期間ブースター
+${bText}
+
+---
+※ Twitter DM でのお取引開始時は冒頭に「金木犀」とご記入ください。`
+);
+window.location.href=`mailto:nelsonplayroomboothyou@gmail.com?subject=${sub}&body=${bod}`;
 }
-window.addEventListener('scroll',checkReveal,{passive:true});
-checkReveal();
+
+/* ── URL COPY ── */
+function copyPageURL(btn){
+const url='http://nelsonvisualarts.com/';
+navigator.clipboard.writeText(url).then(()=>{
+const orig=btn.textContent;
+btn.textContent='✓ コピーしました！';
+btn.style.background='linear-gradient(135deg,#00e676,#00bcd4)';
+setTimeout(()=>{btn.textContent=orig;btn.style.background='';},2000);
+}).catch(()=>{
+const ta=document.createElement('textarea');
+ta.value=url;ta.style.position='fixed';ta.style.opacity='0';
+document.body.appendChild(ta);ta.select();document.execCommand('copy');
+document.body.removeChild(ta);
+const orig=btn.textContent;
+btn.textContent='✓ コピーしました！';
+btn.style.background='linear-gradient(135deg,#00e676,#00bcd4)';
+setTimeout(()=>{btn.textContent=orig;btn.style.background='';},2000);
+});
+}
+
+/* ── SCROLL REVEAL ── */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
 </script>
+
 </body>
 </html>
