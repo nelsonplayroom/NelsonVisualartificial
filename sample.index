@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VISUAL LAB — コーディングで作るビジュアル表現集</title>
+<style>
+:root {
+  --bg: #07070f;
+  --surface: #10101c;
+  --purple: #7c3aed;
+  --cyan: #06b6d4;
+  --pink: #ec4899;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --white: #eeeeff;
+  --dim: #7777aa;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── NAV ────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 0.9rem 2rem;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background: rgba(7,7,15,0.75);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logo {
+  font-size: 0.9rem; font-weight: 800; letter-spacing: 0.1em;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+nav ul { display: flex; gap: 1.4rem; list-style: none; }
+nav a {
+  color: var(--dim); text-decoration: none;
+  font-size: 0.75rem; letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+nav a:hover { color: var(--white); }
+
+/* ── SECTION BASE ────────────────────────── */
+section {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 6rem 2rem 4rem;
+}
+.section-label {
+  font-size: 0.65rem; letter-spacing: 0.22em; color: var(--cyan);
+  text-transform: uppercase; margin-bottom: 0.8rem;
+}
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800; line-height: 1.1; margin-bottom: 0.6rem;
+}
+.desc {
+  color: var(--dim); font-size: 0.9rem;
+  margin-bottom: 2.5rem; max-width: 42ch; line-height: 1.7;
+}
+.tag {
+  display: inline-block;
+  background: rgba(124,58,237,0.12);
+  border: 1px solid rgba(124,58,237,0.28);
+  color: #a78bfa; font-size: 0.68rem;
+  padding: 0.22em 0.75em; border-radius: 100px;
+  margin: 0.2rem 0.2rem 0 0;
+}
+.container { max-width: 960px; width: 100%; }
+
+/* ══════════════════════════════════════════
+   1. HERO — Aurora + Animated Gradient Text
+══════════════════════════════════════════ */
+#hero {
+  position: relative; overflow: hidden;
+  align-items: center; text-align: center;
+}
+#aurora-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; z-index: 0;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-pill {
+  display: inline-block;
+  background: rgba(124,58,237,0.18);
+  border: 1px solid rgba(124,58,237,0.35);
+  color: #c4b5fd; font-size: 0.72rem;
+  letter-spacing: 0.14em; padding: 0.38em 1.1em;
+  border-radius: 100px; margin-bottom: 1.8rem;
+  text-transform: uppercase;
+}
+.hero-title {
+  font-size: clamp(2.4rem, 8vw, 5.5rem);
+  font-weight: 900; line-height: 1.05;
+  margin-bottom: 1.2rem;
+}
+.gradient-text {
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 45%, var(--pink) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradShift 5s ease-in-out infinite;
+}
+@keyframes gradShift {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+.hero-sub {
+  color: var(--dim); font-size: clamp(0.85rem, 2vw, 1rem);
+  max-width: 46ch; margin: 0 auto 2.5rem; line-height: 1.7;
+}
+.scroll-cue {
+  position: absolute; bottom: 2.2rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  color: var(--dim); font-size: 0.65rem; letter-spacing: 0.14em;
+}
+.scroll-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--cyan);
+  animation: dotBounce 1.6s ease-in-out infinite;
+}
+@keyframes dotBounce {
+  0%,100% { transform: translateY(0); opacity: 1; }
+  50%      { transform: translateY(9px); opacity: 0.25; }
+}
+
+/* ══════════════════════════════════════════
+   2. GLASSMORPHISM
+══════════════════════════════════════════ */
+#glass {
+  background:
+    radial-gradient(ellipse at 15% 50%, rgba(124,58,237,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 40%, rgba(6,182,212,0.08) 0%, transparent 55%);
+}
+.glass-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.4rem; max-width: 900px;
+}
+.glass-card {
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 20px; padding: 1.8rem;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1),
+              background 0.3s, border-color 0.3s;
+  cursor: default;
+}
+.glass-card:hover {
+  transform: translateY(-7px);
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.18);
+}
+.card-icon { font-size: 1.8rem; margin-bottom: 0.9rem; }
+.card-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+.card-desc  { font-size: 0.78rem; color: var(--dim); line-height: 1.55; }
+
+/* ══════════════════════════════════════════
+   3. NEON GLOW
+══════════════════════════════════════════ */
+#neon {
+  background: #000009;
+  align-items: center; text-align: center;
+}
+.neon-stage {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 2.2rem;
+  max-width: 700px; width: 100%;
+}
+.neon-sign { font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 900; }
+.neon-cyan  {
+  color: #00eeff;
+  text-shadow: 0 0 7px #00eeff, 0 0 12px #00eeff,
+               0 0 28px #0ff, 0 0 60px #0ff, 0 0 100px #0ff;
+  animation: flickerC 5s steps(1) infinite;
+}
+.neon-pink  {
+  color: #ff2288;
+  text-shadow: 0 0 7px #ff2288, 0 0 12px #ff2288,
+               0 0 28px #f0f, 0 0 60px #f0f;
+  animation: flickerP 6.5s steps(1) infinite;
+}
+.neon-lime  {
+  color: #aaff00;
+  text-shadow: 0 0 7px #aaff00, 0 0 12px #aaff00,
+               0 0 28px #0f0, 0 0 60px #0f0;
+}
+@keyframes flickerC {
+  0%,89%,91%,93%,95%,100% {
+    text-shadow: 0 0 7px #00eeff, 0 0 12px #00eeff, 0 0 28px #0ff, 0 0 60px #0ff;
+  }
+  90%,92%,94% { text-shadow: none; color: rgba(0,238,255,0.3); }
+}
+@keyframes flickerP {
+  0%,87%,89%,91%,100% {
+    text-shadow: 0 0 7px #ff2288, 0 0 12px #ff2288, 0 0 28px #f0f, 0 0 60px #f0f;
+  }
+  88%,90% { text-shadow: none; color: rgba(255,34,136,0.3); }
+}
+.neon-rect {
+  border: 2px solid #00eeff; border-radius: 10px;
+  padding: 0.9rem 2.2rem;
+  box-shadow: 0 0 8px #00eeff, 0 0 18px #00eeff,
+              inset 0 0 8px rgba(0,238,255,0.08);
+  color: #00eeff; font-size: 0.82rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  text-shadow: 0 0 8px #00eeff;
+}
+
+/* ══════════════════════════════════════════
+   4. CSS 3D TRANSFORMS
+══════════════════════════════════════════ */
+#threed {
+  background: radial-gradient(ellipse at center, rgba(16,185,129,0.07) 0%, transparent 65%);
+  align-items: center; text-align: center;
+}
+.cube-scene {
+  width: 140px; height: 140px;
+  perspective: 600px;
+  margin: 0 auto 3rem;
+}
+.cube {
+  width: 100%; height: 100%;
+  position: relative; transform-style: preserve-3d;
+  animation: spinCube 9s linear infinite;
+}
+@keyframes spinCube {
+  from { transform: rotateX(-22deg) rotateY(0deg); }
+  to   { transform: rotateX(-22deg) rotateY(360deg); }
+}
+.face {
+  position: absolute;
+  width: 140px; height: 140px;
+  border: 1px solid rgba(255,255,255,0.14);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; border-radius: 4px;
+  backface-visibility: visible;
+}
+.f-front  { transform: translateZ(70px);                background: rgba(124,58,237,0.22); }
+.f-back   { transform: rotateY(180deg) translateZ(70px); background: rgba(6,182,212,0.22); }
+.f-left   { transform: rotateY(-90deg) translateZ(70px); background: rgba(236,72,153,0.22); }
+.f-right  { transform: rotateY(90deg)  translateZ(70px); background: rgba(16,185,129,0.22); }
+.f-top    { transform: rotateX(90deg)  translateZ(70px); background: rgba(245,158,11,0.22); }
+.f-bottom { transform: rotateX(-90deg) translateZ(70px); background: rgba(239,68,68,0.22); }
+
+.flip-cards { display: flex; gap: 1.8rem; justify-content: center; flex-wrap: wrap; }
+.flip-wrap { perspective: 800px; }
+.flip-card {
+  width: 155px; height: 195px;
+  position: relative; transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(.4,0,.2,1);
+  cursor: pointer;
+}
+.flip-wrap:hover .flip-card { transform: rotateY(180deg); }
+.flip-front, .flip-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 14px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0.7rem; padding: 1rem;
+}
+.flip-front {
+  background: linear-gradient(135deg, rgba(124,58,237,0.28), rgba(6,182,212,0.28));
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 0.82rem; color: var(--dim);
+}
+.flip-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, rgba(6,182,212,0.28), rgba(16,185,129,0.28));
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 0.75rem; color: var(--dim);
+  text-align: center; line-height: 1.55;
+}
+
+/* ══════════════════════════════════════════
+   5. GLITCH ART
+══════════════════════════════════════════ */
+#glitch {
+  background: #000;
+  align-items: center; text-align: center;
+  position: relative;
+}
+.scanlines {
+  position: absolute; inset: 0; pointer-events: none; z-index: 5;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px
+  );
+}
+.glitch-wrap { display: inline-block; position: relative; z-index: 6; }
+.glitch-text {
+  font-size: clamp(3rem, 11vw, 7rem);
+  font-weight: 900; color: #fff;
+  animation: gNoise 2.5s steps(1) infinite;
+}
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  font-size: inherit; font-weight: inherit;
+}
+.glitch-text::before {
+  color: #ff0066;
+  animation: gRed 2.5s steps(1) infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 38%, 0 38%);
+}
+.glitch-text::after {
+  color: #00eeff;
+  animation: gBlue 2.5s steps(1) infinite;
+  clip-path: polygon(0 62%, 100% 62%, 100% 100%, 0 100%);
+}
+@keyframes gNoise {
+  0%,88%,100% { transform: none; }
+  89% { transform: skewX(2deg); }
+  90% { transform: skewX(-3deg) skewY(0.4deg); }
+  91% { transform: none; }
+  92% { transform: skewX(2.5deg); }
+  93% { transform: none; }
+}
+@keyframes gRed {
+  0%,86%,100% { transform: none; opacity: 0; }
+  87% { transform: translateX(-5px); opacity: 0.85; }
+  88% { transform: translateX(5px); opacity: 0.85; }
+  89% { transform: none; opacity: 0; }
+  91% { transform: translateX(-3px) translateY(2px); opacity: 0.85; }
+  92%,99% { transform: none; opacity: 0; }
+}
+@keyframes gBlue {
+  0%,83%,100% { transform: none; opacity: 0; }
+  84% { transform: translateX(6px); opacity: 0.85; }
+  85% { transform: translateX(-6px); opacity: 0.85; }
+  86% { transform: none; opacity: 0; }
+  90% { transform: translateX(4px) translateY(-2px); opacity: 0.85; }
+  91%,99% { transform: none; opacity: 0; }
+}
+
+/* ══════════════════════════════════════════
+   6. MORPHING BLOB
+══════════════════════════════════════════ */
+#blob {
+  background: radial-gradient(ellipse at 70% 30%, rgba(236,72,153,0.09) 0%, transparent 60%);
+}
+.blob-row {
+  display: flex; gap: 3rem; flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.blob-cell { text-align: center; }
+.blob {
+  width: 145px; height: 145px;
+  margin: 0 auto 0.9rem;
+}
+.blob-a {
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  animation: morph 7s ease-in-out infinite;
+}
+.blob-b {
+  background: linear-gradient(135deg, #06b6d4, #10b981);
+  animation: morph 9s ease-in-out infinite;
+  animation-delay: -3s;
+}
+.blob-c {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  animation: morph 11s ease-in-out infinite;
+  animation-delay: -5s;
+}
+@keyframes morph {
+  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%  { border-radius: 50% 60% 40% 70% / 30% 50% 60% 40%; }
+  75%  { border-radius: 40% 50% 60% 30% / 70% 40% 50% 60%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+.blob-label { font-size: 0.75rem; color: var(--dim); }
+
+/* ══════════════════════════════════════════
+   7. TEXT EFFECTS
+══════════════════════════════════════════ */
+#text-fx {
+  background: radial-gradient(ellipse at 80% 20%, rgba(124,58,237,0.09) 0%, transparent 55%);
+}
+.text-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.4rem; max-width: 900px;
+}
+.text-card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 18px; padding: 2rem;
+}
+.fx-label {
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  color: var(--dim); text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
+
+/* Typewriter */
+.typewriter {
+  font-size: 1.3rem; font-weight: 700;
+  font-family: 'Courier New', monospace;
+  color: var(--cyan);
+  border-right: 2px solid var(--cyan);
+  white-space: nowrap; overflow: hidden;
+  width: 0;
+  animation: typeIn 3.2s steps(18,end) infinite,
+             blink 0.75s step-end infinite;
+}
+@keyframes typeIn {
+  0%     { width: 0; }
+  50%,70% { width: 100%; }
+  85%,100% { width: 0; }
+}
+@keyframes blink {
+  from,to { border-color: transparent; }
+  50%     { border-color: var(--cyan); }
+}
+
+/* Gradient scroll text */
+.grad-text-anim {
+  font-size: 2rem; font-weight: 900;
+  background: linear-gradient(90deg,
+    var(--cyan), var(--purple), var(--pink), var(--cyan));
+  background-size: 300% 100%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradMove 2.8s linear infinite;
+}
+@keyframes gradMove {
+  from { background-position: 0% 50%; }
+  to   { background-position: 300% 50%; }
+}
+
+/* Wave letters */
+.wave-text {
+  font-size: 2rem; font-weight: 900;
+  display: flex; gap: 0.02em;
+}
+.wave-text span {
+  display: inline-block;
+  animation: waveLetter 2s ease-in-out infinite;
+}
+.wave-text span:nth-child(1){ animation-delay: 0s; }
+.wave-text span:nth-child(2){ animation-delay: 0.08s; }
+.wave-text span:nth-child(3){ animation-delay: 0.16s; }
+.wave-text span:nth-child(4){ animation-delay: 0.24s; }
+.wave-text span:nth-child(5){ animation-delay: 0.32s; }
+.wave-text span:nth-child(6){ animation-delay: 0.40s; }
+.wave-text span:nth-child(7){ animation-delay: 0.48s; }
+.wave-text span:nth-child(8){ animation-delay: 0.56s; }
+@keyframes waveLetter {
+  0%,100% { transform: translateY(0); color: var(--white); }
+  50%      { transform: translateY(-12px); color: var(--cyan); }
+}
+
+/* Gradient border */
+.grad-border {
+  display: inline-block;
+  padding: 2px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--cyan), var(--purple), var(--pink));
+}
+.grad-border-inner {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 1.2rem 1.6rem;
+  font-size: 0.85rem; color: var(--dim);
+}
+
+/* ══════════════════════════════════════════
+   8. SCROLL REVEAL
+══════════════════════════════════════════ */
+#scroll-reveal {
+  background: radial-gradient(ellipse at 20% 80%, rgba(16,185,129,0.07) 0%, transparent 60%);
+}
+.reveal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.4rem; max-width: 900px;
+}
+.reveal-item {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px; padding: 1.5rem;
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-item.visible {
+  opacity: 1; transform: translateY(0);
+}
+.reveal-item:nth-child(2) { transition-delay: 0.1s; }
+.reveal-item:nth-child(3) { transition-delay: 0.2s; }
+.reveal-item:nth-child(4) { transition-delay: 0.3s; }
+.reveal-item:nth-child(5) { transition-delay: 0.4s; }
+.reveal-item:nth-child(6) { transition-delay: 0.5s; }
+.reveal-num {
+  font-size: 2.2rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.reveal-sub { font-size: 0.78rem; color: var(--dim); margin-top: 0.4rem; line-height: 1.5; }
+
+/* Progress bars */
+.prog-bars { display: flex; flex-direction: column; gap: 1rem; max-width: 420px; margin-top: 2.5rem; }
+.prog-item label {
+  display: flex; justify-content: space-between;
+  font-size: 0.78rem; color: var(--dim); margin-bottom: 0.45rem;
+}
+.prog-track {
+  height: 5px; background: rgba(255,255,255,0.05);
+  border-radius: 100px; overflow: hidden;
+}
+.prog-fill {
+  height: 100%; border-radius: 100px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 1.3s cubic-bezier(.4,0,.2,1);
+}
+.prog-fill.animating { transform: scaleX(1); }
+.pc { background: linear-gradient(90deg, var(--cyan), var(--purple)); width: 85%; }
+.pp { background: linear-gradient(90deg, var(--pink), var(--purple)); width: 70%; }
+.pg { background: linear-gradient(90deg, var(--green), var(--cyan));  width: 92%; }
+
+/* ══════════════════════════════════════════
+   9. CANVAS PARTICLES
+══════════════════════════════════════════ */
+#particles {
+  position: relative; overflow: hidden;
+  background: #00000a;
+  align-items: center; text-align: center;
+}
+#p-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+}
+.p-content { position: relative; z-index: 1; pointer-events: none; }
+
+/* ══════════════════════════════════════════
+   10. HOLOGRAPHIC
+══════════════════════════════════════════ */
+#holo {
+  background: #000;
+  align-items: center; text-align: center;
+}
+.holo-row {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  justify-content: center;
+}
+.holo-card {
+  width: 185px; height: 265px;
+  border-radius: 16px; position: relative;
+  overflow: hidden; cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: #111;
+  transition: transform 0.12s;
+  --mx: 50%; --my: 50%;
+}
+.holo-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(115deg,
+    transparent 0%, rgba(255,0,255,0.06) 25%,
+    rgba(0,255,255,0.1) 50%, rgba(255,255,0,0.06) 75%,
+    transparent 100%);
+  background-size: 400% 400%;
+  animation: holoAnim 3.5s linear infinite;
+  border-radius: inherit;
+}
+.holo-shine {
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--mx) var(--my),
+    rgba(255,255,255,0.18) 0%, transparent 55%
+  );
+}
+@keyframes holoAnim {
+  from { background-position: 0% 50%; }
+  to   { background-position: 400% 50%; }
+}
+.holo-inner {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0.6rem; font-size: 3.2rem; z-index: 1;
+}
+.holo-name {
+  font-size: 0.72rem; letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.65);
+  font-weight: 600;
+}
+.holo-rarity {
+  font-size: 0.6rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.35);
+}
+
+/* ══════════════════════════════════════════
+   11. NOISE TEXTURE
+══════════════════════════════════════════ */
+#grain {
+  background: radial-gradient(ellipse at 30% 50%, rgba(124,58,237,0.07) 0%, transparent 60%);
+}
+.grain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.4rem; max-width: 800px;
+}
+.grain-card {
+  height: 170px; border-radius: 16px;
+  position: relative; overflow: hidden;
+  display: flex; align-items: flex-end; padding: 1.2rem;
+}
+.grain-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+  opacity: 0.7; mix-blend-mode: overlay; pointer-events: none;
+}
+.g1 { background: linear-gradient(135deg, #4c1d95, #7c3aed); }
+.g2 { background: linear-gradient(135deg, #064e3b, #10b981); }
+.g3 { background: linear-gradient(135deg, #7f1d1d, #f59e0b); }
+.g4 { background: linear-gradient(135deg, #1e1b4b, #3b82f6); }
+.grain-name {
+  font-size: 0.78rem; font-weight: 700;
+  position: relative; z-index: 1;
+  color: rgba(255,255,255,0.9);
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer {
+  text-align: center; padding: 3rem 2rem;
+  color: var(--dim); font-size: 0.75rem;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  line-height: 1.8;
+}
+
+/* RESPONSIVE */
+@media (max-width: 620px) {
+  section { padding: 5rem 1.2rem 3rem; }
+  nav ul { display: none; }
+  .blob-row { justify-content: center; }
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ────────── -->
+<nav>
+  <span class="logo">VISUAL LAB</span>
+  <ul>
+    <li><a href="#glass">Glass</a></li>
+    <li><a href="#neon">Neon</a></li>
+    <li><a href="#threed">3D</a></li>
+    <li><a href="#glitch">Glitch</a></li>
+    <li><a href="#blob">Blob</a></li>
+    <li><a href="#text-fx">Text</a></li>
+    <li><a href="#particles">Particles</a></li>
+    <li><a href="#holo">Holo</a></li>
+    <li><a href="#grain">Grain</a></li>
+  </ul>
+</nav>
+
+<!-- ══ 1. HERO ══════════════════════════════ -->
+<section id="hero">
+  <canvas id="aurora-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-pill">HTML / CSS / JavaScript のみで実現</div>
+    <h1 class="hero-title">
+      <span class="gradient-text">コーディングで作る</span><br>ビジュアル表現集
+    </h1>
+    <p class="hero-sub">
+      画像・動画・外部アセット不要。<br>
+      コードだけで表現できるビジュアルデザイン技術をすべて紹介します。
+    </p>
+  </div>
+  <div class="scroll-cue"><span>SCROLL</span><div class="scroll-dot"></div></div>
+</section>
+
+<!-- ══ 2. GLASSMORPHISM ══════════════════════ -->
+<section id="glass">
+  <div class="container">
+    <p class="section-label">01 — Glassmorphism</p>
+    <h2>フロストガラス効果</h2>
+    <p class="desc">backdrop-filterのblurで背景をぼかし、すりガラス越しのような透明感を演出。ホバーで奥行きが出る。</p>
+    <div class="glass-grid">
+      <div class="glass-card">
+        <div class="card-icon">💎</div>
+        <div class="card-title">backdrop-filter: blur</div>
+        <div class="card-desc">要素の後ろをぼかしてガラス質を作る。iOSのコントロールセンターと同じ原理。</div><br>
+        <span class="tag">CSS</span>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">🌊</div>
+        <div class="card-title">半透明レイヤー重ね</div>
+        <div class="card-desc">rgba()で複数の半透明レイヤーを重ね、光の複雑な透過をシミュレート。</div><br>
+        <span class="tag">CSS</span>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">✨</div>
+        <div class="card-title">縁の光彩</div>
+        <div class="card-desc">rgba白の細いborderがガラスの縁に当たる光を表現する。</div><br>
+        <span class="tag">CSS</span>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">🎨</div>
+        <div class="card-title">グラデーション背景</div>
+        <div class="card-desc">鮮やかな背景グラデと組み合わせることで最も映える手法。</div><br>
+        <span class="tag">CSS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3. NEON ════════════════════════════════ -->
+<section id="neon">
+  <div class="neon-stage">
+    <p class="section-label">02 — Neon Glow</p>
+    <h2>ネオン発光エフェクト</h2>
+    <p class="desc" style="text-align:center;margin-inline:auto">text-shadow / box-shadowを多段重ねにするだけで、夜の街のネオンサインをコードで再現。</p>
+    <div class="neon-sign neon-cyan">NEON</div>
+    <div class="neon-sign neon-pink">LIGHTS</div>
+    <div class="neon-sign neon-lime">2025</div>
+    <div class="neon-rect">点滅するネオンサイン</div>
+    <div>
+      <span class="tag">CSS text-shadow (多段)</span>
+      <span class="tag">CSS box-shadow</span>
+      <span class="tag">@keyframes flicker</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4. 3D TRANSFORMS ════════════════════════ -->
+<section id="threed">
+  <div class="container" style="display:flex;flex-direction:column;align-items:center">
+    <p class="section-label">03 — CSS 3D Transforms</p>
+    <h2>CSS だけで作る立体表現</h2>
+    <p class="desc" style="text-align:center">perspectiveとtransform-style: preserve-3dを使えば、WebGLなしで本物の3Dオブジェクトが作れる。</p>
+    <div class="cube-scene">
+      <div class="cube">
+        <div class="face f-front">🚀</div>
+        <div class="face f-back">⚡</div>
+        <div class="face f-left">🔮</div>
+        <div class="face f-right">✨</div>
+        <div class="face f-top">🌌</div>
+        <div class="face f-bottom">💫</div>
+      </div>
+    </div>
+    <div class="flip-cards">
+      <div class="flip-wrap">
+        <div class="flip-card">
+          <div class="flip-front"><span style="font-size:2.5rem">🃏</span><span>ホバーで反転</span></div>
+          <div class="flip-back">カードフリップ<br>rotateYで裏面を見せる<br>backface-visibility: hidden</div>
+        </div>
+      </div>
+      <div class="flip-wrap">
+        <div class="flip-card">
+          <div class="flip-front"><span style="font-size:2.5rem">🎴</span><span>ホバーで反転</span></div>
+          <div class="flip-back">外部ライブラリ不要<br>純粋なCSSのみで<br>実現できる</div>
+        </div>
+      </div>
+      <div class="flip-wrap">
+        <div class="flip-card">
+          <div class="flip-front"><span style="font-size:2.5rem">🎆</span><span>ホバーで反転</span></div>
+          <div class="flip-back">transitionで<br>なめらかに<br>アニメーション</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:2rem">
+      <span class="tag">perspective</span>
+      <span class="tag">transform-style: preserve-3d</span>
+      <span class="tag">rotateY / rotateX</span>
+      <span class="tag">backface-visibility</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. GLITCH ══════════════════════════════ -->
+<section id="glitch">
+  <div class="scanlines"></div>
+  <p class="section-label" style="position:relative;z-index:6">04 — Glitch Art</p>
+  <h2 style="position:relative;z-index:6;text-align:center">グリッチエフェクト</h2>
+  <p class="desc" style="position:relative;z-index:6;text-align:center;margin-inline:auto;margin-bottom:2.5rem">::before/::afterとclip-pathで色ズレを演出。VHSテープの乱れや信号ノイズを表現。</p>
+  <div class="glitch-wrap">
+    <div class="glitch-text" data-text="GLITCH">GLITCH</div>
+  </div>
+  <div style="position:relative;z-index:6;margin-top:2rem;text-align:center">
+    <span class="tag">::before / ::after</span>
+    <span class="tag">clip-path</span>
+    <span class="tag">skewX / translateX</span>
+    <span class="tag">CSS steps()</span>
+  </div>
+</section>
+
+<!-- ══ 6. BLOB ════════════════════════════════ -->
+<section id="blob">
+  <div class="container">
+    <p class="section-label">05 — Morphing Blob</p>
+    <h2>有機的な形態変化</h2>
+    <p class="desc">border-radiusの8つの値をキーフレームで変化させるだけで、生き物のように動く流体的な形が作れる。</p>
+    <div class="blob-row">
+      <div class="blob-cell"><div class="blob blob-a"></div><div class="blob-label">border-radius 8値</div></div>
+      <div class="blob-cell"><div class="blob blob-b"></div><div class="blob-label">animation-delay</div></div>
+      <div class="blob-cell"><div class="blob blob-c"></div><div class="blob-label">ease-in-out</div></div>
+    </div>
+    <div style="margin-top:2rem">
+      <span class="tag">border-radius (8値記法)</span>
+      <span class="tag">@keyframes</span>
+      <span class="tag">CSS gradient</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 7. TEXT EFFECTS ════════════════════════ -->
+<section id="text-fx">
+  <div class="container">
+    <p class="section-label">06 — Text Effects</p>
+    <h2>テキストアニメーション</h2>
+    <p class="desc">文字そのものがデザイン要素に。タイプライター・グラデーション・ウェーブなど多彩な表現がCSSで作れる。</p>
+    <div class="text-grid">
+      <div class="text-card">
+        <div class="fx-label">Typewriter Effect</div>
+        <div class="typewriter">Hello, World!</div>
+      </div>
+      <div class="text-card">
+        <div class="fx-label">Animated Gradient Text</div>
+        <div class="grad-text-anim">GRADIENT</div>
+      </div>
+      <div class="text-card">
+        <div class="fx-label">Wave Letter Animation</div>
+        <div class="wave-text">
+          <span>W</span><span>A</span><span>V</span><span>E</span>
+          <span>&nbsp;</span><span>✦</span><span>&nbsp;</span><span>✦</span>
+        </div>
+      </div>
+      <div class="text-card">
+        <div class="fx-label">Gradient Border</div>
+        <div class="grad-border">
+          <div class="grad-border-inner">グラデーションのボーダー<br>疑似要素で作るグロー縁</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 8. SCROLL REVEAL ══════════════════════ -->
+<section id="scroll-reveal">
+  <div class="container">
+    <p class="section-label">07 — Scroll Reveal</p>
+    <h2>スクロール連動アニメーション</h2>
+    <p class="desc">Intersection Observer APIでスクロール位置を検知し、要素を順番に登場させる。</p>
+    <div class="reveal-grid" id="reveal-grid">
+      <div class="reveal-item"><div class="reveal-num">98%</div><div class="reveal-sub">ブラウザ対応率</div></div>
+      <div class="reveal-item"><div class="reveal-num">0kb</div><div class="reveal-sub">外部ライブラリ不要</div></div>
+      <div class="reveal-item"><div class="reveal-num">60fps</div><div class="reveal-sub">GPUアクセラレーション</div></div>
+      <div class="reveal-item"><div class="reveal-num">∞</div><div class="reveal-sub">カスタマイズ自由度</div></div>
+      <div class="reveal-item"><div class="reveal-num">CSS</div><div class="reveal-sub">transitionで動きを制御</div></div>
+      <div class="reveal-item"><div class="reveal-num">JS</div><div class="reveal-sub">Observerでトリガー検知</div></div>
+    </div>
+    <div class="prog-bars" id="prog-bars">
+      <div class="prog-item"><label><span>HTML/CSS</span><span>85%</span></label><div class="prog-track"><div class="prog-fill pc"></div></div></div>
+      <div class="prog-item"><label><span>JavaScript</span><span>70%</span></label><div class="prog-track"><div class="prog-fill pp"></div></div></div>
+      <div class="prog-item"><label><span>Canvas API</span><span>92%</span></label><div class="prog-track"><div class="prog-fill pg"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 9. PARTICLES ══════════════════════════ -->
+<section id="particles">
+  <canvas id="p-canvas"></canvas>
+  <div class="p-content">
+    <p class="section-label">08 — Canvas Particles</p>
+    <h2>インタラクティブ・パーティクル</h2>
+    <p class="desc" style="text-align:center;margin-inline:auto">Canvas 2D APIで粒子を大量制御。マウスに近い粒子が反応する。</p>
+    <div style="margin-top:1.5rem">
+      <span class="tag">Canvas 2D API</span>
+      <span class="tag">requestAnimationFrame</span>
+      <span class="tag">Mouse Interaction</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 10. HOLOGRAPHIC ══════════════════════ -->
+<section id="holo">
+  <div class="container" style="display:flex;flex-direction:column;align-items:center">
+    <p class="section-label">09 — Holographic Effect</p>
+    <h2>ホログラフィック効果</h2>
+    <p class="desc" style="text-align:center">マウス追従グラデーションでトレーディングカードのホログラムを再現。カードをホバーしてみて。</p>
+    <div class="holo-row">
+      <div class="holo-card">
+        <div class="holo-overlay"></div>
+        <div class="holo-shine"></div>
+        <div class="holo-inner">⚡<div class="holo-name">RARE</div><div class="holo-rarity">★★★★☆</div></div>
+      </div>
+      <div class="holo-card">
+        <div class="holo-overlay"></div>
+        <div class="holo-shine"></div>
+        <div class="holo-inner">🌌<div class="holo-name">EPIC</div><div class="holo-rarity">★★★★★</div></div>
+      </div>
+      <div class="holo-card">
+        <div class="holo-overlay"></div>
+        <div class="holo-shine"></div>
+        <div class="holo-inner">🔮<div class="holo-name">LEGENDARY</div><div class="holo-rarity">✦✦✦✦✦</div></div>
+      </div>
+    </div>
+    <div style="margin-top:2rem">
+      <span class="tag">CSS radial-gradient</span>
+      <span class="tag">mousemove</span>
+      <span class="tag">CSS custom properties</span>
+      <span class="tag">perspective rotateX/Y</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 11. NOISE TEXTURE ══════════════════════ -->
+<section id="grain">
+  <div class="container">
+    <p class="section-label">10 — Noise / Grain Texture</p>
+    <h2>ノイズ・グレインテクスチャ</h2>
+    <p class="desc">SVGのfeTurbulenceフィルターをCSS背景として使うだけで、フィルムグレインや印刷物のような質感が出る。</p>
+    <div class="grain-grid">
+      <div class="grain-card g1"><span class="grain-name">Violet Grain</span></div>
+      <div class="grain-card g2"><span class="grain-name">Forest Grain</span></div>
+      <div class="grain-card g3"><span class="grain-name">Ember Grain</span></div>
+      <div class="grain-card g4"><span class="grain-name">Ocean Grain</span></div>
+    </div>
+    <div style="margin-top:2rem">
+      <span class="tag">SVG feTurbulence</span>
+      <span class="tag">mix-blend-mode: overlay</span>
+      <span class="tag">CSS background-image (data URI)</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>すべてのエフェクトは HTML / CSS / JavaScript のみで実装 — 外部画像・外部ライブラリ不使用</p>
+  <p style="margin-top:0.4rem;font-size:0.7rem;color:#44446a">01 Glassmorphism &nbsp;·&nbsp; 02 Neon Glow &nbsp;·&nbsp; 03 CSS 3D &nbsp;·&nbsp; 04 Glitch &nbsp;·&nbsp; 05 Blob Morph &nbsp;·&nbsp; 06 Text FX &nbsp;·&nbsp; 07 Scroll Reveal &nbsp;·&nbsp; 08 Particles &nbsp;·&nbsp; 09 Holographic &nbsp;·&nbsp; 10 Noise Grain</p>
+</footer>
+
+<script>
+/* ── AURORA BACKGROUND ───────────────────────── */
+!function() {
+  const c = document.getElementById('aurora-canvas');
+  const ctx = c.getContext('2d');
+  let t = 0;
+  const resize = () => { c.width = c.offsetWidth; c.height = c.offsetHeight; };
+  resize(); window.addEventListener('resize', resize);
+  const orbs = [
+    { px:0.2, py:0.35, r:0.5, col:[124,58,237] },
+    { px:0.8, py:0.6,  r:0.4, col:[6,182,212]  },
+    { px:0.5, py:0.8,  r:0.45,col:[236,72,153]  },
+    { px:0.65,py:0.2,  r:0.38,col:[16,185,129]  },
+  ];
+  (function frame() {
+    ctx.clearRect(0,0,c.width,c.height);
+    orbs.forEach((o,i) => {
+      const x = (o.px + Math.sin(t*0.25 + i*1.6) * 0.11) * c.width;
+      const y = (o.py + Math.cos(t*0.18 + i*0.9) * 0.1) * c.height;
+      const r = o.r * Math.max(c.width, c.height);
+      const g = ctx.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,`rgba(${o.col},0.14)`);
+      g.addColorStop(1,`rgba(${o.col},0)`);
+      ctx.fillStyle = g; ctx.fillRect(0,0,c.width,c.height);
+    });
+    t += 0.008;
+    requestAnimationFrame(frame);
+  })();
+}();
+
+/* ── PARTICLE SYSTEM ─────────────────────────── */
+!function() {
+  const c = document.getElementById('p-canvas');
+  const ctx = c.getContext('2d');
+  let mouse = { x: -9999, y: -9999 };
+  let particles = [];
+
+  const resize = () => {
+    c.width = c.offsetWidth; c.height = c.offsetHeight;
+    init();
+  };
+  resize(); window.addEventListener('resize', resize);
+
+  c.parentElement.addEventListener('mousemove', e => {
+    const r = c.getBoundingClientRect();
+    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+  });
+  c.parentElement.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+  function init() {
+    particles = [];
+    const n = Math.min(120, Math.floor(c.width * c.height / 7000));
+    for (let i = 0; i < n; i++) {
+      particles.push({
+        x: Math.random() * c.width,
+        y: Math.random() * c.height,
+        vx: (Math.random()-0.5)*0.6,
+        vy: (Math.random()-0.5)*0.6,
+        sz: Math.random()*1.8+0.5,
+        hue: Math.random()*50+185,
+      });
+    }
+  }
+
+  (function frame() {
+    ctx.clearRect(0,0,c.width,c.height);
+    particles.forEach(p => {
+      const dx = p.x-mouse.x, dy = p.y-mouse.y;
+      const dist = Math.hypot(dx,dy);
+      if (dist < 110) {
+        const f = (110-dist)/110*2;
+        p.vx += (dx/dist)*f*0.06;
+        p.vy += (dy/dist)*f*0.06;
+      }
+      p.vx *= 0.988; p.vy *= 0.988;
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = c.width;
+      if (p.x > c.width) p.x = 0;
+      if (p.y < 0) p.y = c.height;
+      if (p.y > c.height) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.sz,0,Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue},75%,70%,0.8)`;
+      ctx.fill();
+    });
+    // Connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i+1; j < particles.length; j++) {
+        const dx = particles[i].x-particles[j].x;
+        const dy = particles[i].y-particles[j].y;
+        const d = Math.hypot(dx,dy);
+        if (d < 90) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle = `rgba(100,200,255,${(1-d/90)*0.28})`;
+          ctx.lineWidth = 0.5; ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(frame);
+  })();
+}();
+
+/* ── SCROLL REVEAL ───────────────────────────── */
+!function() {
+  const items = document.querySelectorAll('.reveal-item');
+  const bars  = document.querySelectorAll('.prog-fill');
+
+  new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.18 }).observe(document.getElementById('reveal-grid'));
+
+  // Trigger all children when grid enters view
+  const gridObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) items.forEach(el => el.classList.add('visible'));
+  }, { threshold: 0.1 });
+  gridObs.observe(document.getElementById('reveal-grid'));
+
+  new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) bars.forEach(b => b.classList.add('animating'));
+  }, { threshold: 0.5 }).observe(document.getElementById('prog-bars'));
+}();
+
+/* ── HOLOGRAPHIC CARDS ───────────────────────── */
+!function() {
+  document.querySelectorAll('.holo-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX-r.left) / r.width  * 100;
+      const y = (e.clientY-r.top)  / r.height * 100;
+      card.style.setProperty('--mx', x+'%');
+      card.style.setProperty('--my', y+'%');
+      const rx = (y-50)/9, ry = (x-50)/9;
+      card.style.transform = `perspective(650px) rotateX(${-rx}deg) rotateY(${ry}deg) scale(1.04)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.setProperty('--mx','50%');
+      card.style.setProperty('--my','50%');
+    });
+  });
+}();
+</script>
+</body>
+</html>
